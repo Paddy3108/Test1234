@@ -33,18 +33,18 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="Algorithm.c">
+		<Unit filename="Algorithmus.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="Algorithm.h" />
-		<Unit filename="Board.c">
+		<Unit filename="Algorithmus.h" />
+		<Unit filename="Brett.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="Board.h" />
-		<Unit filename="Move.c">
+		<Unit filename="Brett.h" />
+		<Unit filename="Zug.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="Move.h" />
+		<Unit filename="Zug.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

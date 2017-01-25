@@ -57,12 +57,12 @@
 	<stdlib.h>
 	<stdio.h>
 
-1485353423 source:c:\users\patri\desktop\uni\programmierung 1\springer_selfmade\main.c
+1485375622 source:c:\users\patri\desktop\uni\programmierung 1\springer_selfmade\main.c
 	<stdio.h>
 	<stdlib.h>
 	<stdbool.h>
 	<time.h>
-	"Algorithm.h"
+	"Algorithmus.h"
 
 1485287455 source:c:\users\patri\desktop\uni\programmierung 1\springer_selfmade\move.c
 	"Move.h"
@@ -71,4 +71,7 @@
 	<stdbool.h>
 	<assert.h>
 	<stdio.h>
+
+1485375622 c:\users\patri\desktop\uni\programmierung 1\springer_selfmade\algorithmus.h
+	<stdbool.h>
 
