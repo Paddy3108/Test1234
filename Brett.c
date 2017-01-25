@@ -1,4 +1,5 @@
-#include "Board.h"
+#include "Brett.h"
+
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -77,7 +78,7 @@ void board_print(Board* board)
     puts("|");
 }
 
-//nimmt das gelöste Brett mit dem Startwert 0|0 und verschiebt die ganze Werte um den Wert der auf der eigentlichen Startposition steht
+//nimmt das gelï¿½ste Brett mit dem Startwert 0|0 und verschiebt die ganze Werte um den Wert der auf der eigentlichen Startposition steht
 void board_rewriteClosed(Board* board, unsigned int rx, unsigned int ry)
 {
     // Calculate the new values by applying

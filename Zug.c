@@ -1,4 +1,4 @@
-#include "Move.h"
+#include "Zug.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
@@ -19,11 +19,11 @@ void moveList_initialize(MoveList* moveList)
  * move: Pointer auf Move
  * Fuegt ein Schritt ans Ende der Liste hinzu
  */
-void moveList_push(MoveList* list, Move* move)
+void moveList_push(MoveList* list, Zug* move)
 {
     if((*list).dataCount < 8)
     {
-        memcpy(&(*list).data[(*list).dataCount++], move, sizeof(Move));
+        memcpy(&(*list).data[(*list).dataCount++], move, sizeof(Zug));
         return;
     }
     assert(!"Out of memory in move list");
@@ -94,7 +94,7 @@ void heuristicMoveList_sort(HeuristicMoveList* list)
  * move: Pointer auf Move
  * Kontrolliert die Grenzen des Boards
  */
-bool checkBounds(Board* board, Move* move)
+bool checkBounds(Board* board, Zug* move)
 {
     return (*move).x >= 0 && (*move).x < (*board).boardSize && (*move).y >= 0 && (*move).y < (*board).boardSize;
 }
@@ -102,10 +102,10 @@ bool checkBounds(Board* board, Move* move)
 /*
  * board: Pointer auf das Board
  * move: Pointer auf Move
- * shouldOfferStart: ob der Startpunkt dazuzählt oder nicht
+ * shouldOfferStart: ob der Startpunkt dazuzï¿½hlt oder nicht
  * Kontrolliert das Board
  */
-bool checkBoard(Board* board, Move* move, bool shouldOfferStart)
+bool checkBoard(Board* board, Zug* move, bool shouldOfferStart)
 {
     return board_getValue(board, (*move).x, (*move).y) == -1 || (shouldOfferStart && board_getValue(board, (*move).x, (*move).y) == 0);
 }
@@ -115,7 +115,7 @@ bool checkBoard(Board* board, Move* move, bool shouldOfferStart)
  * index: Stelle der Liste
  * Liefert den Wert der Liste an Index
  */
-Move* moveList_get(MoveList* list, unsigned int index)
+Zug* moveList_get(MoveList* list, unsigned int index)
 {
     assert((*list).dataCount > index);
     return &(*list).data[index];
@@ -133,35 +133,35 @@ MoveList generateMoveList(Board* board, unsigned int x, unsigned int y, bool sho
     MoveList moveList;
     moveList_initialize(&moveList);
 
-    Move move = {x + 1, y + 2}; //Schrittfolge des Springers
+    Zug move = {x + 1, y + 2}; //Schrittfolge des Springers
     if(checkBounds(board, &move) && checkBoard(board, &move, shouldOfferStart))
         moveList_push(&moveList, &move);
 
-    move = (Move){x + 2, y + 1};
+    move = (Zug){x + 2, y + 1};
     if(checkBounds(board, &move) && checkBoard(board, &move, shouldOfferStart))
         moveList_push(&moveList, &move);
 
-    move = (Move){x + 2, y - 1};
+    move = (Zug){x + 2, y - 1};
     if(checkBounds(board, &move) && checkBoard(board, &move, shouldOfferStart))
         moveList_push(&moveList, &move);
 
-    move = (Move){x + 1, y - 2};
+    move = (Zug){x + 1, y - 2};
     if(checkBounds(board, &move) && checkBoard(board, &move, shouldOfferStart))
         moveList_push(&moveList, &move);
 
-    move = (Move){x - 1, y - 2};
+    move = (Zug){x - 1, y - 2};
     if(checkBounds(board, &move) && checkBoard(board, &move, shouldOfferStart))
         moveList_push(&moveList, &move);
 
-    move = (Move){x - 2, y - 1};
+    move = (Zug){x - 2, y - 1};
     if(checkBounds(board, &move) && checkBoard(board, &move, shouldOfferStart))
         moveList_push(&moveList, &move);
 
-    move = (Move){x - 2, y + 1};
+    move = (Zug){x - 2, y + 1};
     if(checkBounds(board, &move) && checkBoard(board, &move, shouldOfferStart))
         moveList_push(&moveList, &move);
 
-    move = (Move){x - 1, y + 2};
+    move = (Zug){x - 1, y + 2};
     if(checkBounds(board, &move) && checkBoard(board, &move, shouldOfferStart))
         moveList_push(&moveList, &move);
 
@@ -179,35 +179,35 @@ unsigned int generateMoveCount(Board* board, unsigned int x, unsigned int y, boo
 {
     unsigned int moveCount = 0;
 
-    Move move = {x + 1, y + 2};
+    Zug move = {x + 1, y + 2};
     if(checkBounds(board, &move) && checkBoard(board, &move, shouldOfferStart))
         ++moveCount;
 
-    move = (Move){x + 2, y + 1};
+    move = (Zug){x + 2, y + 1};
     if(checkBounds(board, &move) && checkBoard(board, &move, shouldOfferStart))
         ++moveCount;
 
-    move = (Move){x + 2, y - 1};
+    move = (Zug){x + 2, y - 1};
     if(checkBounds(board, &move) && checkBoard(board, &move, shouldOfferStart))
         ++moveCount;
 
-    move = (Move){x + 1, y - 2};
+    move = (Zug){x + 1, y - 2};
     if(checkBounds(board, &move) && checkBoard(board, &move, shouldOfferStart))
         ++moveCount;
 
-    move = (Move){x - 1, y - 2};
+    move = (Zug){x - 1, y - 2};
     if(checkBounds(board, &move) && checkBoard(board, &move, shouldOfferStart))
         ++moveCount;
 
-    move = (Move){x - 2, y - 1};
+    move = (Zug){x - 2, y - 1};
     if(checkBounds(board, &move) && checkBoard(board, &move, shouldOfferStart))
         ++moveCount;
 
-    move = (Move){x - 2, y + 1};
+    move = (Zug){x - 2, y + 1};
     if(checkBounds(board, &move) && checkBoard(board, &move, shouldOfferStart))
         ++moveCount;
 
-    move = (Move){x - 1, y + 2};
+    move = (Zug){x - 1, y + 2};
     if(checkBounds(board, &move) && checkBoard(board, &move, shouldOfferStart))
         ++moveCount;
 
@@ -226,7 +226,7 @@ HeuristicMoveList generateHeuristic(Board* board, MoveList* moveList, bool shoul
     heuristicMoveList_initialize(&heuristicMoveList);
     for(unsigned int i = 0; i < (*moveList).dataCount; ++i)
     {
-        Move* move = moveList_get(moveList, i);
+    	Zug* move = moveList_get(moveList, i);
         unsigned int moveCount = generateMoveCount(board, (*move).x, (*move).y, shouldOfferStart);
         // Warnsdorf heuristic: Bevorzugt Felder mit weniger naechsten Schritten
         HeuristicMove heuristicMove = {{(*move).x, (*move).y}, moveCount};

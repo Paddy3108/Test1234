@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <time.h>
-#include "Algorithm.h"
+
+#include "Algorithmus.h"
 
 int main()
 {

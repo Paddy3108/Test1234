@@ -1,9 +1,11 @@
-#include "Board.h"
-#include "Algorithm.h"
-#include "Move.h"
+#include "Algorithmus.h"
+
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+
+#include "Brett.h"
+#include "Zug.h"
 
 
 /*

@@ -1,17 +1,17 @@
 #ifndef MOVE_H_INCLUDED
 #define MOVE_H_INCLUDED
 
-#include "Board.h"
 #include <stdbool.h>
+#include "Brett.h"
 
 /*
  * Move Struct, mit der x und y - Koordinate
  */
-typedef struct Move
+typedef struct Zug
 {
     unsigned int x;
     unsigned int y;
-} Move;
+} Zug;
 
 /*
  * Sortiert die naechsten Zuege nach moeglichen Nachbarn in aufsteigender Reihenfolge und speichert es in diesem struct
@@ -20,7 +20,7 @@ typedef struct Move
  */
 typedef struct HeuristicMove
 {
-    Move move;
+    Zug move;
     unsigned int neighborCount;
 } HeuristicMove;
 
@@ -31,7 +31,7 @@ typedef struct HeuristicMove
  */
 typedef struct MoveList
 {
-    Move data[8];
+    Zug data[8];
     unsigned int dataCount;
 } MoveList;
 
@@ -57,14 +57,14 @@ void moveList_initialize(MoveList* moveList);
  * move: Pointer auf Move
  * Fuegt ein Schritt ans Ende der Liste hinzu
  */
-void moveList_push(MoveList* list, Move* move);
+void moveList_push(MoveList* list, Zug* move);
 
 /*
  * list: Pointer auf die moveList
  * index: Stelle der Liste
  * Liefert den Pointer, der auf den Wert an der Stelle des index in der Liste zeigt
  */
-Move* moveList_get(MoveList* list, unsigned int index);
+Zug* moveList_get(MoveList* list, unsigned int index);
 
 /*
  * list: Pointer auf die HeuristicMoveList
