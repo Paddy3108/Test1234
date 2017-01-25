@@ -73,7 +73,6 @@ void knightsTour(unsigned int boardSize, unsigned int x, unsigned int y, bool cl
         if(result)
         {
           board_rewriteClosed(&board, x, y);
-          //blub
         }
     }
     else
