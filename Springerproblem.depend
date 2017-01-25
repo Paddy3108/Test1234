@@ -1,0 +1,74 @@
+# depslib dependency file v1.0
+1484633548 source:c:\users\patri\desktop\uni\programmierung 1\springerproblem\algorithm.c
+	"Board.h"
+	"Algorithm.h"
+	"Move.h"
+	<stdlib.h>
+	<string.h>
+	<stdio.h>
+
+1484633548 c:\users\patri\desktop\uni\programmierung 1\springerproblem\board.h
+
+1484633548 c:\users\patri\desktop\uni\programmierung 1\springerproblem\algorithm.h
+	<stdbool.h>
+
+1484633548 c:\users\patri\desktop\uni\programmierung 1\springerproblem\move.h
+	"Board.h"
+	<stdbool.h>
+
+1484633548 source:c:\users\patri\desktop\uni\programmierung 1\springerproblem\board.c
+	"Board.h"
+	<stdlib.h>
+	<stdio.h>
+
+1484633548 source:c:\users\patri\desktop\uni\programmierung 1\springerproblem\move.c
+	"Move.h"
+	<stdlib.h>
+	<string.h>
+	<stdbool.h>
+	<assert.h>
+	<stdio.h>
+
+1484676746 source:c:\users\patri\desktop\uni\programmierung 1\springerproblem\main.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	"Algorithm.h"
+
+1485336556 source:c:\users\patri\desktop\uni\programmierung 1\springer_selfmade\algorithm.c
+	"Board.h"
+	"Algorithm.h"
+	"Move.h"
+	<stdlib.h>
+	<string.h>
+	<stdio.h>
+
+1485163736 c:\users\patri\desktop\uni\programmierung 1\springer_selfmade\board.h
+
+1485162602 c:\users\patri\desktop\uni\programmierung 1\springer_selfmade\algorithm.h
+	<stdbool.h>
+
+1485165045 c:\users\patri\desktop\uni\programmierung 1\springer_selfmade\move.h
+	"Board.h"
+	<stdbool.h>
+
+1485346861 source:c:\users\patri\desktop\uni\programmierung 1\springer_selfmade\board.c
+	"Board.h"
+	<stdlib.h>
+	<stdio.h>
+
+1485353423 source:c:\users\patri\desktop\uni\programmierung 1\springer_selfmade\main.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	<time.h>
+	"Algorithm.h"
+
+1485287455 source:c:\users\patri\desktop\uni\programmierung 1\springer_selfmade\move.c
+	"Move.h"
+	<stdlib.h>
+	<string.h>
+	<stdbool.h>
+	<assert.h>
+	<stdio.h>
+
