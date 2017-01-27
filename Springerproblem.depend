@@ -57,7 +57,7 @@
 	<stdlib.h>
 	<stdio.h>
 
-1485375622 source:c:\users\patri\desktop\uni\programmierung 1\springer_selfmade\main.c
+1485433713 source:c:\users\patri\desktop\uni\programmierung 1\springer_selfmade\main.c
 	<stdio.h>
 	<stdlib.h>
 	<stdbool.h>
@@ -74,4 +74,31 @@
 
 1485375622 c:\users\patri\desktop\uni\programmierung 1\springer_selfmade\algorithmus.h
 	<stdbool.h>
+
+1485375622 source:c:\users\patri\desktop\uni\programmierung 1\springer_selfmade\algorithmus.c
+	"Algorithmus.h"
+	<stdlib.h>
+	<string.h>
+	<stdio.h>
+	"Brett.h"
+	"Zug.h"
+
+1485375622 c:\users\patri\desktop\uni\programmierung 1\springer_selfmade\brett.h
+
+1485375622 c:\users\patri\desktop\uni\programmierung 1\springer_selfmade\zug.h
+	<stdbool.h>
+	"Brett.h"
+
+1485375622 source:c:\users\patri\desktop\uni\programmierung 1\springer_selfmade\brett.c
+	"Brett.h"
+	<stdlib.h>
+	<stdio.h>
+
+1485375622 source:c:\users\patri\desktop\uni\programmierung 1\springer_selfmade\zug.c
+	"Zug.h"
+	<stdlib.h>
+	<string.h>
+	<stdbool.h>
+	<assert.h>
+	<stdio.h>
 
