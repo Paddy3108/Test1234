@@ -9,9 +9,9 @@
  * moveList: Pointer auf die moveListe
  * Initialisiert die MoveListe
  */
-void moveList_initialize(MoveList* moveList)
+void zugListeInitialisieren(ZugListe* zugListe)
 {
-    (*moveList).dataCount = 0;
+    (*zugListe).anzahlZuege = 0;
 }
 
 /*
@@ -19,11 +19,11 @@ void moveList_initialize(MoveList* moveList)
  * move: Pointer auf Move
  * Fuegt ein Schritt ans Ende der Liste hinzu
  */
-void moveList_push(MoveList* list, Zug* move)
+void moveList_push(ZugListe* liste, Zug* zug)
 {
-    if((*list).dataCount < 8)
+    if((*liste).anzahlZuege < 8)
     {
-        memcpy(&(*list).data[(*list).dataCount++], move, sizeof(Zug));
+        memcpy(&(*liste).zuege[(*liste).anzahlZuege++], zug, sizeof(Zug));
         return;
     }
     assert(!"Out of memory in move list");
@@ -31,11 +31,11 @@ void moveList_push(MoveList* list, Zug* move)
 
 /*
  * moveList: Pointer auf die HeuristicmMoveListe
- * Initialisiert die HeuristicMoveListe
+ * Initialisiert die HeuristikZugListe
  */
-void heuristicMoveList_initialize(HeuristicMoveList* moveList)
+void heuristikZugListeInitialisieren(HeuristikZugListe* zugListe)
 {
-    (*moveList).dataCount = 0;
+    (*zugListe).anzahlZuege = 0;
 }
 
 /*
@@ -43,60 +43,46 @@ void heuristicMoveList_initialize(HeuristicMoveList* moveList)
  * move: Pointer auf HeuristicMove
  * Fuegt ein Schritt ans Ende der Liste hinzu
  */
-void heuristicMoveList_push(HeuristicMoveList* list, HeuristicMove* move)
+void heuristicMoveList_push(HeuristikZugListe* liste, HeuristikZug* zug)
 {
-    if((*list).dataCount < 8)
+    if((*liste).anzahlZuege < 8)
     {
-        memcpy(&(*list).data[(*list).dataCount++], move, sizeof(HeuristicMove));
+        memcpy(&(*liste).zuege[(*liste).anzahlZuege++], zug, sizeof(HeuristikZug));
         return;
     }
     assert(!"Out of memory in heuristic move list");
 }
 
 /*
- * move1: Pointer auf den ersten HeuristicMove
- * move2: Pointer auf den zweiten HeuristicMove
- * Tauscht die zwei Schritte
+ * list: Pointer auf die HeuristikZugListe
+ * Sortierung der Liste mit den Heuristischen Zügen, um den Warnsdorf Algorithmus umzusetzen
  */
-void swapHeuristic(HeuristicMove* move1, HeuristicMove* move2)
+void heuristikZugListeSortieren(HeuristikZugListe* liste)
 {
-    HeuristicMove tmp = *move1;
-    *move1 = *move2;
-    *move2 = tmp;
-}
+	// Sortiert die Liste nach Insertion Sort Verfahren
+	for(int i = 1; i < (*liste).anzahlZuege; i++) {
+		HeuristikZug temp = (*liste).zuege[i];
+		int j = i-1;
+		while(temp.anzahlNachbarn < (*liste).zuege[j].anzahlNachbarn && j >=0) {
+			(*liste).zuege[j+1] = (*liste).zuege[j];
+			j--;
+		}
+		(*liste).zuege[j+1] = temp;
+	}
 
-/*
- * list: Pointer auf die HeuristicMoveList
- * Sortierung der heuristischen Liste, um den Warnsdorf Algorithmus umzusetzen
- */
-void heuristicMoveList_sort(HeuristicMoveList* list)
-{
-    // Sortiert die Liste nach dem Bubble Sort Verfahren
-    for(unsigned int outer = (*list).dataCount; outer; --outer)
-    {
-        bool didSwap = false;
-        for(unsigned int inner = 0; inner < (outer - 1); ++inner)
-        {
-            HeuristicMove* current = &(*list).data[inner];
-            HeuristicMove* next = &(*list).data[inner + 1];
-            if((*current).neighborCount > (*next).neighborCount)
-            {
-                swapHeuristic(current, next);
-                didSwap = true;
-            }
-        }
-        if(!didSwap) break;
-    }
 }
 
 /*
  * board: Pointer auf das Board
  * move: Pointer auf Move
- * Kontrolliert die Grenzen des Boards
+ * Kontrolliert, ob moegliche Zuege valide sind
  */
-bool checkBounds(Board* board, Zug* move)
+bool zugValidieren(Board* board, Zug* zug)
 {
-    return (*move).x >= 0 && (*move).x < (*board).boardSize && (*move).y >= 0 && (*move).y < (*board).boardSize;
+    return 	((*zug).x >= 0) &&
+    		((*zug).x < (*board).boardSize) &&
+			((*zug).y >= 0)
+			&& ((*zug).y < (*board).boardSize);
 }
 
 /*
@@ -105,7 +91,7 @@ bool checkBounds(Board* board, Zug* move)
  * shouldOfferStart: ob der Startpunkt dazuz�hlt oder nicht
  * Kontrolliert das Board
  */
-bool checkBoard(Board* board, Zug* move, bool shouldOfferStart)
+bool brettUeberpruefen(Board* board, Zug* move, bool shouldOfferStart)
 {
     return board_getValue(board, (*move).x, (*move).y) == -1 || (shouldOfferStart && board_getValue(board, (*move).x, (*move).y) == 0);
 }
@@ -115,10 +101,10 @@ bool checkBoard(Board* board, Zug* move, bool shouldOfferStart)
  * index: Stelle der Liste
  * Liefert den Wert der Liste an Index
  */
-Zug* moveList_get(MoveList* list, unsigned int index)
+Zug* moveList_get(ZugListe* list, unsigned int index)
 {
-    assert((*list).dataCount > index);
-    return &(*list).data[index];
+    assert((*list).anzahlZuege > index);
+    return &(*list).zuege[index];
 }
 
 /*
@@ -128,44 +114,20 @@ Zug* moveList_get(MoveList* list, unsigned int index)
  * shouldOfferStart: Ist der Startpunkt Inhalt der Liste oder nicht
  * Liefert alle Schritte, die an der aktuellen Position des Boards moeglich sind
  */
-MoveList generateMoveList(Board* board, unsigned int x, unsigned int y, bool shouldOfferStart)
+ZugListe erstelleZugListe(Board* board, unsigned int x, unsigned int y, bool shouldOfferStart)
 {
-    MoveList moveList;
-    moveList_initialize(&moveList);
+	ZugListe zugListe;
+	zugListeInitialisieren(&zugListe);
 
-    Zug move = {x + 1, y + 2}; //Schrittfolge des Springers
-    if(checkBounds(board, &move) && checkBoard(board, &move, shouldOfferStart))
-        moveList_push(&moveList, &move);
+    int springer_zuege[8][2] = {{1,2},{2,1},{2,-1},{1,-2},{-1,-2},{-2,-1},{-2,1},{-1,2}};
 
-    move = (Zug){x + 2, y + 1};
-    if(checkBounds(board, &move) && checkBoard(board, &move, shouldOfferStart))
-        moveList_push(&moveList, &move);
+    for(int i = 0; i < 8; i++) {
+    	Zug zug = {x + springer_zuege[i][0], y + springer_zuege[i][1]};
+    	if(zugValidieren(board, &zug) && brettUeberpruefen(board, &zug, shouldOfferStart))
+    		moveList_push(&zugListe, &zug);
+    }
 
-    move = (Zug){x + 2, y - 1};
-    if(checkBounds(board, &move) && checkBoard(board, &move, shouldOfferStart))
-        moveList_push(&moveList, &move);
-
-    move = (Zug){x + 1, y - 2};
-    if(checkBounds(board, &move) && checkBoard(board, &move, shouldOfferStart))
-        moveList_push(&moveList, &move);
-
-    move = (Zug){x - 1, y - 2};
-    if(checkBounds(board, &move) && checkBoard(board, &move, shouldOfferStart))
-        moveList_push(&moveList, &move);
-
-    move = (Zug){x - 2, y - 1};
-    if(checkBounds(board, &move) && checkBoard(board, &move, shouldOfferStart))
-        moveList_push(&moveList, &move);
-
-    move = (Zug){x - 2, y + 1};
-    if(checkBounds(board, &move) && checkBoard(board, &move, shouldOfferStart))
-        moveList_push(&moveList, &move);
-
-    move = (Zug){x - 1, y + 2};
-    if(checkBounds(board, &move) && checkBoard(board, &move, shouldOfferStart))
-        moveList_push(&moveList, &move);
-
-    return moveList;
+    return zugListe;
 }
 
 /*
@@ -178,38 +140,13 @@ MoveList generateMoveList(Board* board, unsigned int x, unsigned int y, bool sho
 unsigned int generateMoveCount(Board* board, unsigned int x, unsigned int y, bool shouldOfferStart)
 {
     unsigned int moveCount = 0;
+    int springer_zuege[8][2] = {{1,2},{2,1},{2,-1},{1,-2},{-1,-2},{-2,-1},{-2,1},{-1,2}};
 
-    Zug move = {x + 1, y + 2};
-    if(checkBounds(board, &move) && checkBoard(board, &move, shouldOfferStart))
-        ++moveCount;
-
-    move = (Zug){x + 2, y + 1};
-    if(checkBounds(board, &move) && checkBoard(board, &move, shouldOfferStart))
-        ++moveCount;
-
-    move = (Zug){x + 2, y - 1};
-    if(checkBounds(board, &move) && checkBoard(board, &move, shouldOfferStart))
-        ++moveCount;
-
-    move = (Zug){x + 1, y - 2};
-    if(checkBounds(board, &move) && checkBoard(board, &move, shouldOfferStart))
-        ++moveCount;
-
-    move = (Zug){x - 1, y - 2};
-    if(checkBounds(board, &move) && checkBoard(board, &move, shouldOfferStart))
-        ++moveCount;
-
-    move = (Zug){x - 2, y - 1};
-    if(checkBounds(board, &move) && checkBoard(board, &move, shouldOfferStart))
-        ++moveCount;
-
-    move = (Zug){x - 2, y + 1};
-    if(checkBounds(board, &move) && checkBoard(board, &move, shouldOfferStart))
-        ++moveCount;
-
-    move = (Zug){x - 1, y + 2};
-    if(checkBounds(board, &move) && checkBoard(board, &move, shouldOfferStart))
-        ++moveCount;
+    for(int i = 0; i < 8; i++) {
+    	Zug move = {x + springer_zuege[i][0], y + springer_zuege[i][1]};
+    	    if(zugValidieren(board, &move) && brettUeberpruefen(board, &move, shouldOfferStart))
+    	        ++moveCount;
+    }
 
     return moveCount;
 }
@@ -220,18 +157,18 @@ unsigned int generateMoveCount(Board* board, unsigned int x, unsigned int y, boo
  * shouldOfferStart: Ist der Startpunkt Inhalt der Liste oder nicht
  * Liefert eine sortierte Liste mit allen moeglichen Schritten mit ihren Nachbarn zurueck
  */
-HeuristicMoveList generateHeuristic(Board* board, MoveList* moveList, bool shouldOfferStart)
+HeuristikZugListe erstelleHeuristik(Board* board, ZugListe* zugListe, bool shouldOfferStart)
 {
-    HeuristicMoveList heuristicMoveList;
-    heuristicMoveList_initialize(&heuristicMoveList);
-    for(unsigned int i = 0; i < (*moveList).dataCount; ++i)
+    HeuristikZugListe heuristikZugListe;
+    heuristikZugListeInitialisieren(&heuristikZugListe);
+    for(unsigned int i = 0; i < (*zugListe).anzahlZuege; ++i)
     {
-    	Zug* move = moveList_get(moveList, i);
+    	Zug* move = moveList_get(zugListe, i);
         unsigned int moveCount = generateMoveCount(board, (*move).x, (*move).y, shouldOfferStart);
         // Warnsdorf heuristic: Bevorzugt Felder mit weniger naechsten Schritten
-        HeuristicMove heuristicMove = {{(*move).x, (*move).y}, moveCount};
-        heuristicMoveList_push(&heuristicMoveList, &heuristicMove);
+        HeuristikZug heuristicMove = {{(*move).x, (*move).y}, moveCount};
+        heuristicMoveList_push(&heuristikZugListe, &heuristicMove);
     }
-    heuristicMoveList_sort(&heuristicMoveList);
-    return heuristicMoveList;
+    heuristikZugListeSortieren(&heuristikZugListe);
+    return heuristikZugListe;
 }

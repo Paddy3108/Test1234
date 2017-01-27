@@ -38,14 +38,14 @@ bool tryPath(Board* board, unsigned int x, unsigned int y, unsigned int n, bool 
     // Entscheidet ob der Startpunkt mit in der Liste vorhanden sein soll
     // Dies ist der Fall bei einem geschlossenen Weg
     bool shouldOfferStart = (closedTour && n == (boardSize * boardSize) - 1);
-    MoveList moveList = generateMoveList(board, x, y, shouldOfferStart);
-    HeuristicMoveList list = generateHeuristic(board, &moveList, shouldOfferStart);
+    ZugListe moveList = erstelleZugListe(board, x, y, shouldOfferStart);
+    HeuristikZugListe list = erstelleHeuristik(board, &moveList, shouldOfferStart);
 
     // Geht alle moeglichen Wege ab
-    for(unsigned int i = 0; i < list.dataCount; ++i)
+    for(unsigned int i = 0; i < list.anzahlZuege; ++i)
     {
-        HeuristicMove* move = &list.data[i];
-        bool result = tryPath(board, (*move).move.x, (*move).move.y, n+1, closedTour);
+        HeuristikZug* move = &list.zuege[i];
+        bool result = tryPath(board, (*move).zug.x, (*move).zug.y, n+1, closedTour);
         if(result)
         {
             // Loesung gefunden
