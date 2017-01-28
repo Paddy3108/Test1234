@@ -6,56 +6,53 @@
 #include <stdio.h>
 
 /*
- * moveList: Pointer auf die moveListe
- * Initialisiert die MoveListe
- */
-void zugListeInitialisieren(ZugListe* zugListe)
-{
-    (*zugListe).anzahlZuege = 0;
-}
-
-/*
- * list: Pointer auf die moveList
- * move: Pointer auf Move
+ * Funktion:
  * Fuegt ein Schritt ans Ende der Liste hinzu
+ *
+ * Parameter:
+ * liste: Pointer auf die zugliste
+ * zug: Pointer auf zug
+ *
+ * Rückgabewert: void
+ *
  */
-void moveList_push(ZugListe* liste, Zug* zug)
+void zugHinzufuegen(ZugListe* liste, Zug* zug)
 {
     if((*liste).anzahlZuege < 8)
     {
         memcpy(&(*liste).zuege[(*liste).anzahlZuege++], zug, sizeof(Zug));
         return;
     }
-    assert(!"Out of memory in move list");
 }
 
 /*
- * moveList: Pointer auf die HeuristicmMoveListe
- * Initialisiert die HeuristikZugListe
- */
-void heuristikZugListeInitialisieren(HeuristikZugListe* zugListe)
-{
-    (*zugListe).anzahlZuege = 0;
-}
-
-/*
- * list: Pointer auf die HeuristicMoveList
- * move: Pointer auf HeuristicMove
+ * Funktion:
  * Fuegt ein Schritt ans Ende der Liste hinzu
+ *
+ * Parameter:
+ * liste: Pointer auf die HeuristikZugListe
+ * zug: Pointer auf HeuristikZug
+ *
+ * Rückgabewert: void
+ *
  */
-void heuristicMoveList_push(HeuristikZugListe* liste, HeuristikZug* zug)
+void heuristikZugHinzufuegen(HeuristikZugListe* liste, HeuristikZug* zug)
 {
     if((*liste).anzahlZuege < 8)
     {
         memcpy(&(*liste).zuege[(*liste).anzahlZuege++], zug, sizeof(HeuristikZug));
         return;
     }
-    assert(!"Out of memory in heuristic move list");
 }
 
 /*
- * list: Pointer auf die HeuristikZugListe
- * Sortierung der Liste mit den Heuristischen Zügen, um den Warnsdorf Algorithmus umzusetzen
+ * Funktion:
+ * Sortiert die Liste nach der Warnsdorf Heuristik - die Felder mit den wenigsten Nachfolgern kommen zuerst dran
+ *
+ * Parameter:
+ * liste: Pointer auf die HeuristikZugListe
+ *
+ * Rückgabewert: void
  */
 void heuristikZugListeSortieren(HeuristikZugListe* liste)
 {
@@ -73,101 +70,136 @@ void heuristikZugListeSortieren(HeuristikZugListe* liste)
 }
 
 /*
- * board: Pointer auf das Board
- * move: Pointer auf Move
- * Kontrolliert, ob moegliche Zuege valide sind
+ * Funktion:
+ * kontrolliert, ob moegliche Zuege valide sind
+ * (x/y-Wert ist größer-gleich null und kleiner als die Brettbreite
+ *
+ * Parameter:
+ * brett: Pointer auf das Brett
+ * zug: Pointer auf zug
+ *
+ * Rückgabewert: boolean
+ * Zug valide - true - 1
+ * Zug nicht valide - false - 0
  */
-bool zugValidieren(Board* board, Zug* zug)
+bool zugValidieren(Board* brett, Zug* zug)
 {
     return 	((*zug).x >= 0) &&
-    		((*zug).x < (*board).boardSize) &&
+    		((*zug).x < (*brett).boardSize) &&
 			((*zug).y >= 0)
-			&& ((*zug).y < (*board).boardSize);
+			&& ((*zug).y < (*brett).boardSize);
 }
 
 /*
- * board: Pointer auf das Board
- * move: Pointer auf Move
- * shouldOfferStart: ob der Startpunkt dazuz�hlt oder nicht
- * Kontrolliert das Board
+ * Funktion:
+ * Kontrolliert im Schachbrett, ob das Feld frei ist (-1, bzw. auch 0 wenn das Startfeld dazugehören darf)
+ *
+ * Parameter
+ * brett: Pointer auf das Schachbrett
+ * zug: Pointer auf Zug
+ * shouldOfferStart: ob der Startpunkt dazuzaehlt oder nicht
+ *
+ * Rueckgabewert: bool
+ * Feld ist frei: true - 1
+ * Feld ist besetzt: false - 0
  */
-bool brettUeberpruefen(Board* board, Zug* move, bool shouldOfferStart)
+bool brettUeberpruefen(Board* brett, Zug* zug, bool shouldOfferStart)
 {
-    return board_getValue(board, (*move).x, (*move).y) == -1 || (shouldOfferStart && board_getValue(board, (*move).x, (*move).y) == 0);
+    return board_getValue(brett, (*zug).x, (*zug).y) == -1 || (shouldOfferStart && board_getValue(brett, (*zug).x, (*zug).y) == 0);
 }
 
 /*
- * list: Pointer auf die MoveList
+ * Funktion:
+ * liefert den Wert der Liste an einem bestimmten Index zurück
+ *
+ * Parameter:
+ * liste: Pointer auf die ZugListe
  * index: Stelle der Liste
- * Liefert den Wert der Liste an Index
+ *
+ * Rückgabewert: Zug-Pointer
  */
-Zug* moveList_get(ZugListe* list, unsigned int index)
+Zug* erhalteZugAusZugliste(ZugListe* list, unsigned int index)
 {
-    assert((*list).anzahlZuege > index);
     return &(*list).zuege[index];
 }
 
 /*
- * board: Pointer auf das Board
+ * Funktion:
+ * Liefert eine Liste aller Schritte, die an der aktuellen Position des Schachbretts moeglich sind
+ *
+ * Parameter:
+ * brett: Pointer auf das Board
  * x: X - Koordinate
  * y: Y - Koordinate
- * shouldOfferStart: Ist der Startpunkt Inhalt der Liste oder nicht
- * Liefert alle Schritte, die an der aktuellen Position des Boards moeglich sind
+ * shouldOfferStart: Gehoert der Startpunkt der Liste zum Inhalt oder nicht
+ *
+ * Rückgabewert: ZugListe
  */
-ZugListe erstelleZugListe(Board* board, unsigned int x, unsigned int y, bool shouldOfferStart)
+ZugListe erstelleZugListe(Board* brett, int x, int y, bool shouldOfferStart)
 {
 	ZugListe zugListe;
-	zugListeInitialisieren(&zugListe);
+	zugListe.anzahlZuege = 0;
 
     int springer_zuege[8][2] = {{1,2},{2,1},{2,-1},{1,-2},{-1,-2},{-2,-1},{-2,1},{-1,2}};
 
     for(int i = 0; i < 8; i++) {
     	Zug zug = {x + springer_zuege[i][0], y + springer_zuege[i][1]};
-    	if(zugValidieren(board, &zug) && brettUeberpruefen(board, &zug, shouldOfferStart))
-    		moveList_push(&zugListe, &zug);
+    	if(zugValidieren(brett, &zug) && brettUeberpruefen(brett, &zug, shouldOfferStart))
+    		zugHinzufuegen(&zugListe, &zug);
     }
 
     return zugListe;
 }
 
 /*
- * board: Pointer auf das Board
+ * Funktion:
+ * liefert Anzahl der moeglichen Schritte zurück, die von einem bestimmten Feld gemacht werden können
+ *
+ * Parameter:
+ * brett: Pointer auf das Brett
  * x: X - Koordinate
  * Y: Y - Koordinate
  * shouldOfferStart: Ist der Startpunkt Inhalt der Liste oder nicht
- * Liefert die Anzahl der moeglischen Schritte
+ *
+ * Rückgabewert: integer-Wert ohne Vorzeichen mit der Anzahl der möglichen Zuege
  */
-unsigned int generateMoveCount(Board* board, unsigned int x, unsigned int y, bool shouldOfferStart)
+unsigned int anzahlMoeglicherZuegeFinden(Board* brett, unsigned int x, unsigned int y, bool shouldOfferStart)
 {
-    unsigned int moveCount = 0;
+    unsigned int anzahlZuege = 0;
     int springer_zuege[8][2] = {{1,2},{2,1},{2,-1},{1,-2},{-1,-2},{-2,-1},{-2,1},{-1,2}};
 
     for(int i = 0; i < 8; i++) {
-    	Zug move = {x + springer_zuege[i][0], y + springer_zuege[i][1]};
-    	    if(zugValidieren(board, &move) && brettUeberpruefen(board, &move, shouldOfferStart))
-    	        ++moveCount;
+    	Zug zug = {x + springer_zuege[i][0], y + springer_zuege[i][1]};
+    	    if(zugValidieren(brett, &zug) && brettUeberpruefen(brett, &zug, shouldOfferStart))
+    	        ++anzahlZuege;
     }
 
-    return moveCount;
+    return anzahlZuege;
 }
 
 /*
- * board: Pointer auf das Board
- * moveList: Pointer auf die moveList
- * shouldOfferStart: Ist der Startpunkt Inhalt der Liste oder nicht
+ * Funktion:
  * Liefert eine sortierte Liste mit allen moeglichen Schritten mit ihren Nachbarn zurueck
+ *
+ * Parameter:
+ * brett: Pointer auf das Schachbrett
+ * zugListe: Pointer auf die ZugListe
+ * shouldOfferStart: Ist der Startpunkt Inhalt der Liste oder nicht
+ *
+ * Rückgabewert: HeuristikZugListe, vollstaendig sortierte Liste nach der Warnsdorf-Heuristik
  */
-HeuristikZugListe erstelleHeuristik(Board* board, ZugListe* zugListe, bool shouldOfferStart)
+HeuristikZugListe erstelleHeuristik(Board* brett, ZugListe* zugListe, bool shouldOfferStart)
 {
     HeuristikZugListe heuristikZugListe;
-    heuristikZugListeInitialisieren(&heuristikZugListe);
+    heuristikZugListe.anzahlZuege = 0;
+
     for(unsigned int i = 0; i < (*zugListe).anzahlZuege; ++i)
     {
-    	Zug* move = moveList_get(zugListe, i);
-        unsigned int moveCount = generateMoveCount(board, (*move).x, (*move).y, shouldOfferStart);
-        // Warnsdorf heuristic: Bevorzugt Felder mit weniger naechsten Schritten
-        HeuristikZug heuristicMove = {{(*move).x, (*move).y}, moveCount};
-        heuristicMoveList_push(&heuristikZugListe, &heuristicMove);
+    	Zug* zug = erhalteZugAusZugliste(zugListe, i);
+        unsigned int anzahlZuege = anzahlMoeglicherZuegeFinden(brett, (*zug).x, (*zug).y, shouldOfferStart);
+        // Warnsdorf Heuristik: Bevorzugt Felder mit weniger naechsten Schritten
+        HeuristikZug heuristikZug = {{(*zug).x, (*zug).y}, anzahlZuege};
+        heuristikZugHinzufuegen(&heuristikZugListe, &heuristikZug);
     }
     heuristikZugListeSortieren(&heuristikZugListe);
     return heuristikZugListe;

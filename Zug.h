@@ -1,11 +1,12 @@
-#ifndef MOVE_H_INCLUDED
-#define MOVE_H_INCLUDED
+#ifndef ZUG_H_INCLUDED
+#define ZUG_H_INCLUDED
 
 #include <stdbool.h>
 #include "Brett.h"
 
 /*
- * Move Struct, mit der x und y - Koordinate
+ * Zug Struktur
+ * x und y - Koordinate
  */
 typedef struct Zug
 {
@@ -14,9 +15,11 @@ typedef struct Zug
 } Zug;
 
 /*
- * Sortiert die naechsten Zuege nach moeglichen Nachbarn in aufsteigender Reihenfolge und speichert es in diesem struct
- * move: Instanz von dem Move struct
- * neighborCount: Moegliche Anzahl von Schritten in diesem Schritt
+ * HeuristikZug Struktur
+ * zug: Instanz der Zug Struktur
+ * anzahlNachbarn: Anzahl von Nachbarn
+ *
+ * Struktur wird benutzt, um Zuege in einer Liste in sortierter (aufsteigender) Reihenfolge nach Anzahl der Nachbarn abzuspeichern
  */
 typedef struct HeuristikZug
 {
@@ -25,9 +28,11 @@ typedef struct HeuristikZug
 } HeuristikZug;
 
 /*
- * Move Liste behaelt maximal 8 Schritte
- * data: Schritte in der Liste
- * dataCount: Anzahl der schon erledigten Schritte
+ * ZugListe Struktur
+ *
+ * ZugListe behaelt maximal 8 Schritte (wegen 8 Nachfolgern von einem Feld)
+ * zuege: Schritte in der Liste
+ * anzahlZuege: Anzahl der schon erledigten Schritte
  */
 typedef struct ZugListe
 {
@@ -36,9 +41,9 @@ typedef struct ZugListe
 } ZugListe;
 
 /*
- * Die heuristische Version von der MoveListe
- * data: heuristischen Schritte in der Liste
- * dataCount: Anzahl der schon erledigten Schritte
+ * Die heuristische Version von der ZugListe
+ * zuege: heuristische Schritte in der Liste
+ * anzahlZuege: Anzahl der schon erledigten Schritte
  */
 typedef struct HeuristikZugListe
 {
@@ -47,53 +52,30 @@ typedef struct HeuristikZugListe
 } HeuristikZugListe;
 
 /*
- * moveList: Pointer auf die moveListe
- * Initialisiert die MoveListe
- */
-void zugListeInitialisieren(ZugListe* zugListe);
-
-/*
- * list: Pointer auf die moveList
- * move: Pointer auf Move
- * Fuegt ein Schritt ans Ende der Liste hinzu
- */
-void moveList_push(ZugListe* zugListe, Zug* zug);
-
-/*
- * list: Pointer auf die moveList
- * index: Stelle der Liste
- * Liefert den Pointer, der auf den Wert an der Stelle des index in der Liste zeigt
- */
-Zug* moveList_get(ZugListe* zugListe, unsigned int index);
-
-/*
- * list: Pointer auf die HeuristicMoveList
- * move: Pointer auf Move
- * Fuegt ein Schritt ans Ende der Liste hinzu
- */
-void heuristicMoveList_push(HeuristikZugListe* heuristikZugListe, HeuristikZug* heuristikZug);
-
-/*
- * list: Pointer auf die HeuristicMoveList
- * Sortierung der heuristischen Liste, um den Warnsdorf Algorithmus umzusetzen
- */
-void heuristicMoveList_sort(HeuristikZugListe* heuristikZugListe);
-
-/*
- * board: Pointer auf das Board
+ * Funktion:
+ * Liefert eine Liste aller Schritte, die an der aktuellen Position des Schachbretts moeglich sind
+ *
+ * Parameter:
+ * brett: Pointer auf das Board
  * x: X - Koordinate
  * y: Y - Koordinate
- * shouldOfferStart: Ist der Startpunkt Inhalt der Liste oder nicht
- * Liefert alle Schritte, die an der aktuellen Position des Boards moeglich sind
+ * shouldOfferStart: Gehoert der Startpunkt der Liste zum Inhalt oder nicht
+ *
+ * Rückgabewert: ZugListe
  */
-ZugListe erstelleZugListe(Board* board, unsigned int x, unsigned int y, bool shouldOfferStart);
+ZugListe erstelleZugListe(Board* board, int x, int y, bool shouldOfferStart);
 
 /*
- * board: Pointer auf das Board
- * moveList: Pointer auf die moveList
- * shouldOfferStart: Ist der Startpunkt Inhalt der Liste oder nicht
+ * Funktion:
  * Liefert eine sortierte Liste mit allen moeglichen Schritten mit ihren Nachbarn zurueck
+ *
+ * Parameter:
+ * brett: Pointer auf das Schachbrett
+ * zugListe: Pointer auf die ZugListe
+ * shouldOfferStart: Ist der Startpunkt Inhalt der Liste oder nicht
+ *
+ * Rückgabewert: HeuristikZugListe, vollstaendig sortierte Liste nach der Warnsdorf-Heuristik
  */
 HeuristikZugListe erstelleHeuristik(Board* board, ZugListe* moveList, bool shouldOfferStart);
 
-#endif // MOVE_H_INCLUDED
+#endif // ZUG_H_INCLUDED
