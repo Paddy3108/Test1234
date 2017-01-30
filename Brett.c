@@ -60,7 +60,7 @@ void brettSpeicherFreigeben(Brett* brett)
  *
  */
 
-int BrettGetPositionswert(Brett* brett, unsigned int x, unsigned int y)
+int brettGetPositionswert(Brett* brett, unsigned int x, unsigned int y)
 {
     return (*brett).data[y * (*brett).brettGroesse + x];
 }
@@ -110,7 +110,7 @@ void brettAusgeben(Brett* brett)
         printf("%s", "|");
         for(unsigned int x = 0; x < (*brett).brettGroesse; ++x)
         {
-            int wert = BrettGetPositionswert(brett, x, y);
+            int wert = brettGetPositionswert(brett, x, y);
             if(wert == -1)
                 printf("% 3c", 'x');
             else if(wert == (*brett).brettGroesse*(*brett).brettGroesse)
@@ -142,18 +142,18 @@ void brettAusgeben(Brett* brett)
  *
  */
 
-void BrettWiederbeschreiben(Brett* brett, unsigned int rx, unsigned int ry)
+void brettWiederbeschreiben(Brett* brett, unsigned int rx, unsigned int ry)
 {
 
-    int relative = BrettGetPostitionswert(brett, rx, ry);
+    int relative = brettGetPositionswert(brett, rx, ry);
     if(relative == 0) return;
     unsigned int brettGroesse = (*brett).brettGroesse*(*brett).brettGroesse;
     for(unsigned int x = 0; x < (*brett).brettGroesse; ++x)
     {
         for(unsigned int y = 0; y < (*brett).brettGroesse; ++y)
         {
-            int newVal = (((brettGetPositionswert(brett, x, y) - relative) % brettGroesse) + brettGroesse) % brettGroesse;
-            board_setValue(brett, x, y, newVal);
+            int neuerWert = (((brettGetPositionswert(brett, x, y) - relative) % brettGroesse) + brettGroesse) % brettGroesse;
+            brettSetPositionswert(brett, x, y, neuerWert);
         }
     }
 }

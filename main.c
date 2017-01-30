@@ -15,7 +15,7 @@ int main()
 
     int wahl = 0;
     bool geschlossen;
-    int groesse = 0;
+    int brettGroesse = 0;
     int x = -1 ,y = -1;
     scanf("%d", &wahl);
 
@@ -27,27 +27,27 @@ int main()
                 else geschlossen = false;
 
                 printf("Groesse des Brettes (5 bis 13): ");
-                while (groesse<5 || groesse > 13)
+                while (brettGroesse<5 || brettGroesse > 13)
                 {
-                    while((scanf("%d", &groesse))!= 1)
+                    while((scanf("%d", &brettGroesse))!= 1)
                     {
                         fflush(stdin); // loescht Eingabepuffer, um die Variablen neue Werte zu zu weisen.
                         printf("Falsche Eingabe. Bitte korrigieren Sie ihre Eingabe.\n> ");
                     }
-                    if(groesse<5 || groesse > 13) printf("Falsche Eingabe. Bitte korrigieren Sie ihre Eingabe.\n> ");
+                    if(brettGroesse<5 || brettGroesse > 13) printf("Falsche Eingabe. Bitte korrigieren Sie ihre Eingabe.\n> ");
                 }
                 printf("%s", "Startfeld. Format: %d %d\nLinke obere Ecke: 0 0\n> ");
 
-                while (x<0 || x>groesse-1 || y<0 || y>groesse-1)
+                while (x<0 || x>brettGroesse-1 || y<0 || y>brettGroesse-1)
                 {
                     while ((scanf("%d %d", &x, &y)) != 2)
                     {
                         fflush(stdin); // loescht Eingabepuffer, um die Variablen neue Werte zu zu weisen.
                         printf("Falsche Eingabe. Bitte korrigieren Sie ihre Eingabe.\n> ");
                     }
-                    if((x<0 || x>groesse-1 || y<0 || y>groesse-1)) printf("Falsche Eingabe. Bitte korrigieren Sie ihre Eingabe.\n> ");
+                    if((x<0 || x>brettGroesse-1 || y<0 || y>brettGroesse-1)) printf("Falsche Eingabe. Bitte korrigieren Sie ihre Eingabe.\n> ");
                 }
-                knightsTour(groesse, x, y, geschlossen);
+                knightsTour(brettGroesse, x, y, geschlossen);
                 break;
         case 3:
         case 4:

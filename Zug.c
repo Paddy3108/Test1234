@@ -105,7 +105,7 @@ bool zugValidieren(Brett* brett, Zug* zug)
  */
 bool brettUeberpruefen(Brett* brett, Zug* zug, bool shouldOfferStart)
 {
-    return BrettGetPositionswert(brett, (*zug).x, (*zug).y) == -1 || (shouldOfferStart && BrettGetPositionswert(brett, (*zug).x, (*zug).y) == 0);
+    return brettGetPositionswert(brett, (*zug).x, (*zug).y) == -1 || (shouldOfferStart && brettGetPositionswert(brett, (*zug).x, (*zug).y) == 0);
 }
 
 /*
