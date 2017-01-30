@@ -16,12 +16,12 @@
  * n: aktuelle Anzahl der Durchlaeufe
  * closedTour: Geschlossener oder Offener Weg
  */
-bool tryPath(Board* board, unsigned int x, unsigned int y, unsigned int n, bool closedTour)
+bool tryPath(Brett* brett, unsigned int x, unsigned int y, unsigned int n, bool closedTour)
 {
 
-    unsigned int boardSize = (*board).boardSize;
+    unsigned int boardSize = (*brett).brettGroesse;
     // Setzt an (x|Y) den Wert n (Startwert = 0)
-    board_setValue(board, x, y, n);
+    brettSetPositionswert(brett, x, y, n);
 
 
     // Wenn Anzahl der Durchlaeufe gleich der Anzahl der Felder => Loesung gefunden
@@ -38,14 +38,14 @@ bool tryPath(Board* board, unsigned int x, unsigned int y, unsigned int n, bool 
     // Entscheidet ob der Startpunkt mit in der Liste vorhanden sein soll
     // Dies ist der Fall bei einem geschlossenen Weg
     bool shouldOfferStart = (closedTour && n == (boardSize * boardSize) - 1);
-    ZugListe moveList = erstelleZugListe(board, x, y, shouldOfferStart);
-    HeuristikZugListe list = erstelleHeuristik(board, &moveList, shouldOfferStart);
+    ZugListe moveList = erstelleZugListe(brett, x, y, shouldOfferStart);
+    HeuristikZugListe list = erstelleHeuristik(brett, &moveList, shouldOfferStart);
 
     // Geht alle moeglichen Wege ab
     for(unsigned int i = 0; i < list.anzahlZuege; ++i)
     {
         HeuristikZug* move = &list.zuege[i];
-        bool result = tryPath(board, (*move).zug.x, (*move).zug.y, n+1, closedTour);
+        bool result = tryPath(brett, (*move).zug.x, (*move).zug.y, n+1, closedTour);
         if(result)
         {
             // Loesung gefunden
@@ -53,7 +53,7 @@ bool tryPath(Board* board, unsigned int x, unsigned int y, unsigned int n, bool 
         }
     }
     // Keine Loesung, setzt das Feld wieder auf "unbesucht" (-1)
-    board_setValue(board, x, y, -1);
+    brettSetPositionswert(brett, x, y, -1);
     return false;
 }
 
@@ -64,31 +64,31 @@ bool tryPath(Board* board, unsigned int x, unsigned int y, unsigned int n, bool 
  * closedTour: Geschlosser oder offener Weg
  * Versucht das Springerproblem mit den gegeben Variablen zu loesen
  */
-void knightsTour(unsigned int boardSize, unsigned int x, unsigned int y, bool closedTour)
+void knightsTour(unsigned int brettGroesse, unsigned int x, unsigned int y, bool closedTour)
 {
-    Board board;
-    board_initialize(&board, boardSize);
+    Brett brett;
+    brettInitialisieren(&brett, brettGroesse);
     bool result = false;
     if(closedTour)
     {
-        result = tryPath(&board, 0, 0, 0, closedTour);
+        result = tryPath(&brett, 0, 0, 0, closedTour);
         if(result)
         {
-          board_rewriteClosed(&board, x, y);
+          brettWiederbeschreiben(&brett, x, y);
         }
     }
     else
     {
-        result = tryPath(&board, x, y, 0, closedTour);
+        result = tryPath(&brett, x, y, 0, closedTour);
     }
 
     if(result)
     {
-        board_print(&board);
+        brettAusgeben(&brett);
     }
     else
     {
         printf("%s", "No solution found");
     }
-   board_destruct(&board);
+   brettSpeicherFreigeben(&brett);
 }

@@ -10,6 +10,6 @@
  * closedTour: Geschlosser oder offener Weg
  * Versucht das Springerproblem mit den gegeben Variablen zu loesen
  */
-void knightsTour(unsigned int boardSize, unsigned int x, unsigned int y, bool closedTour);
+void knightsTour(unsigned int brettGroesse, unsigned int x, unsigned int y, bool closedTour);
 
 #endif // ALGORITHM_H_INCLUDED

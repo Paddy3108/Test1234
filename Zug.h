@@ -63,7 +63,7 @@ typedef struct HeuristikZugListe
  *
  * Rückgabewert: ZugListe
  */
-ZugListe erstelleZugListe(Board* board, int x, int y, bool shouldOfferStart);
+ZugListe erstelleZugListe(Brett* brett, int x, int y, bool shouldOfferStart);
 
 /*
  * Funktion:
@@ -76,6 +76,6 @@ ZugListe erstelleZugListe(Board* board, int x, int y, bool shouldOfferStart);
  *
  * Rückgabewert: HeuristikZugListe, vollstaendig sortierte Liste nach der Warnsdorf-Heuristik
  */
-HeuristikZugListe erstelleHeuristik(Board* board, ZugListe* moveList, bool shouldOfferStart);
+HeuristikZugListe erstelleHeuristik(Brett* brett, ZugListe* moveList, bool shouldOfferStart);
 
 #endif // ZUG_H_INCLUDED

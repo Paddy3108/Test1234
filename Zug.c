@@ -82,12 +82,12 @@ void heuristikZugListeSortieren(HeuristikZugListe* liste)
  * Zug valide - true - 1
  * Zug nicht valide - false - 0
  */
-bool zugValidieren(Board* brett, Zug* zug)
+bool zugValidieren(Brett* brett, Zug* zug)
 {
     return 	((*zug).x >= 0) &&
-    		((*zug).x < (*brett).boardSize) &&
+    		((*zug).x < (*brett).brettGroesse) &&
 			((*zug).y >= 0)
-			&& ((*zug).y < (*brett).boardSize);
+			&& ((*zug).y < (*brett).brettGroesse);
 }
 
 /*
@@ -103,9 +103,9 @@ bool zugValidieren(Board* brett, Zug* zug)
  * Feld ist frei: true - 1
  * Feld ist besetzt: false - 0
  */
-bool brettUeberpruefen(Board* brett, Zug* zug, bool shouldOfferStart)
+bool brettUeberpruefen(Brett* brett, Zug* zug, bool shouldOfferStart)
 {
-    return board_getValue(brett, (*zug).x, (*zug).y) == -1 || (shouldOfferStart && board_getValue(brett, (*zug).x, (*zug).y) == 0);
+    return BrettGetPositionswert(brett, (*zug).x, (*zug).y) == -1 || (shouldOfferStart && BrettGetPositionswert(brett, (*zug).x, (*zug).y) == 0);
 }
 
 /*
@@ -135,7 +135,7 @@ Zug* erhalteZugAusZugliste(ZugListe* list, unsigned int index)
  *
  * Rückgabewert: ZugListe
  */
-ZugListe erstelleZugListe(Board* brett, int x, int y, bool shouldOfferStart)
+ZugListe erstelleZugListe(Brett* brett, int x, int y, bool shouldOfferStart)
 {
 	ZugListe zugListe;
 	zugListe.anzahlZuege = 0;
@@ -163,7 +163,7 @@ ZugListe erstelleZugListe(Board* brett, int x, int y, bool shouldOfferStart)
  *
  * Rückgabewert: integer-Wert ohne Vorzeichen mit der Anzahl der möglichen Zuege
  */
-unsigned int anzahlMoeglicherZuegeFinden(Board* brett, unsigned int x, unsigned int y, bool shouldOfferStart)
+unsigned int anzahlMoeglicherZuegeFinden(Brett* brett, unsigned int x, unsigned int y, bool shouldOfferStart)
 {
     unsigned int anzahlZuege = 0;
     int springer_zuege[8][2] = {{1,2},{2,1},{2,-1},{1,-2},{-1,-2},{-2,-1},{-2,1},{-1,2}};
@@ -188,7 +188,7 @@ unsigned int anzahlMoeglicherZuegeFinden(Board* brett, unsigned int x, unsigned 
  *
  * Rückgabewert: HeuristikZugListe, vollstaendig sortierte Liste nach der Warnsdorf-Heuristik
  */
-HeuristikZugListe erstelleHeuristik(Board* brett, ZugListe* zugListe, bool shouldOfferStart)
+HeuristikZugListe erstelleHeuristik(Brett* brett, ZugListe* zugListe, bool shouldOfferStart)
 {
     HeuristikZugListe heuristikZugListe;
     heuristikZugListe.anzahlZuege = 0;

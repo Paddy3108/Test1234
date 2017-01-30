@@ -1,52 +1,113 @@
 #ifndef BOARD_H_INCLUDED
 #define BOARD_H_INCLUDED
 
-// Definiert ein Struct "Board" mit den Variablen boardSize und einem int Pointer
-typedef struct Board
+
+/*
+ * Funktion:
+ * Definiert ein Struct "Board" mit den Variablen boardSize und einem int Pointer
+ *
+ * Parameter:
+ * brettGroesse: Brettgroesse
+ * data: um den Wert zu bekommen
+ *
+ *
+ */
+
+typedef struct Brett
 {
-    unsigned int boardSize;
+    unsigned int brettGroesse;
     int* data;
-} Board;
+} Brett;
+
 
 /*
- * board: Pointer auf das Board
- * boardSize: Boardgroesse
- * Initialisiert das Board mit den zwei Variablen
+ * Funktion:
+ * Initialisiert das Brett mit den zwei Variablen
+ *
+ * Parameter:
+ * brett: Pointer auf das Brett
+ * brettgroesse: Brettgroesse
+ *
+ * Rückgabewert: void
+ *
  */
-void board_initialize(Board* board, unsigned int boardSize);
+
+void brettInitialisieren(Brett* brett, unsigned int brettGroesse);
+
 
 /*
- * board: Pointer auf das Board
+ * Funktion:
  * Gibt zuvor reservierten Speicher wieder frei
+ *
+ * Parameter:
+ * brett: Pointer auf das Brett
+ *
+ * Rückgabewert: void
+ *
  */
-void board_destruct(Board* board);
+
+void brettSpeicherFreigeben(Brett* brett);
+
 
 /*
- * board: Pointer auf das Board
- * X : X - Koordinate
- * Y : Y - Koordinate
+ * Funktion:
  * Gibt den Wert von dem Board an der Stelle x und y zurück
+ *
+ * Parameter:
+ * brett: Pointer auf das Brett
+ * x: X - Koordinate
+ * Y: Y - Koordinate
+ *
+ * Rückgabewert: int - Wert der Position
+ *
  */
-int board_getValue(Board* board, unsigned int x, unsigned int y);
+
+int brettGetPositionswert(Brett* brett, unsigned int x, unsigned int y);
+
 
 /*
- * board: Pointer auf das Board
- * X : X - Koordinate
- * Y : Y - Koordinate
- * value: Wert des Feldes
+ * Funktion:
  * Setzt den Wert von dem Board an der Stelle x und y zurück
+ *
+ * Parameter:
+ * brett: Pointer auf das Brett
+ * x: X - Koordinate
+ * Y: Y - Koordinate
+ * wert: Wert des Feldes
+ *
+ * Rückgabewert: void
+ *
  */
-void board_setValue(Board* board, unsigned int x, unsigned int y, int value);
+
+void brettSetPositionswert(Brett* brett, unsigned int x, unsigned int y, int wert);
+
 
 /*
- * board: Pointer auf das Board
+ * Funktion:
  * Gibt das Board aus
+ *
+ * Parameter:
+ * brett: Pointer auf das Brett
+ *
+ * Rückgabewert: void
+ *
  */
-void board_print(Board* board);
+
+void brettAusgeben(Brett* brett);
 
 /*
- * Rewrites a closed board at 0|0 to a board at x|y
+ * Funktion:
+ * Nimmt das geloeste Brett mit dem Startwert 0|0 und verschiebt die ganzen Werte um den Wert der auf der eigentlichen Startposition steht
+ *
+ * Parameter:
+ * brett: Pointer auf das Brett
+ * x: X - Koordinate
+ * Y: Y - Koordinate
+ *
+ * Rückgabewert: void
+ *
  */
-void board_rewriteClosed(Board* board, unsigned int x, unsigned int y);
+
+void brettWiederbeschreiben(Brett* brett, unsigned int x, unsigned int y);
 
 #endif // BOARD_H_INCLUDED

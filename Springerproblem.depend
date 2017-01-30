@@ -102,3 +102,40 @@
 	<assert.h>
 	<stdio.h>
 
+1485768235 source:/Users/nxeon/Springerproblem/Algorithmus.c
+	"Algorithmus.h"
+	<stdlib.h>
+	<string.h>
+	<stdio.h>
+	"Brett.h"
+	"Zug.h"
+
+1485768117 /Users/nxeon/Springerproblem/Algorithmus.h
+	<stdbool.h>
+
+1485768212 /Users/nxeon/Springerproblem/Brett.h
+
+1485767956 /Users/nxeon/Springerproblem/Zug.h
+	<stdbool.h>
+	"Brett.h"
+
+1485764249 source:/Users/nxeon/Springerproblem/main.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	<time.h>
+	"Algorithmus.h"
+
+1485768306 source:/Users/nxeon/Springerproblem/Brett.c
+	"Brett.h"
+	<stdlib.h>
+	<stdio.h>
+
+1485767801 source:/Users/nxeon/Springerproblem/Zug.c
+	"Zug.h"
+	<stdlib.h>
+	<string.h>
+	<stdbool.h>
+	<assert.h>
+	<stdio.h>
+
