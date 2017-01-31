@@ -53,9 +53,7 @@ int main()
         case 4:
                 if (wahl == 4) geschlossen = true;
                 else geschlossen = false;
-                time_t t;
-                time(&t);
-                srand((unsigned int)t); // wird benoetigt, um abhaengig von der Zeit eine Zufallszahl zu erstellen, ohne das => immer die gleiche Zufallszahl
+                srand(time (NULL)); // wird benoetigt, um abhaengig von der Zeit eine Zufallszahl zu erstellen, ohne das => immer die gleiche Zufallszahl
                 x = rand() % 8; //erzeugt Zufalszahl
                 y = rand() % 8;
                 printf("%s %s (%d|%d)\n", geschlossen ? "Geschlossener" : "Offener", "Weg", x, y);
