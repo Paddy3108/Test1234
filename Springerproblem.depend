@@ -75,26 +75,28 @@
 1485375622 c:\users\patri\desktop\uni\programmierung 1\springer_selfmade\algorithmus.h
 	<stdbool.h>
 
-1485789007 source:c:\users\patri\desktop\uni\programmierung 1\springer_selfmade\algorithmus.c
+1485559342 source:c:\users\patri\desktop\uni\programmierung 1\springer_selfmade\algorithmus.c
 	"Algorithmus.h"
 	<stdlib.h>
 	<string.h>
 	<stdio.h>
+	<time.h>
+	<sys/time.h>
 	"Brett.h"
 	"Zug.h"
 
-1485788985 c:\users\patri\desktop\uni\programmierung 1\springer_selfmade\brett.h
+1485375622 c:\users\patri\desktop\uni\programmierung 1\springer_selfmade\brett.h
 
-1485789069 c:\users\patri\desktop\uni\programmierung 1\springer_selfmade\zug.h
+1485557763 c:\users\patri\desktop\uni\programmierung 1\springer_selfmade\zug.h
 	<stdbool.h>
 	"Brett.h"
 
-1485789558 source:c:\users\patri\desktop\uni\programmierung 1\springer_selfmade\brett.c
+1485375622 source:c:\users\patri\desktop\uni\programmierung 1\springer_selfmade\brett.c
 	"Brett.h"
 	<stdlib.h>
 	<stdio.h>
 
-1485789576 source:c:\users\patri\desktop\uni\programmierung 1\springer_selfmade\zug.c
+1485557763 source:c:\users\patri\desktop\uni\programmierung 1\springer_selfmade\zug.c
 	"Zug.h"
 	<stdlib.h>
 	<string.h>
