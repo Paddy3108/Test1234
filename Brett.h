@@ -4,11 +4,11 @@
 
 /*
  * Funktion:
- * Definiert ein Struct "Board" mit den Variablen boardSize und einem int Pointer
+ * Struct "Brett"
  *
  * Parameter:
  * brettGroesse: Brettgroesse
- * data: um den Wert zu bekommen
+ * data: Daten des Schachbrettes
  *
  *
  */
@@ -37,7 +37,7 @@ void brettInitialisieren(Brett* brett, unsigned int brettGroesse);
 
 /*
  * Funktion:
- * Gibt zuvor reservierten Speicher wieder frei
+ * Gibt zuvor allokierten Speicher wieder frei
  *
  * Parameter:
  * brett: Pointer auf das Brett
@@ -84,7 +84,7 @@ void brettSetPositionswert(Brett* brett, unsigned int x, unsigned int y, int wer
 
 /*
  * Funktion:
- * Gibt das Board aus
+ * Gibt das Brett in der Konsole aus
  *
  * Parameter:
  * brett: Pointer auf das Brett
@@ -97,7 +97,8 @@ void brettAusgeben(Brett* brett);
 
 /*
  * Funktion:
- * Nimmt das geloeste Brett mit dem Startwert 0|0 und verschiebt die ganzen Werte um den Wert der auf der eigentlichen Startposition steht
+ * Nimmt das geloeste Brett mit dem Startwert 0|0
+ * und verschiebt die ganzen Werte um den Wert der auf der eigentlichen Startposition steht
  *
  * Parameter:
  * brett: Pointer auf das Brett

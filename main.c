@@ -8,10 +8,10 @@
 int main()
 {
     printf("=== Springerproblem ===\n");
-    printf("%s", "1. Offener Pfad (frei waehlbar)\n");
-    printf("%s", "2. Geschlossener Pfad (frei waehlbar)\n");
-    printf("%s", "3. Offener Pfad (Zufaellig)\n");
-    printf("%s", "4. Geschlossener Pfad (Zufaellig)\n> ");
+    printf("1. Offener Pfad (frei waehlbar)\n");
+    printf("2. Geschlossener Pfad (frei waehlbar)\n");
+    printf("3. Offener Pfad (Zufaellig)\n");
+    printf("4. Geschlossener Pfad (Zufaellig)\n> ");
 
     int wahl = 0;
     bool geschlossen;
@@ -26,21 +26,21 @@ int main()
                 if (wahl == 2) geschlossen = true;
                 else geschlossen = false;
 
-                printf("Groesse des Brettes (5 bis 13): ");
-                while (brettGroesse<5 || brettGroesse > 13)
+                printf("Groesse des Brettes (5 bis 70): ");
+                while (brettGroesse<5 || brettGroesse > 70) //prueft ob die eingelesenen Werte korrekt sind
                 {
-                    while((scanf("%d", &brettGroesse))!= 1)
+                    while((scanf("%d", &brettGroesse))!= 1) //prueft ob Zahlen eingelesen wurden
                     {
                         fflush(stdin); // loescht Eingabepuffer, um die Variablen neue Werte zu zu weisen.
                         printf("Falsche Eingabe. Bitte korrigieren Sie ihre Eingabe.\n> ");
                     }
-                    if(brettGroesse<5 || brettGroesse > 13) printf("Falsche Eingabe. Bitte korrigieren Sie ihre Eingabe.\n> ");
+                    if(brettGroesse<5 || brettGroesse > 70) printf("Falsche Eingabe. Bitte korrigieren Sie ihre Eingabe.\n> ");
                 }
                 printf("%s", "Startfeld. Format: %d %d\nLinke obere Ecke: 0 0\n> ");
 
-                while (x<0 || x>brettGroesse-1 || y<0 || y>brettGroesse-1)
+                while (x<0 || x>brettGroesse-1 || y<0 || y>brettGroesse-1) //prueft ob die eingebene Position moeglich ist
                 {
-                    while ((scanf("%d %d", &x, &y)) != 2)
+                    while ((scanf("%d %d", &x, &y)) != 2) //prueft ob Zahlen eingelesen wurden
                     {
                         fflush(stdin); // loescht Eingabepuffer, um die Variablen neue Werte zu zu weisen.
                         printf("Falsche Eingabe. Bitte korrigieren Sie ihre Eingabe.\n> ");

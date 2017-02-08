@@ -6,8 +6,8 @@
 
 /*
  * Funktion:
- * Dem Board wird zu Beginn die Boardgroesse zugewiesen und es werden so viele Felder reserviert
- * Alle Felder werden erstmal auf -1 gesetzt
+ * Dem Board wird zu Beginn die Boardgroesse zugewiesen und es werden so viele Felder alloziert.
+ * Alle Felder werden erstmal auf -1 (unbesucht) gesetzt
  *
  * Parameter:
  * brett: Pointer auf das Brett
@@ -20,7 +20,7 @@
 void brettInitialisieren(Brett* brett, unsigned int brettGroesse)
 {
     (*brett).brettGroesse = brettGroesse;
-    (*brett).data = (int*)malloc(((*brett).brettGroesse * (*brett).brettGroesse)*sizeof(int));
+    (*brett).data = malloc(((*brett).brettGroesse * (*brett).brettGroesse)*sizeof(int));
 
     int brettFelder = ((*brett).brettGroesse*(*brett).brettGroesse);
     for(unsigned int i = 0; i < brettFelder ; ++i)
@@ -32,7 +32,7 @@ void brettInitialisieren(Brett* brett, unsigned int brettGroesse)
 
 /*
  * Funktion:
- * Kann den reservierten Speicher wieder frei geben
+ * Gibt zuvor allokierten Speicher wieder frei
  *
  * Parameter:
  * brett: Pointer auf das Brett
@@ -88,7 +88,7 @@ void brettSetPositionswert(Brett* brett, unsigned int x, unsigned int y, int wer
 
 /*
  * Funktion:
- * Gibt das Brett aus
+ * Gibt das Brett in der Konsole aus
  *
  * Parameter:
  * brett: Pointer auf das Brett
@@ -131,7 +131,8 @@ void brettAusgeben(Brett* brett)
 
 /*
  * Funktion:
- * Nimmt das geloeste Brett mit dem Startwert 0|0 und verschiebt die ganzen Werte um den Wert der auf der eigentlichen Startposition steht
+ * Nimmt das geloeste Brett mit dem Startwert 0|0
+ * und verschiebt die ganzen Werte um den Wert der auf der eigentlichen Startposition steht
  *
  * Parameter:
  * brett: Pointer auf das Brett
