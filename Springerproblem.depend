@@ -57,7 +57,7 @@
 	<stdlib.h>
 	<stdio.h>
 
-1486571579 source:c:\users\patri\desktop\uni\programmierung 1\springer_selfmade\main.c
+1486572525 source:c:\users\patri\desktop\uni\programmierung 1\springer_selfmade\main.c
 	<stdio.h>
 	<stdlib.h>
 	<stdbool.h>
@@ -89,10 +89,11 @@
 	<stdbool.h>
 	"Brett.h"
 
-1486572136 source:c:\users\patri\desktop\uni\programmierung 1\springer_selfmade\brett.c
+1486760604 source:c:\users\patri\desktop\uni\programmierung 1\springer_selfmade\brett.c
 	"Brett.h"
 	<stdlib.h>
 	<stdio.h>
+	<windows.h>
 
 1485789576 source:c:\users\patri\desktop\uni\programmierung 1\springer_selfmade\zug.c
 	"Zug.h"

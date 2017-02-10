@@ -18,11 +18,7 @@
 	printLogOut("%02d" , board.fields[row][col].value);
 	printf(ANSI_COLOR_RESET);
 #endif // unix
-#ifdef _WIN32
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN );
-	printLogOut("%02d", board.fields[row][col].value);
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_WHITE);
-#endif // _WIN32
+
 
 
 /*
@@ -136,8 +132,19 @@ void brettAusgeben(Brett* brett)
                 printf("% 3c", 'x');
             else if(wert == (*brett).brettGroesse*(*brett).brettGroesse)
                 printf("% 3c", 'X');
-            else
-                printf("% 3d", wert);
+            else if (wert == (*brett).brettGroesse*(*brett).brettGroesse -1)
+            {
+                SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN );
+                printf("%3d", wert);
+                SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_WHITE);
+            }
+            else if (wert == 0)
+            {
+                SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_RED );
+                printf("%3d", wert);
+                SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_WHITE);
+            }
+            else printf("%3d", wert);
         }
         printf("%s", "|\n");
     }
