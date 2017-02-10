@@ -4,8 +4,25 @@
 #include <time.h>
 
 #include "Algorithmus.h"
-
-int main()
+/*
+ * Funktion:
+ * Startmenue, ueberprueft, welcher Aufgabentyp geloest werden soll.
+ *
+ * Frei waehlbare Optionen:
+ * Anschlieﬂend wird die Brettgroesse eingelesen und
+ * ueberprueft ob die Brettgroesse im Gueltigkeitsbereich liegt.
+ * Danach wird die Startposition eingelesen und
+ * ueberprueft ob sie im Gueltigkeitsbereich liegt.
+ * Anschlieﬂend versucht das Programm das Springerproblem zu loesen.
+ *
+ * Zufaellige Optionen:
+ * Das Programm erzeugt zwei Zufallszahlen, die die Startposition angeben.
+* Anschlieﬂend versucht das Programm fuer die Brettgroesse 8x8 das Springerproblem zu loesen.
+ *
+ *
+ * R¸ckgabewert: void
+ */
+void start()
 {
     printf("=== Springerproblem ===\n");
     printf("1. Offener Pfad (frei waehlbar)\n");
@@ -63,5 +80,10 @@ int main()
         default: printf("Falsche Eingabe.");
                     break;
     }
+}
+
+int main()
+{
+    start();
     return 0;
 }

@@ -3,23 +3,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#ifdef _WIN32
-    #include <windows.h>
-    #define FOREGROUND_WHITE   7
-#endif
-
-#ifdef _APPLE_
-    #define ANSI_COLOR_RED     "\x1b[31m"
-    #define ANSI_COLOR_GREEN   "\x1b[32m"
-    #define ANSI_COLOR_RESET   "\x1b[0m"
-#endif
-#ifdef _APPLE_
-	printf(ANSI_COLOR_GREEN);
-	printLogOut("%02d" , board.fields[row][col].value);
-	printf(ANSI_COLOR_RESET);
-#endif // unix
-
-
+#include <windows.h>
+#define FOREGROUND_WHITE   7
 
 /*
  * Funktion:
@@ -106,6 +91,8 @@ void brettSetPositionswert(Brett* brett, unsigned int x, unsigned int y, int wer
 /*
  * Funktion:
  * Gibt das Brett in der Konsole aus
+ * Rot: Markiert das Startfeld
+ * Gruen: Markiert das Endfeld
  *
  * Parameter:
  * brett: Pointer auf das Brett
