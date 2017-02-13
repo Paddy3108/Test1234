@@ -9,15 +9,15 @@
  * Startmenue, ueberprueft, welcher Aufgabentyp geloest werden soll.
  *
  * Frei waehlbare Optionen:
- * Anschlieﬂend wird die Brettgroesse eingelesen und
+ * Anschliessend wird die Brettgroesse eingelesen und
  * ueberprueft ob die Brettgroesse im Gueltigkeitsbereich liegt.
  * Danach wird die Startposition eingelesen und
  * ueberprueft ob sie im Gueltigkeitsbereich liegt.
- * Anschlieﬂend versucht das Programm das Springerproblem zu loesen.
+ * Anschliessend versucht das Programm das Springerproblem zu loesen.
  *
  * Zufaellige Optionen:
  * Das Programm erzeugt zwei Zufallszahlen, die die Startposition angeben.
-* Anschlieﬂend versucht das Programm fuer die Brettgroesse 8x8 das Springerproblem zu loesen.
+ * Anschliessend versucht das Programm fuer die Brettgroesse 8x8 das Springerproblem zu loesen.
  *
  *
  * R¸ckgabewert: void
