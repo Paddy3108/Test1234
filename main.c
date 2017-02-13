@@ -9,18 +9,18 @@
  * Startmenue, ueberprueft, welcher Aufgabentyp geloest werden soll.
  *
  * Frei waehlbare Optionen:
- * Anschließend wird die Brettgroesse eingelesen und
+ * Anschlieï¿½end wird die Brettgroesse eingelesen und
  * ueberprueft ob die Brettgroesse im Gueltigkeitsbereich liegt.
  * Danach wird die Startposition eingelesen und
  * ueberprueft ob sie im Gueltigkeitsbereich liegt.
- * Anschließend versucht das Programm das Springerproblem zu loesen.
+ * Anschlieï¿½end versucht das Programm das Springerproblem zu loesen.
  *
  * Zufaellige Optionen:
  * Das Programm erzeugt zwei Zufallszahlen, die die Startposition angeben.
-* Anschließend versucht das Programm fuer die Brettgroesse 8x8 das Springerproblem zu loesen.
+* Anschlieï¿½end versucht das Programm fuer die Brettgroesse 8x8 das Springerproblem zu loesen.
  *
  *
- * Rückgabewert: void
+ * Rï¿½ckgabewert: void
  */
 void start()
 {
@@ -53,18 +53,18 @@ void start()
                     }
                     if(brettGroesse<5 || brettGroesse > 70) printf("Falsche Eingabe. Bitte korrigieren Sie ihre Eingabe.\n> ");
                 }
-                printf("%s", "Startfeld. Format: %d %d\nLinke obere Ecke: 0 0\n> ");
+                printf("%s", "Startfeld. Format: %d %d\nLinke obere Ecke: 1 1\n> ");
 
-                while (x<0 || x>brettGroesse-1 || y<0 || y>brettGroesse-1) //prueft ob die eingebene Position moeglich ist
+                while (x<1 || x>brettGroesse || y<1 || y>brettGroesse) //prueft ob die eingebene Position moeglich ist
                 {
                     while ((scanf("%d %d", &x, &y)) != 2) //prueft ob Zahlen eingelesen wurden
                     {
                         fflush(stdin); // loescht Eingabepuffer, um die Variablen neue Werte zu zu weisen.
                         printf("Falsche Eingabe. Bitte korrigieren Sie ihre Eingabe.\n> ");
                     }
-                    if((x<0 || x>brettGroesse-1 || y<0 || y>brettGroesse-1)) printf("Falsche Eingabe. Bitte korrigieren Sie ihre Eingabe.\n> ");
+                    if((x<1 || x>brettGroesse || y<1 || y>brettGroesse)) printf("Falsche Eingabe. Bitte korrigieren Sie ihre Eingabe.\n> ");
                 }
-                knightsTour(brettGroesse, x, y, geschlossen);
+                knightsTour(brettGroesse, --x, --y, geschlossen);
                 break;
         case 3:
         case 4:
