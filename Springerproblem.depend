@@ -140,3 +140,41 @@
 	<assert.h>
 	<stdio.h>
 
+1485775414 source:\\mac\home\documents\development\workspace\springerproblem\algorithmus.c
+	"Algorithmus.h"
+	<stdlib.h>
+	<string.h>
+	<stdio.h>
+	"Brett.h"
+	"Zug.h"
+
+1485799385 \\mac\home\documents\development\workspace\springerproblem\algorithmus.h
+	<stdbool.h>
+
+1486574077 \\mac\home\documents\development\workspace\springerproblem\brett.h
+
+1487275138 \\mac\home\documents\development\workspace\springerproblem\zug.h
+	<stdbool.h>
+	"Brett.h"
+
+1487273592 source:\\mac\home\documents\development\workspace\springerproblem\brett.c
+	"Brett.h"
+	<stdlib.h>
+	<stdio.h>
+	<windows.h>
+
+1487273592 source:\\mac\home\documents\development\workspace\springerproblem\main.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	<time.h>
+	"Algorithmus.h"
+
+1487275163 source:\\mac\home\documents\development\workspace\springerproblem\zug.c
+	"Zug.h"
+	<stdlib.h>
+	<string.h>
+	<stdbool.h>
+	<assert.h>
+	<stdio.h>
+

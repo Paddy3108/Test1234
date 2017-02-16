@@ -131,11 +131,11 @@ Zug* erhalteZugAusZugliste(ZugListe* list, unsigned int index)
  * brett: Pointer auf das Board
  * x: X - Koordinate
  * y: Y - Koordinate
- * shouldOfferStart: Gehoert der Startpunkt der Liste zum Inhalt oder nicht
+ * startwertEinbeziehen: Gehoert der Startpunkt der Liste zum Inhalt oder nicht
  *
  * Rückgabewert: ZugListe
  */
-ZugListe erstelleZugListe(Brett* brett, int x, int y, bool shouldOfferStart)
+ZugListe erstelleZugListe(Brett* brett, int x, int y, bool startwertEinbeziehen)
 {
 	ZugListe zugListe;
 	zugListe.anzahlZuege = 0;
@@ -144,7 +144,7 @@ ZugListe erstelleZugListe(Brett* brett, int x, int y, bool shouldOfferStart)
 
     for(int i = 0; i < 8; i++) {
     	Zug zug = {x + springer_zuege[i][0], y + springer_zuege[i][1]};
-    	if(zugValidieren(brett, &zug) && brettUeberpruefen(brett, &zug, shouldOfferStart))
+    	if(zugValidieren(brett, &zug) && brettUeberpruefen(brett, &zug, startwertEinbeziehen))
     		zugHinzufuegen(&zugListe, &zug);
     }
 
@@ -159,18 +159,18 @@ ZugListe erstelleZugListe(Brett* brett, int x, int y, bool shouldOfferStart)
  * brett: Pointer auf das Brett
  * x: X - Koordinate
  * Y: Y - Koordinate
- * shouldOfferStart: Ist der Startpunkt Inhalt der Liste oder nicht
+ * startwertEinbeziehen: Ist der Startpunkt Inhalt der Liste oder nicht
  *
  * Rückgabewert: integer-Wert ohne Vorzeichen mit der Anzahl der möglichen Zuege
  */
-unsigned int anzahlMoeglicherZuegeFinden(Brett* brett, unsigned int x, unsigned int y, bool shouldOfferStart)
+unsigned int anzahlMoeglicherZuegeFinden(Brett* brett, unsigned int x, unsigned int y, bool startwertEinbeziehen)
 {
     unsigned int anzahlZuege = 0;
     int springer_zuege[8][2] = {{1,2},{2,1},{2,-1},{1,-2},{-1,-2},{-2,-1},{-2,1},{-1,2}};
 
     for(int i = 0; i < 8; i++) {
     	Zug zug = {x + springer_zuege[i][0], y + springer_zuege[i][1]};
-    	    if(zugValidieren(brett, &zug) && brettUeberpruefen(brett, &zug, shouldOfferStart))
+    	    if(zugValidieren(brett, &zug) && brettUeberpruefen(brett, &zug, startwertEinbeziehen))
     	        ++anzahlZuege;
     }
 
@@ -184,11 +184,11 @@ unsigned int anzahlMoeglicherZuegeFinden(Brett* brett, unsigned int x, unsigned 
  * Parameter:
  * brett: Pointer auf das Schachbrett
  * zugListe: Pointer auf die ZugListe
- * shouldOfferStart: Ist der Startpunkt Inhalt der Liste oder nicht
+ * startwertEinbeziehen: Ist der Startpunkt Inhalt der Liste oder nicht
  *
  * Rückgabewert: HeuristikZugListe, vollstaendig sortierte Liste nach der Warnsdorf-Heuristik
  */
-HeuristikZugListe erstelleHeuristik(Brett* brett, ZugListe* zugListe, bool shouldOfferStart)
+HeuristikZugListe erstelleHeuristik(Brett* brett, ZugListe* zugListe, bool startwertEinbeziehen)
 {
     HeuristikZugListe heuristikZugListe;
     heuristikZugListe.anzahlZuege = 0;
@@ -196,7 +196,7 @@ HeuristikZugListe erstelleHeuristik(Brett* brett, ZugListe* zugListe, bool shoul
     for(unsigned int i = 0; i < (*zugListe).anzahlZuege; ++i)
     {
     	Zug* zug = erhalteZugAusZugliste(zugListe, i);
-        unsigned int anzahlZuege = anzahlMoeglicherZuegeFinden(brett, (*zug).x, (*zug).y, shouldOfferStart);
+        unsigned int anzahlZuege = anzahlMoeglicherZuegeFinden(brett, (*zug).x, (*zug).y, startwertEinbeziehen);
         // Warnsdorf Heuristik: Bevorzugt Felder mit weniger naechsten Schritten
         HeuristikZug heuristikZug = {{(*zug).x, (*zug).y}, anzahlZuege};
         heuristikZugHinzufuegen(&heuristikZugListe, &heuristikZug);
