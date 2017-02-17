@@ -70,7 +70,7 @@ bool pfadTesten(Brett* brett, unsigned int x, unsigned int y, unsigned int n, bo
  *
  * Rückgabewert: void
  */
-void knightsTour(unsigned int brettGroesse, unsigned int x, unsigned int y, bool geschlossen) {
+void springen(unsigned int brettGroesse, unsigned int x, unsigned int y, bool geschlossen) {
     Brett brett;
     brettInitialisieren(&brett, brettGroesse);
     bool loesungVorhanden = false;

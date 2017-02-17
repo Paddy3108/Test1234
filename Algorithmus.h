@@ -16,6 +16,6 @@
  *
  * Rückgabewert: void
  */
-void knightsTour(unsigned int brettGroesse, unsigned int x, unsigned int y, bool geschlossen);
+void springen(unsigned int brettGroesse, unsigned int x, unsigned int y, bool geschlossen);
 
 #endif // ALGORITHMUS_H_INCLUDED

@@ -60,7 +60,7 @@ void start() {
                     }
                     if((x<0 || x>brettGroesse-1 || y<0 || y>brettGroesse-1)) printf("Falsche Eingabe. Bitte korrigieren Sie ihre Eingabe.\n> ");
                 }
-                knightsTour(brettGroesse, x, y, geschlossen);
+                springen(brettGroesse, x, y, geschlossen);
                 break;
         case 3:
         case 4:
@@ -70,7 +70,7 @@ void start() {
                 x = rand() % 8; //erzeugt Zufalszahl
                 y = rand() % 8;
                 printf("%s %s (%d|%d)\n", geschlossen ? "Geschlossener" : "Offener", "Weg", x, y);
-                knightsTour(8, x, y, geschlossen);
+                springen(8, x, y, geschlossen);
                 break;
 
         default: printf("Falsche Eingabe.");
