@@ -7,47 +7,46 @@
 #include "Brett.h"
 #include "Zug.h"
 
-
-/*
- * Recursive function, tries the given move on the given board and all subsequent moves by the Warnsdorf heuristic
- * board: Pointer auf das Board
+ /*
+ * Funktion:
+ * Funktionsbeschreibung: Recursive function, tries the given move on the given board and all subsequent moves by the Warnsdorf heuristic
+ *
+ * Parameter:
+ * brett: Pointer auf das Brett
  * x: X - Koordinate
  * y: Y - Koordinate
  * n: aktuelle Anzahl der Durchlaeufe
- * closedTour: Geschlossener oder Offener Weg
+ * geschlossen: Geschlossener oder Offener Weg
+ *
+ * Rückgabewert: boolean-Wert ob Loesung gefunden wurde oder nicht
  */
-bool tryPath(Brett* brett, unsigned int x, unsigned int y, unsigned int n, bool closedTour)
-{
+bool pfadTesten(Brett* brett, unsigned int x, unsigned int y, unsigned int n, bool geschlossen) {
 
-    unsigned int boardSize = (*brett).brettGroesse;
-    // Setzt an (x|Y) den Wert n (Startwert = 0)
+    unsigned int brettGroesse = (*brett).brettGroesse;
+
+    // Setzt an (x|y) den Wert der aktuellen Anzahl der Durchläufe n (Startwert = 0)
     brettSetPositionswert(brett, x, y, n);
 
-
-    // Wenn Anzahl der Durchlaeufe gleich der Anzahl der Felder => Loesung gefunden
-    // Wenn wir einen offenen Weg haben wollen, muessen wir eins abziehen, weil n bei 0 anfaengt
-    // Bei einem geschlossenen Weg ziehen wir nichts ab
-    int dif = 0;
-    if(closedTour) dif = 0;
-    else dif = 1;
-    if(n == (boardSize*boardSize - dif))
-    {
+    // Wenn Anzahl der Durchlaeufe = Anzahl der Felder => Loesung gefunden
+    // bei offenem Weg: Anzahl der Durchlaeufe -1, weil n bei 0 anfängt
+    // bei geschlossenem Weg: nichts abziehen
+    int unterschied = 0;
+    if(geschlossen) unterschied = 0;
+    else unterschied = 1;
+    if(n == (brettGroesse*brettGroesse - unterschied)) {
         return true;
     }
 
-    // Entscheidet ob der Startpunkt mit in der Liste vorhanden sein soll
-    // Dies ist der Fall bei einem geschlossenen Weg
-    bool shouldOfferStart = (closedTour && n == (boardSize * boardSize) - 1);
-    ZugListe moveList = erstelleZugListe(brett, x, y, shouldOfferStart);
-    HeuristikZugListe list = erstelleHeuristik(brett, &moveList, shouldOfferStart);
+    // Entscheidet ob der Startpunkt mit in der Liste vorhanden sein soll (Variable startwertEinbeziehen) --> geschlossener Weg
+    bool startwertEinbeziehen = (geschlossen && n == (brettGroesse * brettGroesse) - 1);
+    ZugListe zugListe = erstelleZugListe(brett, x, y, startwertEinbeziehen);
+    HeuristikZugListe liste = erstelleHeuristik(brett, &zugListe, startwertEinbeziehen);
 
-    // Geht alle moeglichen Wege ab
-    for(unsigned int i = 0; i < list.anzahlZuege; ++i)
-    {
-        HeuristikZug* move = &list.zuege[i];
-        bool result = tryPath(brett, (*move).zug.x, (*move).zug.y, n+1, closedTour);
-        if(result)
-        {
+    // Schleife über alle moeglichen Wege
+    for(unsigned int i = 0; i < liste.anzahlZuege; ++i) {
+        HeuristikZug* zug = &liste.zuege[i];
+        bool loesungVorhanden = pfadTesten(brett, (*zug).zug.x, (*zug).zug.y, n+1, geschlossen);
+        if(loesungVorhanden) {
             // Loesung gefunden
             return true;
         }
@@ -57,38 +56,37 @@ bool tryPath(Brett* brett, unsigned int x, unsigned int y, unsigned int n, bool 
     return false;
 }
 
-/*
- * boardSize: Groesse des Boards
+
+ /*
+ * Funktion:
+ * Initialisieren des Boards mit den uebergebenen Variablen
+ * Methode für geschlossenenen bzw, offenen Weg aufrufen
+ *
+ * Parameter:
+ * brettGroesse: Groesse des Boards
  * x : Start X - Koordinate
  * y : Start Y - Koordinate
- * closedTour: Geschlosser oder offener Weg
- * Versucht das Springerproblem mit den gegeben Variablen zu loesen
+ * geschlossen: Geschlosser oder offener Weg
+ *
+ * Rückgabewert: void
  */
-void knightsTour(unsigned int brettGroesse, unsigned int x, unsigned int y, bool closedTour)
-{
+void knightsTour(unsigned int brettGroesse, unsigned int x, unsigned int y, bool geschlossen) {
     Brett brett;
     brettInitialisieren(&brett, brettGroesse);
-    bool result = false;
-    if(closedTour)
-    {
-        result = tryPath(&brett, 0, 0, 0, closedTour);
-        if(result)
-        {
+    bool loesungVorhanden = false;
+    if(geschlossen) {
+        loesungVorhanden = pfadTesten(&brett, 0, 0, 0, geschlossen);
+        if(loesungVorhanden) {
           brettWiederbeschreiben(&brett, x, y);
         }
-    }
-    else
-    {
-        result = tryPath(&brett, x, y, 0, closedTour);
+    } else {
+        loesungVorhanden = pfadTesten(&brett, x, y, 0, geschlossen);
     }
 
-    if(result)
-    {
+    if(loesungVorhanden) {
         brettAusgeben(&brett);
-    }
-    else
-    {
-        printf("%s", "No solution found");
+    } else {
+        printf("%s", "Keine Loesung gefunden");
     }
    brettSpeicherFreigeben(&brett);
 }

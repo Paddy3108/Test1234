@@ -9,10 +9,7 @@
  * Parameter:
  * brettGroesse: Brettgroesse
  * data: Daten des Schachbrettes
- *
- *
  */
-
 typedef struct Brett
 {
     unsigned int brettGroesse;
@@ -22,52 +19,47 @@ typedef struct Brett
 
 /*
  * Funktion:
- * Initialisiert das Brett mit den zwei Variablen
+ * Dem Brett wird zu Beginn die Boardgroesse zugewiesen und es werden so viele Felder allokiert wie die Brettgroesse ist.
+ * Alle Felder werden auf -1 gesetzt --> -1 = unbesucht
  *
  * Parameter:
  * brett: Pointer auf das Brett
  * brettgroesse: Brettgroesse
  *
  * Rückgabewert: void
- *
  */
-
 void brettInitialisieren(Brett* brett, unsigned int brettGroesse);
 
 
 /*
  * Funktion:
- * Gibt zuvor allokierten Speicher wieder frei
+ * Gibt den zuvor allokierten Speicher wieder frei
  *
  * Parameter:
  * brett: Pointer auf das Brett
  *
  * Rückgabewert: void
- *
  */
-
 void brettSpeicherFreigeben(Brett* brett);
 
 
 /*
  * Funktion:
- * Gibt den Wert von dem Board an der Stelle x und y zurück
+ * Liefert den Positionswert an der jeweiligen Position zurueck
  *
  * Parameter:
  * brett: Pointer auf das Brett
  * x: X - Koordinate
  * Y: Y - Koordinate
  *
- * Rückgabewert: int - Wert der Position
- *
+ * Rückgabewert: Wert der Position (integer)
  */
-
 int brettGetPositionswert(Brett* brett, unsigned int x, unsigned int y);
 
 
 /*
  * Funktion:
- * Setzt den Wert von dem Board an der Stelle x und y zurück
+ * Setzt den Wert an der jeweiligen Position
  *
  * Parameter:
  * brett: Pointer auf das Brett
@@ -76,23 +68,21 @@ int brettGetPositionswert(Brett* brett, unsigned int x, unsigned int y);
  * wert: Wert des Feldes
  *
  * Rückgabewert: void
- *
  */
-
 void brettSetPositionswert(Brett* brett, unsigned int x, unsigned int y, int wert);
 
 
 /*
  * Funktion:
  * Gibt das Brett in der Konsole aus
+ * Rot: Markiert das Startfeld
+ * Gruen: Markiert das Endfeld
  *
  * Parameter:
  * brett: Pointer auf das Brett
  *
  * Rückgabewert: void
- *
  */
-
 void brettAusgeben(Brett* brett);
 
 /*
@@ -102,13 +92,11 @@ void brettAusgeben(Brett* brett);
  *
  * Parameter:
  * brett: Pointer auf das Brett
- * x: X - Koordinate
- * Y: Y - Koordinate
+ * rx: X - Koordinate
+ * ry: Y - Koordinate
  *
  * Rückgabewert: void
- *
  */
-
 void brettWiederbeschreiben(Brett* brett, unsigned int x, unsigned int y);
 
 #endif // BOARD_H_INCLUDED

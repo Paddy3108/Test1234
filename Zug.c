@@ -36,10 +36,8 @@ void zugHinzufuegen(ZugListe* liste, Zug* zug)
  * Rückgabewert: void
  *
  */
-void heuristikZugHinzufuegen(HeuristikZugListe* liste, HeuristikZug* zug)
-{
-    if((*liste).anzahlZuege < 8)
-    {
+void heuristikZugHinzufuegen(HeuristikZugListe* liste, HeuristikZug* zug) {
+    if((*liste).anzahlZuege < 8) {
         memcpy(&(*liste).zuege[(*liste).anzahlZuege++], zug, sizeof(HeuristikZug));
         return;
     }
@@ -54,8 +52,7 @@ void heuristikZugHinzufuegen(HeuristikZugListe* liste, HeuristikZug* zug)
  *
  * Rückgabewert: void
  */
-void heuristikZugListeSortieren(HeuristikZugListe* liste)
-{
+void heuristikZugListeSortieren(HeuristikZugListe* liste) {
 	// Sortiert die Liste nach Insertion Sort Verfahren
 	for(int i = 1; i < (*liste).anzahlZuege; i++) {
 		HeuristikZug temp = (*liste).zuege[i];
@@ -82,12 +79,11 @@ void heuristikZugListeSortieren(HeuristikZugListe* liste)
  * Zug valide - true - 1
  * Zug nicht valide - false - 0
  */
-bool zugValidieren(Brett* brett, Zug* zug)
-{
+bool zugValidieren(Brett* brett, Zug* zug) {
     return 	((*zug).x >= 0) &&
     		((*zug).x < (*brett).brettGroesse) &&
-			((*zug).y >= 0)
-			&& ((*zug).y < (*brett).brettGroesse);
+			((*zug).y >= 0) &&
+			((*zug).y < (*brett).brettGroesse);
 }
 
 /*
@@ -103,8 +99,7 @@ bool zugValidieren(Brett* brett, Zug* zug)
  * Feld ist frei: true - 1
  * Feld ist besetzt: false - 0
  */
-bool brettUeberpruefen(Brett* brett, Zug* zug, bool shouldOfferStart)
-{
+bool brettUeberpruefen(Brett* brett, Zug* zug, bool shouldOfferStart) {
     return brettGetPositionswert(brett, (*zug).x, (*zug).y) == -1 || (shouldOfferStart && brettGetPositionswert(brett, (*zug).x, (*zug).y) == 0);
 }
 
@@ -118,8 +113,7 @@ bool brettUeberpruefen(Brett* brett, Zug* zug, bool shouldOfferStart)
  *
  * Rückgabewert: Zug-Pointer
  */
-Zug* erhalteZugAusZugliste(ZugListe* list, unsigned int index)
-{
+Zug* erhalteZugAusZugliste(ZugListe* list, unsigned int index) {
     return &(*list).zuege[index];
 }
 
@@ -135,8 +129,7 @@ Zug* erhalteZugAusZugliste(ZugListe* list, unsigned int index)
  *
  * Rückgabewert: ZugListe
  */
-ZugListe erstelleZugListe(Brett* brett, int x, int y, bool startwertEinbeziehen)
-{
+ZugListe erstelleZugListe(Brett* brett, int x, int y, bool startwertEinbeziehen) {
 	ZugListe zugListe;
 	zugListe.anzahlZuege = 0;
 
@@ -163,8 +156,7 @@ ZugListe erstelleZugListe(Brett* brett, int x, int y, bool startwertEinbeziehen)
  *
  * Rückgabewert: integer-Wert ohne Vorzeichen mit der Anzahl der möglichen Zuege
  */
-unsigned int anzahlMoeglicherZuegeFinden(Brett* brett, unsigned int x, unsigned int y, bool startwertEinbeziehen)
-{
+unsigned int anzahlMoeglicherZuegeFinden(Brett* brett, unsigned int x, unsigned int y, bool startwertEinbeziehen) {
     unsigned int anzahlZuege = 0;
     int springer_zuege[8][2] = {{1,2},{2,1},{2,-1},{1,-2},{-1,-2},{-2,-1},{-2,1},{-1,2}};
 
@@ -188,13 +180,11 @@ unsigned int anzahlMoeglicherZuegeFinden(Brett* brett, unsigned int x, unsigned 
  *
  * Rückgabewert: HeuristikZugListe, vollstaendig sortierte Liste nach der Warnsdorf-Heuristik
  */
-HeuristikZugListe erstelleHeuristik(Brett* brett, ZugListe* zugListe, bool startwertEinbeziehen)
-{
+HeuristikZugListe erstelleHeuristik(Brett* brett, ZugListe* zugListe, bool startwertEinbeziehen) {
     HeuristikZugListe heuristikZugListe;
     heuristikZugListe.anzahlZuege = 0;
 
-    for(unsigned int i = 0; i < (*zugListe).anzahlZuege; ++i)
-    {
+    for(unsigned int i = 0; i < (*zugListe).anzahlZuege; ++i) {
     	Zug* zug = erhalteZugAusZugliste(zugListe, i);
         unsigned int anzahlZuege = anzahlMoeglicherZuegeFinden(brett, (*zug).x, (*zug).y, startwertEinbeziehen);
         // Warnsdorf Heuristik: Bevorzugt Felder mit weniger naechsten Schritten

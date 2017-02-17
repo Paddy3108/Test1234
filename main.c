@@ -22,8 +22,7 @@
  *
  * Rückgabewert: void
  */
-void start()
-{
+void start() {
     printf("=== Springerproblem ===\n");
     printf("1. Offener Pfad (frei waehlbar)\n");
     printf("2. Geschlossener Pfad (frei waehlbar)\n");
@@ -36,18 +35,16 @@ void start()
     int x = -1 ,y = -1;
     scanf("%d", &wahl);
 
-    switch (wahl)
-    {
+    switch (wahl) {
         case 1:
         case 2:
                 if (wahl == 2) geschlossen = true;
                 else geschlossen = false;
 
                 printf("Groesse des Brettes (5 bis 70): ");
-                while (brettGroesse<5 || brettGroesse > 70) //prueft ob die eingelesenen Werte korrekt sind
-                {
-                    while((scanf("%d", &brettGroesse))!= 1) //prueft ob Zahlen eingelesen wurden
-                    {
+                while (brettGroesse<5 || brettGroesse > 70) { //prueft ob die eingelesenen Werte korrekt sind
+                    while((scanf("%d", &brettGroesse))!= 1) { //prueft ob Zahlen eingelesen wurden
+
                         fflush(stdin); // loescht Eingabepuffer, um die Variablen neue Werte zu zu weisen.
                         printf("Falsche Eingabe. Bitte korrigieren Sie ihre Eingabe.\n> ");
                     }
@@ -55,10 +52,9 @@ void start()
                 }
                 printf("%s", "Startfeld. Format: %d %d\nLinke obere Ecke: 0 0\n> ");
 
-                while (x<0 || x>brettGroesse-1 || y<0 || y>brettGroesse-1) //prueft ob die eingebene Position moeglich ist
-                {
-                    while ((scanf("%d %d", &x, &y)) != 2) //prueft ob Zahlen eingelesen wurden
-                    {
+                while (x<0 || x>brettGroesse-1 || y<0 || y>brettGroesse-1) { //prueft ob die eingebene Position moeglich ist
+
+                    while ((scanf("%d %d", &x, &y)) != 2) {//prueft ob Zahlen eingelesen wurden
                         fflush(stdin); // loescht Eingabepuffer, um die Variablen neue Werte zu zu weisen.
                         printf("Falsche Eingabe. Bitte korrigieren Sie ihre Eingabe.\n> ");
                     }
@@ -82,8 +78,7 @@ void start()
     }
 }
 
-int main()
-{
+int main() {
     start();
     return 0;
 }

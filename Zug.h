@@ -8,8 +8,7 @@
  * Zug Struktur
  * x und y - Koordinate
  */
-typedef struct Zug
-{
+typedef struct Zug {
     int x;
     int y;
 } Zug;
@@ -21,8 +20,7 @@ typedef struct Zug
  *
  * Struktur wird benutzt, um Zuege in einer Liste in sortierter (aufsteigender) Reihenfolge nach Anzahl der Nachbarn abzuspeichern
  */
-typedef struct HeuristikZug
-{
+typedef struct HeuristikZug {
     Zug zug;
     unsigned int anzahlNachbarn;
 } HeuristikZug;
@@ -34,8 +32,7 @@ typedef struct HeuristikZug
  * zuege: Schritte in der Liste
  * anzahlZuege: Anzahl der schon erledigten Schritte
  */
-typedef struct ZugListe
-{
+typedef struct ZugListe {
     Zug zuege[8];
     unsigned int anzahlZuege;
 } ZugListe;
@@ -45,8 +42,7 @@ typedef struct ZugListe
  * zuege: heuristische Schritte in der Liste
  * anzahlZuege: Anzahl der schon erledigten Schritte
  */
-typedef struct HeuristikZugListe
-{
+typedef struct HeuristikZugListe {
     HeuristikZug zuege[8];
     unsigned int anzahlZuege;
 } HeuristikZugListe;

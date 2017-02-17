@@ -1,15 +1,21 @@
-#ifndef ALGORITHM_H_INCLUDED
-#define ALGORITHM_H_INCLUDED
+#ifndef ALGORITHMUS_H_INCLUDED
+#define ALGORITHMUS_H_INCLUDED
 
 #include <stdbool.h>
 
-/*
- * boardSize: Groesse des Boards
+ /*
+ * Funktion:
+ * Initialisieren des Boards mit den uebergebenen Variablen
+ * Methode für geschlossenenen bzw, offenen Weg aufrufen
+ *
+ * Parameter:
+ * brettGroesse: Groesse des Boards
  * x : Start X - Koordinate
  * y : Start Y - Koordinate
- * closedTour: Geschlosser oder offener Weg
- * Versucht das Springerproblem mit den gegeben Variablen zu loesen
+ * geschlossen: Geschlosser oder offener Weg
+ *
+ * Rückgabewert: void
  */
-void knightsTour(unsigned int boardSize, unsigned int x, unsigned int y, bool closedTour);
+void knightsTour(unsigned int brettGroesse, unsigned int x, unsigned int y, bool geschlossen);
 
-#endif // ALGORITHM_H_INCLUDED
+#endif // ALGORITHMUS_H_INCLUDED
