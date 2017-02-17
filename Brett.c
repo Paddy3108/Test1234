@@ -89,7 +89,7 @@ void brettSetPositionswert(Brett* brett, unsigned int x, unsigned int y, int wer
 void brettAusgeben(Brett* brett){
     printf("%s", "|");
     for(unsigned int i = 0; i < (*brett).brettGroesse; ++i) {
-        printf("%s", "---");
+        printf("%s", "-----");
     }
     printf("|\n");
     for(unsigned int y = 0; y < (*brett).brettGroesse; ++y) {
@@ -104,18 +104,20 @@ void brettAusgeben(Brett* brett){
                 SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN );
                 printf("%3d", wert);
                 SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_WHITE);
+                printf(" |");
             } else if (wert == 0) {
                 SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_RED );
                 printf("%3d", wert);
                 SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_WHITE);
+                printf(" |");
             }
-            else printf("%3d", wert);
+            else printf("%3d |", wert);
         }
         printf("%s", "|\n");
     }
     printf("%s", "|");
     for(unsigned int i = 0; i < (*brett).brettGroesse; ++i) {
-        printf("%s", "---");
+        printf("%s", "-----");
     }
     printf("|\n");
 }
