@@ -96,11 +96,12 @@ void brettAusgeben(Brett* brett){
         printf("%s", "|");
         for(unsigned int x = 0; x < (*brett).brettGroesse; ++x) {
             int wert = brettGetPositionswert(brett, x, y);
-            if(wert == -1)
-                printf("% 3c", 'x');
-            else if(wert == (*brett).brettGroesse*(*brett).brettGroesse)
-                printf("% 3c", 'X');
-            else if (wert == (*brett).brettGroesse*(*brett).brettGroesse -1) {
+//            if(wert == -1)
+//                printf("% 3c", 'x');
+//            else if(wert == (*brett).brettGroesse*(*brett).brettGroesse)
+//                printf("% 3c", 'X');
+//            else
+                if (wert == (*brett).brettGroesse*(*brett).brettGroesse -1) {
                 SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN );
                 printf("%3d", wert);
                 SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_WHITE);
@@ -130,18 +131,18 @@ void brettAusgeben(Brett* brett){
  *
  * Parameter:
  * brett: Pointer auf das Brett
- * rx: X - Koordinate
- * ry: Y - Koordinate
+ * startX: urspruengliche X - Koordinate
+ * startX: urspruengliche Y - Koordinate
  *
  * Rückgabewert: void
  */
-void brettWiederbeschreiben(Brett* brett, unsigned int rx, unsigned int ry){
-    int relative = brettGetPositionswert(brett, rx, ry);
-    if(relative == 0) return;
+void brettWiederbeschreiben(Brett* brett, unsigned int startX, unsigned int startY){
+    int wertStartposition = brettGetPositionswert(brett, startX, startY);
+    if(wertStartposition == 0) return;
     unsigned int brettGroesse = (*brett).brettGroesse*(*brett).brettGroesse;
     for(unsigned int x = 0; x < (*brett).brettGroesse; ++x) {
         for(unsigned int y = 0; y < (*brett).brettGroesse; ++y) {
-            int neuerWert = (((brettGetPositionswert(brett, x, y) - relative) % brettGroesse) + brettGroesse) % brettGroesse;
+            int neuerWert = (((brettGetPositionswert(brett, x, y) - wertStartposition) % brettGroesse) + brettGroesse) % brettGroesse;
             brettSetPositionswert(brett, x, y, neuerWert);
         }
     }
