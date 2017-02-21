@@ -18,7 +18,7 @@
  * n: aktuelle Anzahl der Durchlaeufe
  * geschlossen: Geschlossener oder Offener Weg
  *
- * Rückgabewert: boolean-Wert ob Loesung gefunden wurde oder nicht
+ * Rueckgabewert: boolean-Wert ob Loesung gefunden wurde oder nicht
  */
 bool pfadTesten(Brett* brett, unsigned int x, unsigned int y, unsigned int n, bool geschlossen) {
 
@@ -68,7 +68,7 @@ bool pfadTesten(Brett* brett, unsigned int x, unsigned int y, unsigned int n, bo
  * y : Start Y - Koordinate
  * geschlossen: Geschlosser oder offener Weg
  *
- * Rückgabewert: void
+ * Rueckgabewert: void
  */
 void springen(unsigned int brettGroesse, unsigned int x, unsigned int y, bool geschlossen) {
     Brett brett;

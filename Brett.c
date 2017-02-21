@@ -15,7 +15,7 @@
  * brett: Pointer auf das Brett
  * brettgroesse: Brettgroesse
  *
- * Rückgabewert: void
+ * Rueckgabewert: void
  */
 void brettInitialisieren(Brett* brett, unsigned int brettGroesse) {
     (*brett).brettGroesse = brettGroesse;
@@ -35,7 +35,7 @@ void brettInitialisieren(Brett* brett, unsigned int brettGroesse) {
  * Parameter:
  * brett: Pointer auf das Brett
  *
- * Rückgabewert: void
+ * Rueckgabewert: void
  */
 void brettSpeicherFreigeben(Brett* brett) {
     free((*brett).data);
@@ -51,7 +51,7 @@ void brettSpeicherFreigeben(Brett* brett) {
  * x: X - Koordinate
  * Y: Y - Koordinate
  *
- * Rückgabewert: Wert der Position (integer)
+ * Rueckgabewert: Wert der Position (integer)
  */
 int brettGetPositionswert(Brett* brett, unsigned int x, unsigned int y) {
     return (*brett).data[y * (*brett).brettGroesse + x];
@@ -68,7 +68,7 @@ int brettGetPositionswert(Brett* brett, unsigned int x, unsigned int y) {
  * Y: Y - Koordinate
  * wert: Wert des Feldes
  *
- * Rückgabewert: void
+ * Rueckgabewert: void
  */
 void brettSetPositionswert(Brett* brett, unsigned int x, unsigned int y, int wert) {
     (*brett).data[y * (*brett).brettGroesse + x] = wert;
@@ -134,7 +134,7 @@ void brettAusgeben(Brett* brett){
  * startX: urspruengliche X - Koordinate
  * startX: urspruengliche Y - Koordinate
  *
- * Rückgabewert: void
+ * Rueckgabewert: void
  */
 void brettWiederbeschreiben(Brett* brett, unsigned int startX, unsigned int startY){
     int wertStartposition = brettGetPositionswert(brett, startX, startY);

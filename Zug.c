@@ -13,7 +13,7 @@
  * liste: Pointer auf die zugliste
  * zug: Pointer auf zug
  *
- * Rückgabewert: void
+ * Rueckgabewert: void
  *
  */
 void zugHinzufuegen(ZugListe* liste, Zug* zug)
@@ -33,7 +33,7 @@ void zugHinzufuegen(ZugListe* liste, Zug* zug)
  * liste: Pointer auf die HeuristikZugListe
  * zug: Pointer auf HeuristikZug
  *
- * Rückgabewert: void
+ * Rueckgabewert: void
  *
  */
 void heuristikZugHinzufuegen(HeuristikZugListe* liste, HeuristikZug* zug) {
@@ -50,7 +50,7 @@ void heuristikZugHinzufuegen(HeuristikZugListe* liste, HeuristikZug* zug) {
  * Parameter:
  * liste: Pointer auf die HeuristikZugListe
  *
- * Rückgabewert: void
+ * Rueckgabewert: void
  */
 void heuristikZugListeSortieren(HeuristikZugListe* liste) {
 	// Sortiert die Liste nach Insertion Sort Verfahren
@@ -75,7 +75,7 @@ void heuristikZugListeSortieren(HeuristikZugListe* liste) {
  * brett: Pointer auf das Brett
  * zug: Pointer auf zug
  *
- * Rückgabewert: boolean
+ * Rueckgabewert: boolean
  * Zug valide - true - 1
  * Zug nicht valide - false - 0
  */
@@ -111,7 +111,7 @@ bool brettUeberpruefen(Brett* brett, Zug* zug, bool shouldOfferStart) {
  * liste: Pointer auf die ZugListe
  * index: Stelle der Liste
  *
- * Rückgabewert: Zug-Pointer
+ * Rueckgabewert: Zug-Pointer
  */
 Zug* erhalteZugAusZugliste(ZugListe* list, unsigned int index) {
     return &(*list).zuege[index];
@@ -127,7 +127,7 @@ Zug* erhalteZugAusZugliste(ZugListe* list, unsigned int index) {
  * y: Y - Koordinate
  * startwertEinbeziehen: Gehoert der Startpunkt der Liste zum Inhalt oder nicht
  *
- * Rückgabewert: ZugListe
+ * Rueckgabewert: ZugListe
  */
 ZugListe erstelleZugListe(Brett* brett, int x, int y, bool startwertEinbeziehen) {
 	ZugListe zugListe;
@@ -154,7 +154,7 @@ ZugListe erstelleZugListe(Brett* brett, int x, int y, bool startwertEinbeziehen)
  * Y: Y - Koordinate
  * startwertEinbeziehen: Ist der Startpunkt Inhalt der Liste oder nicht
  *
- * Rückgabewert: integer-Wert ohne Vorzeichen mit der Anzahl der möglichen Zuege
+ * Rueckgabewert: integer-Wert ohne Vorzeichen mit der Anzahl der möglichen Zuege
  */
 unsigned int anzahlMoeglicherZuegeFinden(Brett* brett, unsigned int x, unsigned int y, bool startwertEinbeziehen) {
     unsigned int anzahlZuege = 0;
@@ -178,7 +178,7 @@ unsigned int anzahlMoeglicherZuegeFinden(Brett* brett, unsigned int x, unsigned 
  * zugListe: Pointer auf die ZugListe
  * startwertEinbeziehen: Ist der Startpunkt Inhalt der Liste oder nicht
  *
- * Rückgabewert: HeuristikZugListe, vollstaendig sortierte Liste nach der Warnsdorf-Heuristik
+ * Rueckgabewert: HeuristikZugListe, vollstaendig sortierte Liste nach der Warnsdorf-Heuristik
  */
 HeuristikZugListe erstelleHeuristik(Brett* brett, ZugListe* zugListe, bool startwertEinbeziehen) {
     HeuristikZugListe heuristikZugListe;

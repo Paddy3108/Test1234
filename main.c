@@ -20,7 +20,7 @@
  * Anschliessend versucht das Programm fuer die Brettgroesse 8x8 das Springerproblem zu loesen.
  *
  *
- * Rückgabewert: void
+ * Rueckgabewert: void
  */
 void start() {
     printf("=== Springerproblem ===\n");

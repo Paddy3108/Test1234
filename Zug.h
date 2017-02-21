@@ -57,7 +57,7 @@ typedef struct HeuristikZugListe {
  * y: Y - Koordinate
  * startwertEinbeziehen: Gehoert der Startpunkt der Liste zum Inhalt oder nicht
  *
- * Rückgabewert: ZugListe
+ * Rueckgabewert: ZugListe
  */
 ZugListe erstelleZugListe(Brett* brett, int x, int y, bool startwertEinbeziehen);
 
@@ -70,7 +70,7 @@ ZugListe erstelleZugListe(Brett* brett, int x, int y, bool startwertEinbeziehen)
  * zugListe: Pointer auf die ZugListe
  * startwertEinbeziehen: Ist der Startpunkt Inhalt der Liste oder nicht
  *
- * Rückgabewert: HeuristikZugListe, vollstaendig sortierte Liste nach der Warnsdorf-Heuristik
+ * Rueckgabewert: HeuristikZugListe, vollstaendig sortierte Liste nach der Warnsdorf-Heuristik
  */
 HeuristikZugListe erstelleHeuristik(Brett* brett, ZugListe* moveList, bool startwertEinbeziehen);
 

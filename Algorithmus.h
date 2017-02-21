@@ -14,7 +14,7 @@
  * y : Start Y - Koordinate
  * geschlossen: Geschlosser oder offener Weg
  *
- * Rückgabewert: void
+ * Rueckgabewert: void
  */
 void springen(unsigned int brettGroesse, unsigned int x, unsigned int y, bool geschlossen);
 

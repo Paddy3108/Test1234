@@ -26,7 +26,7 @@ typedef struct Brett
  * brett: Pointer auf das Brett
  * brettgroesse: Brettgroesse
  *
- * Rückgabewert: void
+ * Rueckgabewert: void
  */
 void brettInitialisieren(Brett* brett, unsigned int brettGroesse);
 
@@ -38,7 +38,7 @@ void brettInitialisieren(Brett* brett, unsigned int brettGroesse);
  * Parameter:
  * brett: Pointer auf das Brett
  *
- * Rückgabewert: void
+ * Rueckgabewert: void
  */
 void brettSpeicherFreigeben(Brett* brett);
 
@@ -52,7 +52,7 @@ void brettSpeicherFreigeben(Brett* brett);
  * x: X - Koordinate
  * Y: Y - Koordinate
  *
- * Rückgabewert: Wert der Position (integer)
+ * Rueckgabewert: Wert der Position (integer)
  */
 int brettGetPositionswert(Brett* brett, unsigned int x, unsigned int y);
 
@@ -67,7 +67,7 @@ int brettGetPositionswert(Brett* brett, unsigned int x, unsigned int y);
  * Y: Y - Koordinate
  * wert: Wert des Feldes
  *
- * Rückgabewert: void
+ * Rueckgabewert: void
  */
 void brettSetPositionswert(Brett* brett, unsigned int x, unsigned int y, int wert);
 
@@ -81,7 +81,7 @@ void brettSetPositionswert(Brett* brett, unsigned int x, unsigned int y, int wer
  * Parameter:
  * brett: Pointer auf das Brett
  *
- * Rückgabewert: void
+ * Rueckgabewert: void
  */
 void brettAusgeben(Brett* brett);
 
@@ -95,7 +95,7 @@ void brettAusgeben(Brett* brett);
  * startX: urspruengliche X - Koordinate
  * startY: urspruengliche Y - Koordinate
  *
- * Rückgabewert: void
+ * Rueckgabewert: void
  */
 void brettWiederbeschreiben(Brett* brett, unsigned int startX, unsigned int startY);
 
