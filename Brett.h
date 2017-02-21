@@ -92,11 +92,11 @@ void brettAusgeben(Brett* brett);
  *
  * Parameter:
  * brett: Pointer auf das Brett
- * rx: X - Koordinate
- * ry: Y - Koordinate
+ * startX: urspruengliche X - Koordinate
+ * startY: urspruengliche Y - Koordinate
  *
  * Rückgabewert: void
  */
-void brettWiederbeschreiben(Brett* brett, unsigned int x, unsigned int y);
+void brettWiederbeschreiben(Brett* brett, unsigned int startX, unsigned int startY);
 
 #endif // BOARD_H_INCLUDED
