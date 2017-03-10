@@ -18,11 +18,10 @@
  * Rueckgabewert: void
  */
 void brettInitialisieren(Brett* brett, unsigned int brettGroesse) {
+    (*brett).data = malloc((brettGroesse * brettGroesse)*sizeof(int));
     (*brett).brettGroesse = brettGroesse;
-    (*brett).data = malloc(((*brett).brettGroesse * (*brett).brettGroesse)*sizeof(int));
 
-    int brettFelder = ((*brett).brettGroesse*(*brett).brettGroesse);
-    for(unsigned int i = 0; i < brettFelder ; ++i) {
+    for(unsigned int i = 0; i < brettGroesse*brettGroesse ; ++i) {
         (*brett).data[i] = -1;
     }
 }
@@ -96,11 +95,6 @@ void brettAusgeben(Brett* brett){
         printf("%s", "|");
         for(unsigned int x = 0; x < (*brett).brettGroesse; ++x) {
             int wert = brettGetPositionswert(brett, x, y);
-//            if(wert == -1)
-//                printf("% 3c", 'x');
-//            else if(wert == (*brett).brettGroesse*(*brett).brettGroesse)
-//                printf("% 3c", 'X');
-//            else
                 if (wert == (*brett).brettGroesse*(*brett).brettGroesse -1) {
                 SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN );
                 printf("%3d", wert);

@@ -41,6 +41,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Brett.h" />
+		<Unit filename="HeuristikZug.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="HeuristikZug.h" />
 		<Unit filename="Zug.c">
 			<Option compilerVar="CC" />
 		</Unit>

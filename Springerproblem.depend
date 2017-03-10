@@ -140,41 +140,41 @@
 	<assert.h>
 	<stdio.h>
 
-1487277930 source:\\mac\home\documents\development\workspace\springerproblem\algorithmus.c
+1489006306 source:\\mac\home\documents\development\workspace\springerproblem\algorithmus.c
 	"Algorithmus.h"
-	<stdlib.h>
-	<string.h>
-	<stdio.h>
-	"Brett.h"
-	"Zug.h"
+	"HeuristikZug.h"
+	"stdio.h"
 
-1487277637 \\mac\home\documents\development\workspace\springerproblem\algorithmus.h
+1487682327 \\mac\home\documents\development\workspace\springerproblem\algorithmus.h
 	<stdbool.h>
 
-1487279422 \\mac\home\documents\development\workspace\springerproblem\brett.h
+1489006053 \\mac\home\documents\development\workspace\springerproblem\brett.h
 
-1487277969 \\mac\home\documents\development\workspace\springerproblem\zug.h
+1489005892 \\mac\home\documents\development\workspace\springerproblem\zug.h
 	<stdbool.h>
 	"Brett.h"
 
-1487279039 source:\\mac\home\documents\development\workspace\springerproblem\brett.c
+1489004664 source:\\mac\home\documents\development\workspace\springerproblem\brett.c
 	"Brett.h"
 	<stdlib.h>
 	<stdio.h>
 	<windows.h>
 
-1487278394 source:\\mac\home\documents\development\workspace\springerproblem\main.c
+1489006546 source:\\mac\home\documents\development\workspace\springerproblem\main.c
 	<stdio.h>
 	<stdlib.h>
-	<stdbool.h>
 	<time.h>
 	"Algorithmus.h"
 
-1487278049 source:\\mac\home\documents\development\workspace\springerproblem\zug.c
+1489006275 source:\\mac\home\documents\development\workspace\springerproblem\zug.c
 	"Zug.h"
-	<stdlib.h>
-	<string.h>
+	"string.h"
+
+1489005513 \\mac\home\documents\development\workspace\springerproblem\heuristikzug.h
 	<stdbool.h>
-	<assert.h>
-	<stdio.h>
+	"Brett.h"
+	"Zug.h"
+
+1489005991 source:\\mac\home\documents\development\workspace\springerproblem\heuristikzug.c
+	"HeuristikZug.h"
 

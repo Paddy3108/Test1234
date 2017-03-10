@@ -1,7 +1,6 @@
 #ifndef BOARD_H_INCLUDED
 #define BOARD_H_INCLUDED
 
-
 /*
  * Funktion:
  * Struct "Brett"
@@ -10,8 +9,7 @@
  * brettGroesse: Brettgroesse
  * data: Daten des Schachbrettes
  */
-typedef struct Brett
-{
+typedef struct Brett{
     unsigned int brettGroesse;
     int* data;
 } Brett;

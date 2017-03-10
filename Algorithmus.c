@@ -1,11 +1,7 @@
 #include "Algorithmus.h"
+#include "HeuristikZug.h"
 
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
-
-#include "Brett.h"
-#include "Zug.h"
+#include "stdio.h"
 
  /*
  * Funktion:
@@ -30,9 +26,8 @@ bool pfadTesten(Brett* brett, unsigned int x, unsigned int y, unsigned int n, bo
     // Wenn Anzahl der Durchlaeufe = Anzahl der Felder => Loesung gefunden
     // bei offenem Weg: Anzahl der Durchlaeufe -1, weil n bei 0 anfängt
     // bei geschlossenem Weg: nichts abziehen
-    int unterschied = 0;
-    if(geschlossen) unterschied = 0;
-    else unterschied = 1;
+    int unterschied = geschlossen? 0 : 1;
+
     if(n == (brettGroesse*brettGroesse - unterschied)) {
         return true;
     }
