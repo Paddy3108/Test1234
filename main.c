@@ -48,27 +48,27 @@ void start() {
                     }
                     if(brettGroesse<5 || brettGroesse > 70) printf("Falsche Eingabe. Bitte korrigieren Sie ihre Eingabe.\n> ");
                 }
-                printf("%s", "Startfeld. Format: %d %d\nLinke obere Ecke: 0 0\n> ");
+                printf("%s", "Startfeld. Format: %d %d\nLinke obere Ecke: 1 1\n> ");
 
-                while (x<0 || x>brettGroesse-1 || y<0 || y>brettGroesse-1) { //prueft ob die eingebene Position moeglich ist
+                while (x<1 || x>brettGroesse || y<1 || y>brettGroesse) { //prueft ob die eingebene Position moeglich ist
 
                     while ((scanf("%d %d", &x, &y)) != 2) {//prueft ob Zahlen eingelesen wurden
                         fflush(stdin); // loescht Eingabepuffer, um die Variablen neue Werte zu zu weisen.
                         printf("Falsche Eingabe. Bitte korrigieren Sie ihre Eingabe.\n> ");
                     }
-                    if((x<0 || x>brettGroesse-1 || y<0 || y>brettGroesse-1)) printf("Falsche Eingabe. Bitte korrigieren Sie ihre Eingabe.\n> ");
+                    if((x<1 || x>brettGroesse || y<1 || y>brettGroesse)) printf("Falsche Eingabe. Bitte korrigieren Sie ihre Eingabe.\n> ");
                 }
-                springen(brettGroesse, x, y, geschlossen);
+                springen(brettGroesse, --x, --y, geschlossen);
                 break;
         case 3:
         case 4:
                 if (wahl == 4) geschlossen = true;
                 else geschlossen = false;
                 srand(time (NULL)); // wird benoetigt, um abhaengig von der Zeit eine Zufallszahl zu erstellen, ohne das => immer die gleiche Zufallszahl
-                x = rand() % 8; //erzeugt Zufalszahl
-                y = rand() % 8;
+                x = rand() % 8 +1; //erzeugt Zufalszahl
+                y = rand() % 8 +1;
                 printf("%s %s (%d|%d)\n", geschlossen ? "Geschlossener" : "Offener", "Weg", x, y);
-                springen(8, x, y, geschlossen);
+                springen(8, --x, --y, geschlossen);
                 break;
 
         default: printf("Falsche Eingabe.");
