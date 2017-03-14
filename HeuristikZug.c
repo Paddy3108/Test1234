@@ -3,7 +3,7 @@
 
 /*
  * Funktion:
- * Fuegt ein Schritt ans Ende der Liste hinzu
+ * Fuegt ein Feld/Schritt ans Ende der Liste hinzu
  *
  * Parameter:
  * liste: Pointer auf die HeuristikZugListe
