@@ -5,7 +5,7 @@
 
  /*
  * Funktion:
- * Initialisieren des Boards mit den uebergebenen Variablen
+ * Initialisieren des Bretts mit den uebergebenen Variablen
  * Methode für geschlossenenen bzw, offenen Weg aufrufen
  *
  * Parameter:

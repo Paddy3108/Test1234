@@ -38,6 +38,6 @@ typedef struct HeuristikZugListe {
  *
  * Rueckgabewert: HeuristikZugListe, vollstaendig sortierte Liste nach der Warnsdorf-Heuristik
  */
-HeuristikZugListe erstelleHeuristik(Brett* brett, ZugListe* moveList, bool startwertEinbeziehen);
+HeuristikZugListe erstelleHeuristik(Brett* brett, ZugListe* zugListe, bool startwertEinbeziehen);
 
 #endif // HEURISTIKZUG_H_INCLUDED

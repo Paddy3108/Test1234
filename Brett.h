@@ -7,17 +7,17 @@
  *
  * Parameter:
  * brettGroesse: Brettgroesse
- * data: Daten des Schachbrettes
+ * daten: Daten des Schachbrettes
  */
 typedef struct Brett{
     unsigned int brettGroesse;
-    int* data;
+    int* daten;
 } Brett;
 
 
 /*
  * Funktion:
- * Dem Brett wird zu Beginn die Boardgroesse zugewiesen und es werden so viele Felder allokiert wie die Brettgroesse ist.
+ * Dem Brett wird zu Beginn die Brettgroesse zugewiesen und es werden so viele Felder allokiert wie die Brettgroesse ist.
  * Alle Felder werden auf -1 gesetzt --> -1 = unbesucht
  *
  * Parameter:

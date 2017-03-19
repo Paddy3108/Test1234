@@ -8,7 +8,7 @@
 
 /*
  * Funktion:
- * Dem Brett wird zu Beginn die Boardgroesse zugewiesen und es werden so viele Felder allokiert wie die Brettgroesse ist.
+ * Dem Brett wird zu Beginn die Brettgroesse zugewiesen und es werden so viele Felder allokiert wie die Brettgroesse ist.
  * Alle Felder werden auf -1 gesetzt --> -1 = unbesucht
  *
  * Parameter:
@@ -18,11 +18,11 @@
  * Rueckgabewert: void
  */
 void brettInitialisieren(Brett* brett, unsigned int brettGroesse) {
-    (*brett).data = malloc((brettGroesse * brettGroesse)*sizeof(int));
+    (*brett).daten = malloc((brettGroesse * brettGroesse)*sizeof(int));
     (*brett).brettGroesse = brettGroesse;
 
     for(unsigned int i = 0; i < brettGroesse*brettGroesse ; ++i) {
-        (*brett).data[i] = -1;
+        (*brett).daten[i] = -1;
     }
 }
 
@@ -37,7 +37,7 @@ void brettInitialisieren(Brett* brett, unsigned int brettGroesse) {
  * Rueckgabewert: void
  */
 void brettSpeicherFreigeben(Brett* brett) {
-    free((*brett).data);
+    free((*brett).daten);
 }
 
 
@@ -53,7 +53,8 @@ void brettSpeicherFreigeben(Brett* brett) {
  * Rueckgabewert: Wert der Position (integer)
  */
 int brettGetPositionswert(Brett* brett, unsigned int x, unsigned int y) {
-    return (*brett).data[y * (*brett).brettGroesse + x];
+    int position = y * (*brett).brettGroesse + x;
+    return (*brett).daten[position];
 }
 
 
@@ -70,7 +71,8 @@ int brettGetPositionswert(Brett* brett, unsigned int x, unsigned int y) {
  * Rueckgabewert: void
  */
 void brettSetPositionswert(Brett* brett, unsigned int x, unsigned int y, int wert) {
-    (*brett).data[y * (*brett).brettGroesse + x] = wert;
+    int position = y * (*brett).brettGroesse + x;
+    (*brett).daten[position] = wert;
 }
 
 

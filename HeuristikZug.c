@@ -6,15 +6,15 @@
  * Fuegt ein Feld/Schritt ans Ende der Liste hinzu
  *
  * Parameter:
- * liste: Pointer auf die HeuristikZugListe
+ * heuristikListe: Pointer auf die HeuristikZugListe
  * zug: Pointer auf HeuristikZug
  *
  * Rueckgabewert: void
  *
  */
-void heuristikZugHinzufuegen(HeuristikZugListe* liste, HeuristikZug* zug) {
-    if((*liste).anzahlZuege < 8) {
-        memcpy(&(*liste).zuege[(*liste).anzahlZuege++], zug, sizeof(HeuristikZug));
+void heuristikZugHinzufuegen(HeuristikZugListe* heuristikListe, HeuristikZug* zug) {
+    if((*heuristikListe).anzahlZuege < 8) {
+        memcpy(&(*heuristikListe).zuege[(*heuristikListe).anzahlZuege++], zug, sizeof(HeuristikZug));
         return;
     }
 }
@@ -24,21 +24,21 @@ void heuristikZugHinzufuegen(HeuristikZugListe* liste, HeuristikZug* zug) {
  * Sortiert die Liste nach der Warnsdorf Heuristik - die Felder mit den wenigsten Nachfolgern kommen zuerst dran
  *
  * Parameter:
- * liste: Pointer auf die HeuristikZugListe
+ * heuristikListe: Pointer auf die HeuristikZugListe
  *
  * Rueckgabewert: void
  */
 
-void heuristikZugListeSortieren(HeuristikZugListe* liste) {
+void heuristikZugListeSortieren(HeuristikZugListe* heuristikListe) {
 	// Sortiert die Liste nach Insertion Sort Verfahren
-	for(int i = 1; i < (*liste).anzahlZuege; i++) {
-		HeuristikZug temp = (*liste).zuege[i];
+	for(int i = 1; i < (*heuristikListe).anzahlZuege; i++) {
+		HeuristikZug temp = (*heuristikListe).zuege[i];
 		int j = i-1;
-		while(temp.anzahlNachbarn < (*liste).zuege[j].anzahlNachbarn && j >=0) {
-			(*liste).zuege[j+1] = (*liste).zuege[j];
+		while(temp.anzahlNachbarn < (*heuristikListe).zuege[j].anzahlNachbarn && j >=0) {
+			(*heuristikListe).zuege[j+1] = (*heuristikListe).zuege[j];
 			j--;
 		}
-		(*liste).zuege[j+1] = temp;
+		(*heuristikListe).zuege[j+1] = temp;
 	}
 
 }

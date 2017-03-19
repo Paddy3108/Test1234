@@ -5,13 +5,16 @@
 
  /*
  * Funktion:
- * Funktionsbeschreibung: Recursive function, tries the given move on the given board and all subsequent moves by the Warnsdorf heuristic
+ * Rekursive Methode, die alle gegebenen Zuege mit ihren nachfolgenden Zuegen auf dem Brett ausprobiert bis sie eine Loesung
+ * gefunden oder alle moeglichen Zuege ausprobiert hat.
  *
  * Parameter:
  * brett: Pointer auf das Brett
  * x: X - Koordinate
  * y: Y - Koordinate
  * n: aktuelle Anzahl der Durchlaeufe
+ * brettGroesse: Groesse des Bretts
+ * unterschied: Bei geschlossenem Weg = 0 | Bei offenem Weg = 1
  * geschlossen: Geschlossener oder Offener Weg
  *
  * Rueckgabewert: boolean-Wert ob Loesung gefunden wurde oder nicht
@@ -21,6 +24,7 @@ bool pfadTesten(Brett* brett, unsigned int x, unsigned int y, unsigned int n, un
     // Setzt an (x|y) den Wert der aktuellen Anzahl der Durchläufe n (Startwert = 0)
     brettSetPositionswert(brett, x, y, n);
 
+    // Wenn Anzahl der Durchlaeufe = Anzahl der Felder => Loesung gefunden
     if(n == (brettGroesse*brettGroesse - unterschied)) {
         return true;
     }
@@ -28,11 +32,11 @@ bool pfadTesten(Brett* brett, unsigned int x, unsigned int y, unsigned int n, un
     // Entscheidet ob der Startpunkt mit in der Liste vorhanden sein soll (Variable startwertEinbeziehen) --> geschlossener Weg
     bool startwertEinbeziehen = (geschlossen && n == (brettGroesse * brettGroesse) - 1);
     ZugListe zugListe = erstelleZugListe(brett, x, y, startwertEinbeziehen);
-    HeuristikZugListe liste = erstelleHeuristik(brett, &zugListe, startwertEinbeziehen);
+    HeuristikZugListe heuristikListe = erstelleHeuristik(brett, &zugListe, startwertEinbeziehen);
 
     // Schleife über alle moeglichen Wege
-    for(unsigned int i = 0; i < liste.anzahlZuege; ++i) {
-        HeuristikZug* zug = &liste.zuege[i];
+    for(unsigned int i = 0; i < heuristikListe.anzahlZuege; ++i) {
+        HeuristikZug* zug = &heuristikListe.zuege[i];
         bool loesungVorhanden = pfadTesten(brett, (*zug).zug.x, (*zug).zug.y, n+1, brettGroesse, unterschied, geschlossen);
         if(loesungVorhanden) {
             // Loesung gefunden
@@ -47,7 +51,7 @@ bool pfadTesten(Brett* brett, unsigned int x, unsigned int y, unsigned int n, un
 
  /*
  * Funktion:
- * Initialisieren des Boards mit den uebergebenen Variablen
+ * Initialisieren des Bretts mit den uebergebenen Variablen
  * Methode für geschlossenenen bzw, offenen Weg aufrufen
  *
  * Parameter:
@@ -62,7 +66,6 @@ void springen(unsigned int brettGroesse, unsigned int x, unsigned int y, bool ge
     Brett brett;
     brettInitialisieren(&brett, brettGroesse);
 
-    // Wenn Anzahl der Durchlaeufe = Anzahl der Felder => Loesung gefunden
     // bei offenem Weg: Anzahl der Durchlaeufe -1, weil n bei 0 anfängt
     // bei geschlossenem Weg: nichts abziehen
     int unterschied = geschlossen? 0 : 1;
