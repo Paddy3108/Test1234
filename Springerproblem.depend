@@ -178,7 +178,7 @@
 1489005991 source:\\mac\home\documents\development\workspace\springerproblem\heuristikzug.c
 	"HeuristikZug.h"
 
-1489924069 source:c:\users\patri\desktop\uni\programmierung 1\test1234\algorithmus.c
+1489924750 source:c:\users\patri\desktop\uni\programmierung 1\test1234\algorithmus.c
 	"Algorithmus.h"
 	"HeuristikZug.h"
 	"stdio.h"
@@ -197,7 +197,7 @@
 	<stdbool.h>
 	"Brett.h"
 
-1489924122 source:c:\users\patri\desktop\uni\programmierung 1\test1234\brett.c
+1489946868 source:c:\users\patri\desktop\uni\programmierung 1\test1234\brett.c
 	"Brett.h"
 	<stdlib.h>
 	<stdio.h>

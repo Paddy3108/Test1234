@@ -116,7 +116,22 @@ void brettAusgeben(Brett* brett){
     for(unsigned int i = 0; i < (*brett).brettGroesse; ++i) {
         printf("%s", "-----");
     }
-    printf("|\n");
+    printf("|\n\nEntwickler: \n");
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_BLUE);
+    printf("Patrick Eichert");
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_WHITE );
+    printf(", ");
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_BLUE );
+    printf("Theresa Reus");
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_WHITE );
+    printf(", ");
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_BLUE );
+    printf("Nico Frischkorn ");
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_WHITE );
+    printf("und ");
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_BLUE );
+    printf("Kristin Angelstein\n");
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_WHITE );
 }
 
 
