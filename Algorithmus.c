@@ -16,17 +16,10 @@
  *
  * Rueckgabewert: boolean-Wert ob Loesung gefunden wurde oder nicht
  */
-bool pfadTesten(Brett* brett, unsigned int x, unsigned int y, unsigned int n, bool geschlossen) {
-
-    unsigned int brettGroesse = (*brett).brettGroesse;
+bool pfadTesten(Brett* brett, unsigned int x, unsigned int y, unsigned int n, unsigned int brettGroesse ,int unterschied, bool geschlossen) {
 
     // Setzt an (x|y) den Wert der aktuellen Anzahl der Durchläufe n (Startwert = 0)
     brettSetPositionswert(brett, x, y, n);
-
-    // Wenn Anzahl der Durchlaeufe = Anzahl der Felder => Loesung gefunden
-    // bei offenem Weg: Anzahl der Durchlaeufe -1, weil n bei 0 anfängt
-    // bei geschlossenem Weg: nichts abziehen
-    int unterschied = geschlossen? 0 : 1;
 
     if(n == (brettGroesse*brettGroesse - unterschied)) {
         return true;
@@ -40,7 +33,7 @@ bool pfadTesten(Brett* brett, unsigned int x, unsigned int y, unsigned int n, bo
     // Schleife über alle moeglichen Wege
     for(unsigned int i = 0; i < liste.anzahlZuege; ++i) {
         HeuristikZug* zug = &liste.zuege[i];
-        bool loesungVorhanden = pfadTesten(brett, (*zug).zug.x, (*zug).zug.y, n+1, geschlossen);
+        bool loesungVorhanden = pfadTesten(brett, (*zug).zug.x, (*zug).zug.y, n+1, brettGroesse, unterschied, geschlossen);
         if(loesungVorhanden) {
             // Loesung gefunden
             return true;
@@ -68,14 +61,20 @@ bool pfadTesten(Brett* brett, unsigned int x, unsigned int y, unsigned int n, bo
 void springen(unsigned int brettGroesse, unsigned int x, unsigned int y, bool geschlossen) {
     Brett brett;
     brettInitialisieren(&brett, brettGroesse);
+
+    // Wenn Anzahl der Durchlaeufe = Anzahl der Felder => Loesung gefunden
+    // bei offenem Weg: Anzahl der Durchlaeufe -1, weil n bei 0 anfängt
+    // bei geschlossenem Weg: nichts abziehen
+    int unterschied = geschlossen? 0 : 1;
+
     bool loesungVorhanden = false;
     if(geschlossen) {
-        loesungVorhanden = pfadTesten(&brett, 0, 0, 0, geschlossen);
+        loesungVorhanden = pfadTesten(&brett, 0, 0, 0, brettGroesse, unterschied, geschlossen);
         if(loesungVorhanden) {
           brettWiederbeschreiben(&brett, x, y);
         }
     } else {
-        loesungVorhanden = pfadTesten(&brett, x, y, 0, geschlossen);
+        loesungVorhanden = pfadTesten(&brett, x, y, 0, brettGroesse , unterschied, geschlossen);
     }
 
     if(loesungVorhanden) {
