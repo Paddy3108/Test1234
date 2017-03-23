@@ -1,5 +1,6 @@
 #ifndef BOARD_H_INCLUDED
 #define BOARD_H_INCLUDED
+#include <stdbool.h>
 
 /*
  * Funktion:
@@ -80,6 +81,7 @@ void brettSetPositionswert(Brett* brett, unsigned int x, unsigned int y, int wer
  * brett: Pointer auf das Brett
  * startX: Start X - Koordinate
  * startY: Start Y - Koordinate
+ * geschlossen: Geschlosser oder offener Weg
  *
  * ASCII Tabelle fuer den Rahmen:
  * 185: ╣
@@ -96,7 +98,7 @@ void brettSetPositionswert(Brett* brett, unsigned int x, unsigned int y, int wer
  *
  * Rueckgabewert: void
  */
-void brettAusgeben(Brett* brett, int startX, int startY);
+void brettAusgeben(Brett* brett, int startX, int startY, bool geschlossen);
 
 /*
  * Funktion:

@@ -2,6 +2,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 #include <windows.h>
 #define FOREGROUND_WHITE   7
@@ -86,6 +87,7 @@ void brettSetPositionswert(Brett* brett, unsigned int x, unsigned int y, int wer
  * brett: Pointer auf das Brett
  * startX: Start X - Koordinate
  * startY: Start Y - Koordinate
+ * geschlossen: Geschlosser oder offener Weg
  *
  * ASCII Tabelle fuer den Rahmen:
  * 185: ╣
@@ -102,8 +104,8 @@ void brettSetPositionswert(Brett* brett, unsigned int x, unsigned int y, int wer
  *
  * Rückgabewert: void
  */
-void brettAusgeben(Brett* brett, int startX, int startY){
-    int zielX, zielY;
+void brettAusgeben(Brett* brett, int startX, int startY, bool geschlossen){
+    int zielX,zielY;
     printf("\t ");
 	for (int zahl = 0; zahl < (*brett).brettGroesse; zahl++)
 	{
@@ -171,7 +173,8 @@ void brettAusgeben(Brett* brett, int startX, int startY){
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN );
     printf("Nico Frischkorn\n");
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_WHITE );
-    if((*brett).brettGroesse == 8) brettErstelleDatei(brett,startX,startY);
+   if((*brett).brettGroesse == 8) brettErstelleDatei(brett,startX,startY,zielX,zielY,geschlossen);
+
 }
 
 /*
@@ -184,23 +187,23 @@ void brettAusgeben(Brett* brett, int startX, int startY){
  * startY: Start Y - Koordinate
  * zielX: Ziel X - Koordinate
  * zielY: Ziel Y - Koordinate
+ * bool: Geschlosser oder offener Weg
  *
  * Rueckgabewert: void
  */
-void brettErstelleDatei (Brett* brett, int startX, int startY, int zielX, int zielY)
+void brettErstelleDatei (Brett* brett, int startX, int startY, int zielX, int zielY, bool geschlossen)
 {
-   int xKoordinaten[((*brett).brettGroesse-1) * ((*brett).brettGroesse-1)];
-   int yKoordinaten[((*brett).brettGroesse-1) * ((*brett).brettGroesse-1)];
-   for(int y=0; y <(*brett).brettGroesse-1; y++)
+   int xKoordinaten[((*brett).brettGroesse) * ((*brett).brettGroesse)];
+   int yKoordinaten[((*brett).brettGroesse) * ((*brett).brettGroesse)];
+   for(int y=0; y <(*brett).brettGroesse; y++)
    {
-       for(int x=0; x<(*brett).brettGroesse-1;x++)
+       for(int x=0; x<(*brett).brettGroesse;x++)
        {
         int wert = brettGetPositionswert(brett, x, y);
-           xKoordinaten[x] = wert;
+           xKoordinaten[wert] = x;
            yKoordinaten[wert] = y;
        }
    }
-
    FILE *out = fopen("Springerproblem.svg","w");
    fprintf(out, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?> \n");
    fprintf(out, "<svg width=\"340\" height=\"340\" version=\"1.1\" viewBox=\"0 0 340 340\" xmlns=\"http://www.w3.org/2000/svg\">  \n\n");
@@ -287,15 +290,36 @@ void brettErstelleDatei (Brett* brett, int startX, int startY, int zielX, int zi
    fprintf(out," <line y1=\"0\" y2=\"8\" x1=\"7\" x2=\"7\" />\n");
    fprintf(out," </g>\n\n");
    fprintf(out," <g transform=\"translate(0.5,0.5)\">\n\n");
-   fprintf(out," <circle cx=\"4\" cy=\"0\" r=\"0.1\" stroke=\"none\" fill=\"red\" />\n\n");
-   fprintf(out," <text id=\"eins\" x=\"4\" y=\"0\" style=\"font-size:0.3px; font-family:Arial\" fill=\"red\" transform=\"translate(-0.3,0.1)\">\n");
+   fprintf(out," <circle cx=\"");
+   fprintf(out, "%d", startX );
+   fprintf(out, "\" cy=\"");
+   fprintf(out,"%d", startY);
+   fprintf(out, "\" r=\"0.1\" stroke=\"none\" fill=\"red\" />\n\n");
+   fprintf(out," <text id=\"eins\" x=\"");
+   fprintf(out,"%d",startX);
+   fprintf(out,"\" y=\"");
+   fprintf(out,"%d",startY);
+   fprintf(out,"\" style=\"font-size:0.3px; font-family:Arial\" fill=\"red\" transform=\"translate(-0.3,0.1)\">\n");
    fprintf(out,"S\n");
    fprintf(out,"</text>\n\n");
-   fprintf(out,"<circle cx=\"4\" cy=\"3\" r=\"0.1\" stroke=\"none\" fill=\"green\" />\n");
-   fprintf(out,"<text id=\"eins\" x=\"4\" y=\"3\" style=\"font-size:0.3px; font-family:Arial\" fill=\"green\" transform=\"translate(-0.3,0.1)\">\n");
+   fprintf(out," <circle cx=\"");
+   fprintf(out, "%d", zielX );
+   fprintf(out, "\" cy=\"");
+   fprintf(out,"%d", zielY);
+   fprintf(out, "\" r=\"0.1\" stroke=\"none\" fill=\"green\" />\n\n");
+   fprintf(out," <text id=\"eins\" x=\"");
+   fprintf(out,"%d",zielX);
+   fprintf(out,"\" y=\"");
+   fprintf(out,"%d",zielY);
+   fprintf(out,"\" style=\"font-size:0.3px; font-family:Arial\" fill=\"green\" transform=\"translate(-0.3,0.1)\">\n");
    fprintf(out,"E\n");
    fprintf(out,"</text>\n\n");
-   fprintf(out,"<polyline points=\"4,0 6,1 7,3 5,2 4,4 6,5 7,7 5,6 3,7 1,6 0,4 2,5 3,3 1,2 0,0 2,1 1,3 0,1 2,0 3,2 2,4 0,5 1,7 3,6 5,7 7,6 6,4 4,5 5,3 7,2 6,0 4,1 2,2 3,0 1,1 0,3 1,5 0,7 2,6 3,4 5,5 4,7 6,6 7,4 6,2 7,0 5,1 6,3 7,1 5,0 4,2 5,4 7,5 6,7 4,6 2,7 0,6 1,4 3,5 2,3 0,2 1,0 3,1 4,3\" stroke=\"blue\" stroke-width=\"0.05\" fill=\"none\" />\n\n");
+   fprintf(out,"<polyline points=\"");
+   for(int wert=0; wert < ((*brett).brettGroesse) * ((*brett).brettGroesse);wert++)
+   {
+        fprintf(out,"%d,%d ", xKoordinaten[wert], yKoordinaten[wert]);
+   }
+   fprintf(out,"\" stroke=\"blue\" stroke-width=\"0.05\" fill=\"none\" />\n\n");
    fprintf(out,"</g>\n");
    fprintf(out,"</g>\n");
    fprintf(out,"</svg>\n");
