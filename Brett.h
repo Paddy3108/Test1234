@@ -79,8 +79,6 @@ void brettSetPositionswert(Brett* brett, unsigned int x, unsigned int y, int wer
  *
  * Parameter:
  * brett: Pointer auf das Brett
- * startX: Start X - Koordinate
- * startY: Start Y - Koordinate
  * geschlossen: Geschlosser oder offener Weg
  *
  * ASCII Tabelle fuer den Rahmen:
@@ -98,7 +96,7 @@ void brettSetPositionswert(Brett* brett, unsigned int x, unsigned int y, int wer
  *
  * Rueckgabewert: void
  */
-void brettAusgeben(Brett* brett, int startX, int startY, bool geschlossen);
+void brettAusgeben(Brett* brett, bool geschlossen);
 
 /*
  * Funktion:

@@ -85,8 +85,6 @@ void brettSetPositionswert(Brett* brett, unsigned int x, unsigned int y, int wer
  *
  * Parameter:
  * brett: Pointer auf das Brett
- * startX: Start X - Koordinate
- * startY: Start Y - Koordinate
  * geschlossen: Geschlosser oder offener Weg
  *
  * ASCII Tabelle fuer den Rahmen:
@@ -104,7 +102,7 @@ void brettSetPositionswert(Brett* brett, unsigned int x, unsigned int y, int wer
  *
  * Rückgabewert: void
  */
-void brettAusgeben(Brett* brett, int startX, int startY, bool geschlossen){
+void brettAusgeben(Brett* brett, bool geschlossen){
     int zielX,zielY;
     printf("\t ");
 	for (int zahl = 0; zahl < (*brett).brettGroesse; zahl++)
@@ -173,7 +171,7 @@ void brettAusgeben(Brett* brett, int startX, int startY, bool geschlossen){
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN );
     printf("Nico Frischkorn\n");
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_WHITE );
-   if((*brett).brettGroesse == 8) brettErstelleDatei(brett,startX,startY,zielX,zielY,geschlossen);
+   if((*brett).brettGroesse == 8) brettErstelleDatei(brett,geschlossen);
 
 }
 
@@ -183,18 +181,15 @@ void brettAusgeben(Brett* brett, int startX, int startY, bool geschlossen){
  *
  * Parameter:
  * brett: Pointer auf das Brett
- * startX: Start X - Koordinate
- * startY: Start Y - Koordinate
- * zielX: Ziel X - Koordinate
- * zielY: Ziel Y - Koordinate
  * bool: Geschlosser oder offener Weg
  *
  * Rueckgabewert: void
  */
-void brettErstelleDatei (Brett* brett, int startX, int startY, int zielX, int zielY, bool geschlossen)
+void brettErstelleDatei (Brett* brett, bool geschlossen)
 {
-   int xKoordinaten[((*brett).brettGroesse) * ((*brett).brettGroesse)];
-   int yKoordinaten[((*brett).brettGroesse) * ((*brett).brettGroesse)];
+   int brettGroesse = ((*brett).brettGroesse) * ((*brett).brettGroesse);
+   int xKoordinaten[brettGroesse];
+   int yKoordinaten[brettGroesse];
    for(int y=0; y <(*brett).brettGroesse; y++)
    {
        for(int x=0; x<(*brett).brettGroesse;x++)
@@ -291,34 +286,39 @@ void brettErstelleDatei (Brett* brett, int startX, int startY, int zielX, int zi
    fprintf(out," </g>\n\n");
    fprintf(out," <g transform=\"translate(0.5,0.5)\">\n\n");
    fprintf(out," <circle cx=\"");
-   fprintf(out, "%d", startX );
+   fprintf(out, "%d", xKoordinaten[0] );
    fprintf(out, "\" cy=\"");
-   fprintf(out,"%d", startY);
+   fprintf(out,"%d", yKoordinaten[0]);
    fprintf(out, "\" r=\"0.1\" stroke=\"none\" fill=\"red\" />\n\n");
    fprintf(out," <text id=\"eins\" x=\"");
-   fprintf(out,"%d",startX);
+   fprintf(out,"%d",xKoordinaten[0]);
    fprintf(out,"\" y=\"");
-   fprintf(out,"%d",startY);
+   fprintf(out,"%d",yKoordinaten[0]);
    fprintf(out,"\" style=\"font-size:0.3px; font-family:Arial\" fill=\"red\" transform=\"translate(-0.3,0.1)\">\n");
    fprintf(out,"S\n");
    fprintf(out,"</text>\n\n");
-   fprintf(out," <circle cx=\"");
-   fprintf(out, "%d", zielX );
-   fprintf(out, "\" cy=\"");
-   fprintf(out,"%d", zielY);
-   fprintf(out, "\" r=\"0.1\" stroke=\"none\" fill=\"green\" />\n\n");
-   fprintf(out," <text id=\"eins\" x=\"");
-   fprintf(out,"%d",zielX);
-   fprintf(out,"\" y=\"");
-   fprintf(out,"%d",zielY);
-   fprintf(out,"\" style=\"font-size:0.3px; font-family:Arial\" fill=\"green\" transform=\"translate(-0.3,0.1)\">\n");
-   fprintf(out,"E\n");
-   fprintf(out,"</text>\n\n");
+   if (!geschlossen)
+   {
+        fprintf(out," <circle cx=\"");
+        fprintf(out, "%d", xKoordinaten[brettGroesse-1] );
+        fprintf(out, "\" cy=\"");
+        fprintf(out,"%d", yKoordinaten[brettGroesse-1]);
+        fprintf(out, "\" r=\"0.1\" stroke=\"none\" fill=\"green\" />\n\n");
+        fprintf(out," <text id=\"eins\" x=\"");
+        fprintf(out,"%d", xKoordinaten[brettGroesse-1]);
+        fprintf(out,"\" y=\"");
+        fprintf(out,"%d", yKoordinaten[brettGroesse-1]);
+        fprintf(out,"\" style=\"font-size:0.3px; font-family:Arial\" fill=\"green\" transform=\"translate(-0.3,0.1)\">\n");
+        fprintf(out,"E\n");
+        fprintf(out,"</text>\n\n");
+   }
+
    fprintf(out,"<polyline points=\"");
    for(int wert=0; wert < ((*brett).brettGroesse) * ((*brett).brettGroesse);wert++)
    {
         fprintf(out,"%d,%d ", xKoordinaten[wert], yKoordinaten[wert]);
    }
+   if(geschlossen) fprintf(out,"%d,%d ",xKoordinaten[0],yKoordinaten[0] );
    fprintf(out,"\" stroke=\"blue\" stroke-width=\"0.05\" fill=\"none\" />\n\n");
    fprintf(out,"</g>\n");
    fprintf(out,"</g>\n");
