@@ -81,7 +81,7 @@ void springen(unsigned int brettGroesse, unsigned int x, unsigned int y, bool ge
     }
 
     if(loesungVorhanden) {
-        brettAusgeben(&brett);
+        brettAusgeben(&brett, x, y);
     } else {
         printf("%s", "Keine Loesung gefunden");
     }

@@ -78,10 +78,25 @@ void brettSetPositionswert(Brett* brett, unsigned int x, unsigned int y, int wer
  *
  * Parameter:
  * brett: Pointer auf das Brett
+ * startX: Start X - Koordinate
+ * startY: Start Y - Koordinate
+ *
+ * ASCII Tabelle fuer den Rahmen:
+ * 185: ╣
+ * 186: ║
+ * 187: ╗
+ * 188: ╝
+ * 200: ╚
+ * 201: ╔
+ * 202: ╩
+ * 203: ╦
+ * 204: ╠
+ * 205: ═
+ * 206: ╬
  *
  * Rueckgabewert: void
  */
-void brettAusgeben(Brett* brett);
+void brettAusgeben(Brett* brett, int startX, int startY);
 
 /*
  * Funktion:
