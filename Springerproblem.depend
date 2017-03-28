@@ -218,3 +218,44 @@
 	"Zug.h"
 	"string.h"
 
+1490735350 source:c:\users\kristin\documents\test1234\algorithmus.c
+	"Algorithmus.h"
+	"HeuristikZug.h"
+	"stdio.h"
+
+1490735350 c:\users\kristin\documents\test1234\algorithmus.h
+	<stdbool.h>
+
+1490735350 c:\users\kristin\documents\test1234\heuristikzug.h
+	<stdbool.h>
+	"Brett.h"
+	"Zug.h"
+
+1490735350 c:\users\kristin\documents\test1234\brett.h
+	<stdbool.h>
+
+1490735350 c:\users\kristin\documents\test1234\zug.h
+	<stdbool.h>
+	"Brett.h"
+
+1490735350 source:c:\users\kristin\documents\test1234\heuristikzug.c
+	"HeuristikZug.h"
+	<string.h>
+
+1490735350 source:c:\users\kristin\documents\test1234\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"Algorithmus.h"
+
+1490735350 source:c:\users\kristin\documents\test1234\zug.c
+	"Zug.h"
+	"string.h"
+
+1490742147 source:c:\users\kristin\documents\test1234\brett.c
+	"Brett.h"
+	<stdlib.h>
+	<stdio.h>
+	<stdbool.h>
+	<windows.h>
+

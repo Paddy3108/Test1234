@@ -171,7 +171,7 @@ void brettAusgeben(Brett* brett, bool geschlossen){
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN );
     printf("Nico Frischkorn\n");
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_WHITE );
-   if((*brett).brettGroesse == 8) brettErstelleDatei(brett,geschlossen);
+   /*if((*brett).brettGroesse == 8) */brettErstelleDatei(brett,geschlossen);
 
 }
 
@@ -185,11 +185,19 @@ void brettAusgeben(Brett* brett, bool geschlossen){
  *
  * Rueckgabewert: void
  */
-void brettErstelleDatei (Brett* brett, bool geschlossen)
+void brettErstelleDatei(Brett* brett, bool geschlossen)
 {
    int brettGroesse = ((*brett).brettGroesse) * ((*brett).brettGroesse);
    int xKoordinaten[brettGroesse];
    int yKoordinaten[brettGroesse];
+
+   // Speichert die Anzahl der Schachfelder pro Zeile / Spalte
+   int dimension =(*brett).brettGroesse;
+
+   // Berechnet die Abmessungen, welche die SVG-Datei hat. +4 wird gerechnet, damit noch je 2 Pixel Abstand zu den Rändern sind.
+   int hoeheBreite = 42 * dimension + 4;
+
+   // WIRD DAS HIER NOCH BENOETIGT????
    for(int y=0; y <(*brett).brettGroesse; y++)
    {
        for(int x=0; x<(*brett).brettGroesse;x++)
@@ -200,105 +208,123 @@ void brettErstelleDatei (Brett* brett, bool geschlossen)
        }
    }
    FILE *out = fopen("Springerproblem.svg","w");
+   /*
+    * Als Grundlage fuer die SVG-Ausgabe diente eine SVG-Datei von Wikipedia:
+    * https://de.wikipedia.org/wiki/Springerproblem#/media/File:Knight%27s_tour.svg
+    */
+
+   /* Der Kopf der SVG-Datei wird beschrieben */
    fprintf(out, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?> \n");
-   fprintf(out, "<svg width=\"340\" height=\"340\" version=\"1.1\" viewBox=\"0 0 340 340\" xmlns=\"http://www.w3.org/2000/svg\">  \n\n");
+   /* width + height = Breite + Hoehe des gesamten SVG's; viewBox gibt an, welcher Bereich davon angezeigt werden soll, die ersten 2 Stellen verruecken das Bild ggf. */
+   fprintf(out, "<svg width=\"%d\" height=\"%d\" version=\"1.1\" viewBox=\"0 0 %d %d\" xmlns=\"http://www.w3.org/2000/svg\">  \n\n", hoeheBreite, hoeheBreite, hoeheBreite, hoeheBreite);
+   /* transform erstellt einen Abstand um das eigentliche Bild; scale vergroessert das Bild in dem angegebenen Bereich */
    fprintf(out, "<g transform=\"translate(10,10) scale(40)\">\n");
+   /* Linienstaerke + -Farbe fuer Schachbrettraster */
    fprintf(out, "<g fill=\"white\" stroke=\"gray\" stroke-width=\"0.025\">\n");
-   fprintf(out, " <rect x=\"0\" y=\"0\" width=\"8\" height=\"8\" />\n\n");
-   fprintf(out, " <rect x=\"0\" y=\"0\" width=\"1\" height=\"1\" fill=\"black\" />\n");
-   fprintf(out, " <rect x=\"0\" y=\"1\" width=\"1\" height=\"1\" fill=\"white\" />\n");/**<  */
-   fprintf(out, " <rect x=\"0\" y=\"2\" width=\"1\" height=\"1\" fill=\"black\" />\n");
-   fprintf(out, " <rect x=\"0\" y=\"3\" width=\"1\" height=\"1\" fill=\"white\" />\n");
-   fprintf(out, " <rect x=\"0\" y=\"4\" width=\"1\" height=\"1\" fill=\"black\" />\n");
-   fprintf(out, " <rect x=\"0\" y=\"5\" width=\"1\" height=\"1\" fill=\"white\" />\n");
-   fprintf(out, " <rect x=\"0\" y=\"6\" width=\"1\" height=\"1\" fill=\"black\" />\n");
-   fprintf(out, " <rect x=\"0\" y=\"7\" width=\"1\" height=\"1\" fill=\"white\" />\n");
-   fprintf(out, " <rect x=\"1\" y=\"0\" width=\"1\" height=\"1\" fill=\"white\" />\n");
-   fprintf(out, " <rect x=\"1\" y=\"1\" width=\"1\" height=\"1\" fill=\"black\" />\n");
-   fprintf(out, " <rect x=\"1\" y=\"2\" width=\"1\" height=\"1\" fill=\"white\" />\n");
-   fprintf(out, " <rect x=\"1\" y=\"3\" width=\"1\" height=\"1\" fill=\"black\" />\n");
-   fprintf(out, " <rect x=\"1\" y=\"4\" width=\"1\" height=\"1\" fill=\"white\" />\n");
-   fprintf(out, " <rect x=\"1\" y=\"5\" width=\"1\" height=\"1\" fill=\"black\" />\n");
-   fprintf(out, " <rect x=\"1\" y=\"6\" width=\"1\" height=\"1\" fill=\"white\" />\n");
-   fprintf(out, " <rect x=\"1\" y=\"7\" width=\"1\" height=\"1\" fill=\"black\" />\n");
-   fprintf(out, " <rect x=\"2\" y=\"0\" width=\"1\" height=\"1\" fill=\"black\" />\n");
-   fprintf(out, " <rect x=\"2\" y=\"1\" width=\"1\" height=\"1\" fill=\"white\" />\n");
-   fprintf(out, " <rect x=\"2\" y=\"2\" width=\"1\" height=\"1\" fill=\"black\" />\n");
-   fprintf(out, " <rect x=\"2\" y=\"3\" width=\"1\" height=\"1\" fill=\"white\" />\n");
-   fprintf(out, " <rect x=\"2\" y=\"4\" width=\"1\" height=\"1\" fill=\"black\" />\n");
-   fprintf(out, " <rect x=\"2\" y=\"5\" width=\"1\" height=\"1\" fill=\"white\" />\n");
-   fprintf(out, " <rect x=\"2\" y=\"6\" width=\"1\" height=\"1\" fill=\"black\" />\n");
-   fprintf(out, " <rect x=\"2\" y=\"7\" width=\"1\" height=\"1\" fill=\"white\" />\n");
-   fprintf(out, " <rect x=\"3\" y=\"0\" width=\"1\" height=\"1\" fill=\"white\" />\n");
-   fprintf(out, " <rect x=\"3\" y=\"1\" width=\"1\" height=\"1\" fill=\"black\" />\n");
-   fprintf(out, " <rect x=\"3\" y=\"2\" width=\"1\" height=\"1\" fill=\"white\" />\n");
-   fprintf(out, " <rect x=\"3\" y=\"3\" width=\"1\" height=\"1\" fill=\"black\" />\n");
-   fprintf(out, " <rect x=\"3\" y=\"4\" width=\"1\" height=\"1\" fill=\"white\" />\n");
-   fprintf(out, " <rect x=\"3\" y=\"5\" width=\"1\" height=\"1\" fill=\"black\" />\n");
-   fprintf(out, " <rect x=\"3\" y=\"6\" width=\"1\" height=\"1\" fill=\"white\" />\n");
-   fprintf(out, " <rect x=\"3\" y=\"7\" width=\"1\" height=\"1\" fill=\"black\" />\n");
-   fprintf(out, " <rect x=\"4\" y=\"0\" width=\"1\" height=\"1\" fill=\"black\" />\n");
-   fprintf(out, " <rect x=\"4\" y=\"1\" width=\"1\" height=\"1\" fill=\"white\" />\n");
-   fprintf(out, " <rect x=\"4\" y=\"2\" width=\"1\" height=\"1\" fill=\"black\" />\n");
-   fprintf(out, " <rect x=\"4\" y=\"3\" width=\"1\" height=\"1\" fill=\"white\" />\n");
-   fprintf(out, " <rect x=\"4\" y=\"4\" width=\"1\" height=\"1\" fill=\"black\" />\n");
-   fprintf(out, " <rect x=\"4\" y=\"5\" width=\"1\" height=\"1\" fill=\"white\" />\n");
-   fprintf(out, " <rect x=\"4\" y=\"6\" width=\"1\" height=\"1\" fill=\"black\" />\n");
-   fprintf(out, " <rect x=\"4\" y=\"7\" width=\"1\" height=\"1\" fill=\"white\" />\n");
-   fprintf(out, " <rect x=\"5\" y=\"0\" width=\"1\" height=\"1\" fill=\"white\" />\n");
-   fprintf(out, " <rect x=\"5\" y=\"1\" width=\"1\" height=\"1\" fill=\"black\" />\n");
-   fprintf(out, " <rect x=\"5\" y=\"2\" width=\"1\" height=\"1\" fill=\"white\" />\n");
-   fprintf(out, " <rect x=\"5\" y=\"3\" width=\"1\" height=\"1\" fill=\"black\" />\n");
-   fprintf(out, " <rect x=\"5\" y=\"4\" width=\"1\" height=\"1\" fill=\"white\" />\n");
-   fprintf(out, " <rect x=\"5\" y=\"5\" width=\"1\" height=\"1\" fill=\"black\" />\n");
-   fprintf(out, " <rect x=\"5\" y=\"6\" width=\"1\" height=\"1\" fill=\"white\" />\n");
-   fprintf(out, " <rect x=\"5\" y=\"7\" width=\"1\" height=\"1\" fill=\"black\" />\n");
-   fprintf(out, " <rect x=\"6\" y=\"0\" width=\"1\" height=\"1\" fill=\"black\" />\n");
-   fprintf(out, " <rect x=\"6\" y=\"1\" width=\"1\" height=\"1\" fill=\"white\" />\n");
-   fprintf(out, " <rect x=\"6\" y=\"2\" width=\"1\" height=\"1\" fill=\"black\" />\n");
-   fprintf(out, " <rect x=\"6\" y=\"3\" width=\"1\" height=\"1\" fill=\"white\" />\n");
-   fprintf(out, " <rect x=\"6\" y=\"4\" width=\"1\" height=\"1\" fill=\"black\" />\n");
-   fprintf(out, " <rect x=\"6\" y=\"5\" width=\"1\" height=\"1\" fill=\"white\" />\n");
-   fprintf(out, " <rect x=\"6\" y=\"6\" width=\"1\" height=\"1\" fill=\"black\" />\n");
-   fprintf(out, " <rect x=\"6\" y=\"7\" width=\"1\" height=\"1\" fill=\"white\" />\n");
-   fprintf(out, " <rect x=\"7\" y=\"0\" width=\"1\" height=\"1\" fill=\"white\" />\n");
-   fprintf(out, " <rect x=\"7\" y=\"1\" width=\"1\" height=\"1\" fill=\"black\" />\n");
-   fprintf(out, " <rect x=\"7\" y=\"2\" width=\"1\" height=\"1\" fill=\"white\" />\n");
-   fprintf(out, " <rect x=\"7\" y=\"3\" width=\"1\" height=\"1\" fill=\"black\" />\n");
-   fprintf(out, " <rect x=\"7\" y=\"4\" width=\"1\" height=\"1\" fill=\"white\" />\n");
-   fprintf(out, " <rect x=\"7\" y=\"5\" width=\"1\" height=\"1\" fill=\"black\" />\n");
-   fprintf(out, " <rect x=\"7\" y=\"6\" width=\"1\" height=\"1\" fill=\"white\" />\n");
-   fprintf(out, " <rect x=\"7\" y=\"7\" width=\"1\" height=\"1\" fill=\"black\" />\n\n");
-   fprintf(out,"<line x1=\"0\" x2=\"8\" y1=\"1\" y2=\"1\" />\n");
-   fprintf(out,"<line x1=\"0\" x2=\"8\" y1=\"2\" y2=\"2\" />\n");
-   fprintf(out,"<line x1=\"0\" x2=\"8\" y1=\"3\" y2=\"3\" />\n");
-   fprintf(out,"<line x1=\"0\" x2=\"8\" y1=\"4\" y2=\"4\" />\n");
-   fprintf(out,"<line x1=\"0\" x2=\"8\" y1=\"5\" y2=\"5\" />\n");
-   fprintf(out,"<line x1=\"0\" x2=\"8\" y1=\"6\" y2=\"6\" />\n");
-   fprintf(out,"<line x1=\"0\" x2=\"8\" y1=\"7\" y2=\"7\" />\n\n");
-   fprintf(out," <line y1=\"0\" y2=\"8\" x1=\"1\" x2=\"1\" />\n");
-   fprintf(out," <line y1=\"0\" y2=\"8\" x1=\"2\" x2=\"2\" />\n");
-   fprintf(out," <line y1=\"0\" y2=\"8\" x1=\"3\" x2=\"3\" />\n");
-   fprintf(out," <line y1=\"0\" y2=\"8\" x1=\"4\" x2=\"4\" />\n");
-   fprintf(out," <line y1=\"0\" y2=\"8\" x1=\"5\" x2=\"5\" />\n");
-   fprintf(out," <line y1=\"0\" y2=\"8\" x1=\"6\" x2=\"6\" />\n");
-   fprintf(out," <line y1=\"0\" y2=\"8\" x1=\"7\" x2=\"7\" />\n");
+   /* Aeußeres Rechteck um das Schachbrettmuster.*/
+   fprintf(out, " <rect x=\"0\" y=\"0\" width=\"%d\" height=\"%d\" />\n\n", dimension, dimension);
+
+   /* Schachbrettmuster dynamisch generieren */
+
+   /* ab hier wird nichts mehr in die svg-gepackt. Nach der Schleife habe ich eigentlich nichts mehr geändert   */
+   for (int x=0; x<dimension; x++){
+    for(int y= 0; y<dimension; y++){
+        char color[5];
+        if((x+y)%2 == 0)
+        {
+          strcpy(color, "black");
+        }
+        else{
+           strcpy(color, "white");
+        }
+        fprintf(out, "<rect x=\"%d\" y=\"%d\" width=\"1\" height=\"1\" fill=\"%s\" />\n", x, y, color);
+    }
+
+   }
+
+
+//   fprintf(out, " <rect x=\"0\" y=\"0\" width=\"1\" height=\"1\" fill=\"black\" />\n");
+//   fprintf(out, " <rect x=\"0\" y=\"1\" width=\"1\" height=\"1\" fill=\"white\" />\n");/**<  */
+//   fprintf(out, " <rect x=\"0\" y=\"2\" width=\"1\" height=\"1\" fill=\"black\" />\n");
+//   fprintf(out, " <rect x=\"0\" y=\"3\" width=\"1\" height=\"1\" fill=\"white\" />\n");
+//   fprintf(out, " <rect x=\"0\" y=\"4\" width=\"1\" height=\"1\" fill=\"black\" />\n");
+//   fprintf(out, " <rect x=\"0\" y=\"5\" width=\"1\" height=\"1\" fill=\"white\" />\n");
+//   fprintf(out, " <rect x=\"0\" y=\"6\" width=\"1\" height=\"1\" fill=\"black\" />\n");
+//   fprintf(out, " <rect x=\"0\" y=\"7\" width=\"1\" height=\"1\" fill=\"white\" />\n");
+//   fprintf(out, " <rect x=\"1\" y=\"0\" width=\"1\" height=\"1\" fill=\"white\" />\n");
+//   fprintf(out, " <rect x=\"1\" y=\"1\" width=\"1\" height=\"1\" fill=\"black\" />\n");
+//   fprintf(out, " <rect x=\"1\" y=\"2\" width=\"1\" height=\"1\" fill=\"white\" />\n");
+//   fprintf(out, " <rect x=\"1\" y=\"3\" width=\"1\" height=\"1\" fill=\"black\" />\n");
+//   fprintf(out, " <rect x=\"1\" y=\"4\" width=\"1\" height=\"1\" fill=\"white\" />\n");
+//   fprintf(out, " <rect x=\"1\" y=\"5\" width=\"1\" height=\"1\" fill=\"black\" />\n");
+//   fprintf(out, " <rect x=\"1\" y=\"6\" width=\"1\" height=\"1\" fill=\"white\" />\n");
+//   fprintf(out, " <rect x=\"1\" y=\"7\" width=\"1\" height=\"1\" fill=\"black\" />\n");
+//   fprintf(out, " <rect x=\"2\" y=\"0\" width=\"1\" height=\"1\" fill=\"black\" />\n");
+//   fprintf(out, " <rect x=\"2\" y=\"1\" width=\"1\" height=\"1\" fill=\"white\" />\n");
+//   fprintf(out, " <rect x=\"2\" y=\"2\" width=\"1\" height=\"1\" fill=\"black\" />\n");
+//   fprintf(out, " <rect x=\"2\" y=\"3\" width=\"1\" height=\"1\" fill=\"white\" />\n");
+//   fprintf(out, " <rect x=\"2\" y=\"4\" width=\"1\" height=\"1\" fill=\"black\" />\n");
+//   fprintf(out, " <rect x=\"2\" y=\"5\" width=\"1\" height=\"1\" fill=\"white\" />\n");
+//   fprintf(out, " <rect x=\"2\" y=\"6\" width=\"1\" height=\"1\" fill=\"black\" />\n");
+//   fprintf(out, " <rect x=\"2\" y=\"7\" width=\"1\" height=\"1\" fill=\"white\" />\n");
+//   fprintf(out, " <rect x=\"3\" y=\"0\" width=\"1\" height=\"1\" fill=\"white\" />\n");
+//   fprintf(out, " <rect x=\"3\" y=\"1\" width=\"1\" height=\"1\" fill=\"black\" />\n");
+//   fprintf(out, " <rect x=\"3\" y=\"2\" width=\"1\" height=\"1\" fill=\"white\" />\n");
+//   fprintf(out, " <rect x=\"3\" y=\"3\" width=\"1\" height=\"1\" fill=\"black\" />\n");
+//   fprintf(out, " <rect x=\"3\" y=\"4\" width=\"1\" height=\"1\" fill=\"white\" />\n");
+//   fprintf(out, " <rect x=\"3\" y=\"5\" width=\"1\" height=\"1\" fill=\"black\" />\n");
+//   fprintf(out, " <rect x=\"3\" y=\"6\" width=\"1\" height=\"1\" fill=\"white\" />\n");
+//   fprintf(out, " <rect x=\"3\" y=\"7\" width=\"1\" height=\"1\" fill=\"black\" />\n");
+//   fprintf(out, " <rect x=\"4\" y=\"0\" width=\"1\" height=\"1\" fill=\"black\" />\n");
+//   fprintf(out, " <rect x=\"4\" y=\"1\" width=\"1\" height=\"1\" fill=\"white\" />\n");
+//   fprintf(out, " <rect x=\"4\" y=\"2\" width=\"1\" height=\"1\" fill=\"black\" />\n");
+//   fprintf(out, " <rect x=\"4\" y=\"3\" width=\"1\" height=\"1\" fill=\"white\" />\n");
+//   fprintf(out, " <rect x=\"4\" y=\"4\" width=\"1\" height=\"1\" fill=\"black\" />\n");
+//   fprintf(out, " <rect x=\"4\" y=\"5\" width=\"1\" height=\"1\" fill=\"white\" />\n");
+//   fprintf(out, " <rect x=\"4\" y=\"6\" width=\"1\" height=\"1\" fill=\"black\" />\n");
+//   fprintf(out, " <rect x=\"4\" y=\"7\" width=\"1\" height=\"1\" fill=\"white\" />\n");
+//   fprintf(out, " <rect x=\"5\" y=\"0\" width=\"1\" height=\"1\" fill=\"white\" />\n");
+//   fprintf(out, " <rect x=\"5\" y=\"1\" width=\"1\" height=\"1\" fill=\"black\" />\n");
+//   fprintf(out, " <rect x=\"5\" y=\"2\" width=\"1\" height=\"1\" fill=\"white\" />\n");
+//   fprintf(out, " <rect x=\"5\" y=\"3\" width=\"1\" height=\"1\" fill=\"black\" />\n");
+//   fprintf(out, " <rect x=\"5\" y=\"4\" width=\"1\" height=\"1\" fill=\"white\" />\n");
+//   fprintf(out, " <rect x=\"5\" y=\"5\" width=\"1\" height=\"1\" fill=\"black\" />\n");
+//   fprintf(out, " <rect x=\"5\" y=\"6\" width=\"1\" height=\"1\" fill=\"white\" />\n");
+//   fprintf(out, " <rect x=\"5\" y=\"7\" width=\"1\" height=\"1\" fill=\"black\" />\n");
+//   fprintf(out, " <rect x=\"6\" y=\"0\" width=\"1\" height=\"1\" fill=\"black\" />\n");
+//   fprintf(out, " <rect x=\"6\" y=\"1\" width=\"1\" height=\"1\" fill=\"white\" />\n");
+//   fprintf(out, " <rect x=\"6\" y=\"2\" width=\"1\" height=\"1\" fill=\"black\" />\n");
+//   fprintf(out, " <rect x=\"6\" y=\"3\" width=\"1\" height=\"1\" fill=\"white\" />\n");
+//   fprintf(out, " <rect x=\"6\" y=\"4\" width=\"1\" height=\"1\" fill=\"black\" />\n");
+//   fprintf(out, " <rect x=\"6\" y=\"5\" width=\"1\" height=\"1\" fill=\"white\" />\n");
+//   fprintf(out, " <rect x=\"6\" y=\"6\" width=\"1\" height=\"1\" fill=\"black\" />\n");
+//   fprintf(out, " <rect x=\"6\" y=\"7\" width=\"1\" height=\"1\" fill=\"white\" />\n");
+//   fprintf(out, " <rect x=\"7\" y=\"0\" width=\"1\" height=\"1\" fill=\"white\" />\n");
+//   fprintf(out, " <rect x=\"7\" y=\"1\" width=\"1\" height=\"1\" fill=\"black\" />\n");
+//   fprintf(out, " <rect x=\"7\" y=\"2\" width=\"1\" height=\"1\" fill=\"white\" />\n");
+//   fprintf(out, " <rect x=\"7\" y=\"3\" width=\"1\" height=\"1\" fill=\"black\" />\n");
+//   fprintf(out, " <rect x=\"7\" y=\"4\" width=\"1\" height=\"1\" fill=\"white\" />\n");
+//   fprintf(out, " <rect x=\"7\" y=\"5\" width=\"1\" height=\"1\" fill=\"black\" />\n");
+//   fprintf(out, " <rect x=\"7\" y=\"6\" width=\"1\" height=\"1\" fill=\"white\" />\n");
+//   fprintf(out, " <rect x=\"7\" y=\"7\" width=\"1\" height=\"1\" fill=\"black\" />\n\n");
+
+
    fprintf(out," </g>\n\n");
    fprintf(out," <g transform=\"translate(0.5,0.5)\">\n\n");
    fprintf(out," <circle cx=\"");
    fprintf(out, "%d", xKoordinaten[0] );
    fprintf(out, "\" cy=\"");
    fprintf(out,"%d", yKoordinaten[0]);
-   fprintf(out, "\" r=\"0.1\" stroke=\"none\" fill=\"red\" />\n\n");
+   fprintf(out, "\" r=\"0.15\" stroke=\"none\" fill=\"red\" />\n\n");
    fprintf(out," <text id=\"eins\" x=\"");
    fprintf(out,"%d",xKoordinaten[0]);
    fprintf(out,"\" y=\"");
    fprintf(out,"%d",yKoordinaten[0]);
-   fprintf(out,"\" style=\"font-size:0.3px; font-family:Arial\" fill=\"red\" transform=\"translate(-0.3,0.1)\">\n");
+   fprintf(out,"\" style=\"font-size:0.3px; font-family:Arial\" fill=\"red\" transform=\"translate(-0.35,0.1)\">\n");
    fprintf(out,"S\n");
    fprintf(out,"</text>\n\n");
-   if (!geschlossen)
-   {
+/*   if (!geschlossen)
+   {*/
         fprintf(out," <circle cx=\"");
         fprintf(out, "%d", xKoordinaten[brettGroesse-1] );
         fprintf(out, "\" cy=\"");
@@ -308,10 +334,10 @@ void brettErstelleDatei (Brett* brett, bool geschlossen)
         fprintf(out,"%d", xKoordinaten[brettGroesse-1]);
         fprintf(out,"\" y=\"");
         fprintf(out,"%d", yKoordinaten[brettGroesse-1]);
-        fprintf(out,"\" style=\"font-size:0.3px; font-family:Arial\" fill=\"green\" transform=\"translate(-0.3,0.1)\">\n");
+        fprintf(out,"\" style=\"font-size:0.3px; font-family:Arial\" fill=\"green\" transform=\"translate(0.12,0.1)\">\n");
         fprintf(out,"E\n");
         fprintf(out,"</text>\n\n");
-   }
+//   }
 
    fprintf(out,"<polyline points=\"");
    for(int wert=0; wert < ((*brett).brettGroesse) * ((*brett).brettGroesse);wert++)
