@@ -103,6 +103,7 @@ void brettSetPositionswert(Brett* brett, unsigned int x, unsigned int y, int wer
  * Rückgabewert: void
  */
 void brettAusgeben(Brett* brett, bool geschlossen){
+    printf("Eine weitere Ausgabe ist in Form einer SvG-Datei im direkten Projektpfad zu finden.\nEs wird empfohlen die Datei \"Springerproblem.svg\" mit einem Internetbrowser zu oeffnen.");
     printf("\t ");
 	for (int zahl = 0; zahl < (*brett).brettGroesse; zahl++) {
 		printf("%3c  ", 97 + zahl);
@@ -226,29 +227,24 @@ void brettErstelleDatei(Brett* brett, bool geschlossen)
    }
    fprintf(out," </g>\n\n");
    fprintf(out," <g transform=\"translate(0.5,0.5)\">\n\n");
-   fprintf(out," <circle cx=\"");
-   fprintf(out, "%d", xKoordinaten[0] );
-   fprintf(out, "\" cy=\"");
-   fprintf(out,"%d", yKoordinaten[0]);
-   fprintf(out, "\" r=\"0.15\" stroke=\"none\" fill=\"red\" />\n\n");
-   fprintf(out," <text id=\"eins\" x=\"");
-   fprintf(out,"%d",xKoordinaten[0]);
-   fprintf(out,"\" y=\"");
-   fprintf(out,"%d",yKoordinaten[0]);
-   fprintf(out,"\" style=\"font-size:0.3px; font-family:Arial\" fill=\"red\" transform=\"translate(-0.35,0.1)\">\n");
+   fprintf(out," <circle cx=\"%d\" cy=\"%d\" r=\"0.15\" stroke=\"none\" fill=\"red\" />\n\n", xKoordinaten[0], yKoordinaten[0] );
+   fprintf(out," <text id=\"eins\" x=\"%d\" y=\"%d\" " , xKoordinaten[0], yKoordinaten[0]);
+   fprintf(out,"style=\"font-size:0.3px; font-family:Arial\" fill=\"red\" transform=\"translate(-0.35,0.1)\">\n");
    fprintf(out,"S\n");
    fprintf(out,"</text>\n\n");
-   if (!geschlossen) {
-        fprintf(out," <circle cx=\"");
-        fprintf(out, "%d", xKoordinaten[brettGroesse-1] );
-        fprintf(out, "\" cy=\"");
-        fprintf(out,"%d", yKoordinaten[brettGroesse-1]);
-        fprintf(out, "\" r=\"0.1\" stroke=\"none\" fill=\"green\" />\n\n");
-        fprintf(out," <text id=\"eins\" x=\"");
-        fprintf(out,"%d", xKoordinaten[brettGroesse-1]);
-        fprintf(out,"\" y=\"");
-        fprintf(out,"%d", yKoordinaten[brettGroesse-1]);
-        fprintf(out,"\" style=\"font-size:0.3px; font-family:Arial\" fill=\"green\" transform=\"translate(0.12,0.1)\">\n");
+   if (geschlossen) {
+        fprintf(out,"<circle cx=\"%d\" cy=\"%d\" ", xKoordinaten[0], yKoordinaten[0] );
+        fprintf(out,"r=\"0.1\" stroke=\"none\" fill=\"green\" />\n\n");
+        fprintf(out,"<text id=\"eins\" x=\"%d\" y=\"%d\" ", xKoordinaten[0], yKoordinaten[0]);
+        fprintf(out,"style=\"font-size:0.3px; font-family:Arial\" fill=\"green\" transform=\"translate(0.12,0.1)\">\n");
+        fprintf(out,"E\n");
+        fprintf(out,"</text>\n\n");
+   }
+   else{
+        fprintf(out,"<circle cx=\"%d\" cy=\"%d\" ", xKoordinaten[brettGroesse-1], yKoordinaten[brettGroesse-1] );
+        fprintf(out,"r=\"0.1\" stroke=\"none\" fill=\"green\" />\n\n");
+        fprintf(out,"<text id=\"eins\" x=\"%d\" y=\"%d\" ", xKoordinaten[brettGroesse-1], yKoordinaten[brettGroesse-1]);
+        fprintf(out,"style=\"font-size:0.3px; font-family:Arial\" fill=\"green\" transform=\"translate(0.12,0.1)\">\n");
         fprintf(out,"E\n");
         fprintf(out,"</text>\n\n");
    }

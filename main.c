@@ -39,7 +39,7 @@ void start() {
                 if (wahl == 2) geschlossen = true;
                 else geschlossen = false;
 
-                printf("Groesse des Brettes (5 bis 70): ");
+                printf("Groesse des Brettes (5 bis 70):\n(Ab einer Brettgroesse > 45 kann, je nach Startposition, die Berechnung sehr lange dauern)\n");
                 while (brettGroesse<5 || brettGroesse > 70) { //prueft ob die eingelesenen Werte korrekt sind
                     while((scanf("%d", &brettGroesse))!= 1) { //prueft ob Zahlen eingelesen wurden
 
@@ -48,7 +48,7 @@ void start() {
                     }
                     if(brettGroesse<5 || brettGroesse > 70) printf("Falsche Eingabe. Bitte korrigieren Sie ihre Eingabe.\n> ");
                 }
-                printf("%s", "Startfeld. Format: %d %d\nLinke obere Ecke: 1 1\n> ");
+                printf("%s", "Koordinaten der linken oberen Ecke sind: 1 1\nBitte Startfeld im Format: %d %d eingeben\n> ");
 
                 while (x<1 || x>brettGroesse || y<1 || y>brettGroesse) { //prueft ob die eingebene Position moeglich ist
 
