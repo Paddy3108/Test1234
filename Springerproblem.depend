@@ -178,43 +178,44 @@
 1489005991 source:\\mac\home\documents\development\workspace\springerproblem\heuristikzug.c
 	"HeuristikZug.h"
 
-1490300492 source:c:\users\patri\desktop\uni\programmierung 1\test1234\algorithmus.c
+1490304092 source:c:\users\patri\desktop\uni\programmierung 1\test1234\algorithmus.c
 	"Algorithmus.h"
 	"HeuristikZug.h"
 	"stdio.h"
 
-1490280724 c:\users\patri\desktop\uni\programmierung 1\test1234\algorithmus.h
+1490284324 c:\users\patri\desktop\uni\programmierung 1\test1234\algorithmus.h
 	<stdbool.h>
 
-1489924323 c:\users\patri\desktop\uni\programmierung 1\test1234\heuristikzug.h
+1489927923 c:\users\patri\desktop\uni\programmierung 1\test1234\heuristikzug.h
 	<stdbool.h>
 	"Brett.h"
 	"Zug.h"
 
-1490300472 c:\users\patri\desktop\uni\programmierung 1\test1234\brett.h
+1490304072 c:\users\patri\desktop\uni\programmierung 1\test1234\brett.h
 	<stdbool.h>
 
-1489218916 c:\users\patri\desktop\uni\programmierung 1\test1234\zug.h
+1489222516 c:\users\patri\desktop\uni\programmierung 1\test1234\zug.h
 	<stdbool.h>
 	"Brett.h"
 
-1490296787 source:c:\users\patri\desktop\uni\programmierung 1\test1234\brett.c
+1490790976 source:c:\users\patri\desktop\uni\programmierung 1\test1234\brett.c
 	"Brett.h"
 	<stdlib.h>
 	<stdio.h>
+	<stdbool.h>
 	<windows.h>
 
-1489924194 source:c:\users\patri\desktop\uni\programmierung 1\test1234\heuristikzug.c
+1489927794 source:c:\users\patri\desktop\uni\programmierung 1\test1234\heuristikzug.c
 	"HeuristikZug.h"
 	<string.h>
 
-1489518267 source:c:\users\patri\desktop\uni\programmierung 1\test1234\main.c
+1489521867 source:c:\users\patri\desktop\uni\programmierung 1\test1234\main.c
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
 	"Algorithmus.h"
 
-1489218916 source:c:\users\patri\desktop\uni\programmierung 1\test1234\zug.c
+1489222516 source:c:\users\patri\desktop\uni\programmierung 1\test1234\zug.c
 	"Zug.h"
 	"string.h"
 

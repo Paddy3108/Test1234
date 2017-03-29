@@ -189,9 +189,9 @@ void brettErstelleDatei(Brett* brett, bool geschlossen)
    // Berechnet die Abmessungen, welche die SVG-Datei hat. +4 wird gerechnet, damit noch je 2 Pixel Abstand zu den Rändern sind.
    int hoeheBreite = 42 * dimension + 4;
 
-   for(int y=0; y <(*brett).brettGroesse; y++) {
-       for(int x=0; x<(*brett).brettGroesse;x++) {
-        int wert = brettGetPositionswert(brett, x, y);
+   for(int y=0; y <dimension; y++) {
+       for(int x=0; x<dimension;x++) {
+           int wert = brettGetPositionswert(brett, x, y);
            xKoordinaten[wert] = x;
            yKoordinaten[wert] = y;
        }
@@ -214,8 +214,6 @@ void brettErstelleDatei(Brett* brett, bool geschlossen)
    fprintf(out, " <rect x=\"0\" y=\"0\" width=\"%d\" height=\"%d\" />\n\n", dimension, dimension);
 
    /* Schachbrettmuster dynamisch generieren */
-
-   /* ab hier wird nichts mehr in die svg-gepackt. Nach der Schleife habe ich eigentlich nichts mehr geändert   */
    for (int x=0; x<dimension; x++){
     for(int y= 0; y<dimension; y++){
         if((x+y)%2 == 0) {
@@ -255,7 +253,7 @@ void brettErstelleDatei(Brett* brett, bool geschlossen)
         fprintf(out,"</text>\n\n");
    }
    fprintf(out,"<polyline points=\"");
-   for(int wert=0; wert < ((*brett).brettGroesse) * ((*brett).brettGroesse);wert++) {
+   for(int wert=0; wert < brettGroesse;wert++) {
         fprintf(out,"%d,%d ", xKoordinaten[wert], yKoordinaten[wert]);
    }
    if(geschlossen) fprintf(out,"%d,%d ",xKoordinaten[0],yKoordinaten[0] );
