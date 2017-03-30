@@ -24,8 +24,8 @@ void start() {
     printf("=== Springerproblem ===\n");
     printf("1. Offener Pfad (frei waehlbar)\n");
     printf("2. Geschlossener Pfad (frei waehlbar)\n");
-    printf("3. Offener Pfad (Zufaellig)\n");
-    printf("4. Geschlossener Pfad (Zufaellig)\n> ");
+    printf("3. Offener Pfad (Brettgroesse: 8x8, Startpunkt: Zufaellig)\n");
+    printf("4. Geschlossener Pfad (Brettgroesse: 8x8, Startpunkt: Zufaellig)\n> ");
 
     int wahl = 0;
     bool geschlossen;
@@ -36,10 +36,15 @@ void start() {
     switch (wahl) {
         case 1:
         case 2:
-                if (wahl == 2) geschlossen = true;
-                else geschlossen = false;
+            if(wahl == 1) {
+                geschlossen = false;
+            }
+            else if (wahl == 2) {
+                geschlossen = true;
+            }
+                printf("(Ab einer Brettgroesse > 8 kann, je nach Startposition, die Berechnung sehr lange dauern. \n Es wird kein Ergebnis garantiert)\n");
+                printf("Eingabe Brettgroesse (5 bis 70):\n");
 
-                printf("Groesse des Brettes (5 bis 70):\n(Ab einer Brettgroesse > 45 kann, je nach Startposition, die Berechnung sehr lange dauern)\n");
                 while (brettGroesse<5 || brettGroesse > 70) { //prueft ob die eingelesenen Werte korrekt sind
                     while((scanf("%d", &brettGroesse))!= 1) { //prueft ob Zahlen eingelesen wurden
 

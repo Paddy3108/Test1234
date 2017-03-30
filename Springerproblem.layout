@@ -7,24 +7,14 @@
 			<Cursor1 position="3424" topLine="86" />
 		</Cursor>
 	</File>
-	<File name="HeuristikZug.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1194" topLine="5" />
-		</Cursor>
-	</File>
-	<File name="main.c" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1092" topLine="23" />
-		</Cursor>
-	</File>
-	<File name="Algorithmus.c" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3042" topLine="51" />
-		</Cursor>
-	</File>
 	<File name="HeuristikZug.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="1810" topLine="32" />
+		</Cursor>
+	</File>
+	<File name="Brett.c" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="9196" topLine="234" />
 		</Cursor>
 	</File>
 	<File name="Algorithmus.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -32,14 +22,24 @@
 			<Cursor1 position="346" topLine="0" />
 		</Cursor>
 	</File>
+	<File name="HeuristikZug.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1194" topLine="5" />
+		</Cursor>
+	</File>
+	<File name="Algorithmus.c" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3042" topLine="47" />
+		</Cursor>
+	</File>
 	<File name="Zug.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="452" topLine="49" />
 		</Cursor>
 	</File>
-	<File name="Brett.c" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="main.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2380" topLine="90" />
+			<Cursor1 position="1495" topLine="27" />
 		</Cursor>
 	</File>
 	<File name="Brett.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">

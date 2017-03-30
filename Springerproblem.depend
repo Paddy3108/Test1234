@@ -243,7 +243,7 @@
 	"HeuristikZug.h"
 	<string.h>
 
-1490822403 source:c:\users\kristin\documents\test1234\main.c
+1490911019 source:c:\users\kristin\documents\test1234\main.c
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
@@ -253,7 +253,7 @@
 	"Zug.h"
 	"string.h"
 
-1490822222 source:c:\users\kristin\documents\test1234\brett.c
+1490909468 source:c:\users\kristin\documents\test1234\brett.c
 	"Brett.h"
 	<stdlib.h>
 	<stdio.h>

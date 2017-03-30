@@ -103,7 +103,6 @@ void brettSetPositionswert(Brett* brett, unsigned int x, unsigned int y, int wer
  * Rückgabewert: void
  */
 void brettAusgeben(Brett* brett, bool geschlossen){
-    printf("Eine weitere Ausgabe ist in Form einer SvG-Datei im direkten Projektpfad zu finden.\nEs wird empfohlen die Datei \"Springerproblem.svg\" mit einem Internetbrowser zu oeffnen.");
     printf("\t ");
 	for (int zahl = 0; zahl < (*brett).brettGroesse; zahl++) {
 		printf("%3c  ", 97 + zahl);
@@ -148,6 +147,8 @@ void brettAusgeben(Brett* brett, bool geschlossen){
         }
 
     }
+    printf("\nEine weitere Ausgabe ist in Form einer SVG-Datei im direkten Projektpfad zu finden.\nEs wird empfohlen die Datei \"Springerproblem.svg\" mit einem Internetbrowser zu oeffnen.\n\n");
+
     printf("\nEntwickler: \n");
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN);
     printf("Patrick Eichert");
@@ -226,32 +227,41 @@ void brettErstelleDatei(Brett* brett, bool geschlossen)
     }
    }
    fprintf(out," </g>\n\n");
+   /* Die Verbindungspunkte werden in der Mitte der Schachfelder positioniert */
    fprintf(out," <g transform=\"translate(0.5,0.5)\">\n\n");
+   /* Definition des Startpunktes */
    fprintf(out," <circle cx=\"%d\" cy=\"%d\" r=\"0.15\" stroke=\"none\" fill=\"red\" />\n\n", xKoordinaten[0], yKoordinaten[0] );
+   /* Beschriftung des Startpunktes */
    fprintf(out," <text id=\"eins\" x=\"%d\" y=\"%d\" " , xKoordinaten[0], yKoordinaten[0]);
    fprintf(out,"style=\"font-size:0.3px; font-family:Arial\" fill=\"red\" transform=\"translate(-0.35,0.1)\">\n");
    fprintf(out,"S\n");
    fprintf(out,"</text>\n\n");
    if (geschlossen) {
+        /* Definition des Endpunktes im geschlossenen System. Hier ist Start- und Endpunkt der gleiche. */
         fprintf(out,"<circle cx=\"%d\" cy=\"%d\" ", xKoordinaten[0], yKoordinaten[0] );
         fprintf(out,"r=\"0.1\" stroke=\"none\" fill=\"green\" />\n\n");
+        /* Beschriftung des Endpunktes */
         fprintf(out,"<text id=\"eins\" x=\"%d\" y=\"%d\" ", xKoordinaten[0], yKoordinaten[0]);
         fprintf(out,"style=\"font-size:0.3px; font-family:Arial\" fill=\"green\" transform=\"translate(0.12,0.1)\">\n");
         fprintf(out,"E\n");
         fprintf(out,"</text>\n\n");
    }
    else{
+        /* Definition des Endpunktes im offenen System*/
         fprintf(out,"<circle cx=\"%d\" cy=\"%d\" ", xKoordinaten[brettGroesse-1], yKoordinaten[brettGroesse-1] );
         fprintf(out,"r=\"0.1\" stroke=\"none\" fill=\"green\" />\n\n");
+        /* Beschriftung des Endpunktes */
         fprintf(out,"<text id=\"eins\" x=\"%d\" y=\"%d\" ", xKoordinaten[brettGroesse-1], yKoordinaten[brettGroesse-1]);
         fprintf(out,"style=\"font-size:0.3px; font-family:Arial\" fill=\"green\" transform=\"translate(0.12,0.1)\">\n");
         fprintf(out,"E\n");
         fprintf(out,"</text>\n\n");
    }
+   /* Generieren der einzelnen Verbindungspunkte. Wichtig ist, dass die Punkte in der richtigen Reihenfolge generiert werden */
    fprintf(out,"<polyline points=\"");
    for(int wert=0; wert < brettGroesse;wert++) {
         fprintf(out,"%d,%d ", xKoordinaten[wert], yKoordinaten[wert]);
    }
+   /* Im geschlossenen System muss noch die letzte Verbindungslinie zurück zum Startpunkt mit angegeben werden. */
    if(geschlossen) fprintf(out,"%d,%d ",xKoordinaten[0],yKoordinaten[0] );
    fprintf(out,"\" stroke=\"blue\" stroke-width=\"0.05\" fill=\"none\" />\n\n");
    fprintf(out,"</g>\n");
