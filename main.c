@@ -44,15 +44,14 @@ void start() {
             }
                 printf("(Ab einer Brettgroesse > 8 kann, je nach Startposition, die Berechnung sehr lange dauern. \n Es wird kein Ergebnis garantiert)\n");
                 printf("Eingabe Brettgroesse (5 bis 70):\n");
-
                 while (brettGroesse<5 || brettGroesse > 70) { //prueft ob die eingelesenen Werte korrekt sind
                     while((scanf("%d", &brettGroesse))!= 1) { //prueft ob Zahlen eingelesen wurden
-
                         fflush(stdin); // loescht Eingabepuffer, um die Variablen neue Werte zu zu weisen.
                         printf("Falsche Eingabe. Bitte korrigieren Sie ihre Eingabe.\n> ");
                     }
                     if(brettGroesse<5 || brettGroesse > 70) printf("Falsche Eingabe. Bitte korrigieren Sie ihre Eingabe.\n> ");
                 }
+                fflush(stdin); // loescht Eingabepuffer, um die Variablen neue Werte zu zu weisen.
                 printf("%s", "Koordinaten der linken oberen Ecke sind: 1 1\nBitte Startfeld im Format: %d %d eingeben\n> ");
 
                 while (x<1 || x>brettGroesse || y<1 || y>brettGroesse) { //prueft ob die eingebene Position moeglich ist
